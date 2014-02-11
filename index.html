@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Android-rate by hotchemi</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Android-rate</h1>
+        <p class="header">Library to Help you promote your app by prompting users to rate the app after using it for a few days.</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/hotchemi/Android-Rate/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/hotchemi/Android-Rate/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/hotchemi/Android-Rate">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/hotchemi">hotchemi</a></p>
+
+
+      </header>
+      <section>
+        <h1>
+<a name="android-rate" class="anchor" href="#android-rate"><span class="octicon octicon-link"></span></a>Android-Rate</h1>
+
+<p>Android-Rate is a library to Help you promote your app by prompting users to rate the app after using it for a few days.</p>
+
+<p><img src="https://raw2.github.com/hotchemi/Android-Rate/master/documents/screenshot.png" alt="Screen shot"></p>
+
+<h2>
+<a name="download" class="anchor" href="#download"><span class="octicon octicon-link"></span></a>Download</h2>
+
+<p>Download from github maven repository via gradle.</p>
+
+<div class="highlight highlight-groovy"><pre><span class="n">repositories</span> <span class="o">{</span>
+    <span class="n">mavenCentral</span><span class="o">()</span>
+    <span class="n">maven</span> <span class="o">{</span> <span class="n">url</span> <span class="s1">'https://raw.github.com/hotchemi/Android-Rate/master/repository/'</span> <span class="o">}</span>
+<span class="o">}</span>
+<span class="n">android</span> <span class="o">{</span>
+    <span class="n">dependencies</span> <span class="o">{</span>
+        <span class="n">compile</span> <span class="s1">'hotchemi.android.rate:android-rate:0.0.1'</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+<h2>
+<a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo</h2>
+
+<p>Please try to move the sample module！</p>
+
+<h2>
+<a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How to use</h2>
+
+<h3>
+<a name="implementation" class="anchor" href="#implementation"><span class="octicon octicon-link"></span></a>Implementation</h3>
+
+<p>Call <code>AppRate.monitor(Context)</code> and <code>AppRate.showRateDialogWhenMeetsConditions(Context)</code> in your launcher activity.</p>
+
+<div class="highlight highlight-java"><pre><span class="nd">@Override</span>
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">.</span><span class="na">onStart</span><span class="o">();</span>
+    <span class="c1">// Monitor launch times and duration of feeding period from installation</span>
+    <span class="n">AppRate</span><span class="o">.</span><span class="na">monitor</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+    <span class="c1">// call this method whenever event you want to trigger showing rate dialog.</span>
+    <span class="n">AppRate</span><span class="o">.</span><span class="na">showRateDialogWhenMeetsConditions</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+
+<h3>
+<a name="custom-conditions" class="anchor" href="#custom-conditions"><span class="octicon octicon-link"></span></a>Custom conditions</h3>
+
+<p>The default condition to show rate dialog is as below:</p>
+
+<ul>
+<li>App is launched more than 10 times</li>
+<li>App is launched more than 10 days later than installation.</li>
+</ul><p>If you want to use your own condition, please call <code>AppRate.setLaunchTimes(int)</code> and <code>AppRate.setInstallDays(int)</code>.</p>
+
+<div class="highlight highlight-java"><pre><span class="nd">@Override</span>
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">.</span><span class="na">onStart</span><span class="o">();</span>
+    <span class="c1">// method chain</span>
+    <span class="n">AppRate</span><span class="o">.</span><span class="na">setInstallDays</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+           <span class="o">.</span><span class="na">setLaunchTimes</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span>
+           <span class="o">.</span><span class="na">monitor</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+
+<h3>
+<a name="custom-rate-dialog-labels" class="anchor" href="#custom-rate-dialog-labels"><span class="octicon octicon-link"></span></a>Custom rate dialog labels</h3>
+
+<p>If you want to use your own dialog labels, please create <code>DialogLabels</code> instance and se to <code>AppRate.setDialogLabels(DialogLabels)</code>.</p>
+
+<div class="highlight highlight-java"><pre><span class="nd">@Override</span>
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">.</span><span class="na">onStart</span><span class="o">();</span>
+
+    <span class="c1">// override default rate dialog label</span>
+    <span class="kd">final</span> <span class="n">DialogLabels</span> <span class="n">labels</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DialogLabels</span><span class="o">();</span>
+    <span class="n">labels</span><span class="o">.</span><span class="na">title</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">title</span><span class="o">;</span>
+    <span class="n">labels</span><span class="o">.</span><span class="na">message</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">message</span><span class="o">;</span>
+    <span class="n">labels</span><span class="o">.</span><span class="na">positiveButton</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">positive_button</span><span class="o">;</span>
+    <span class="n">labels</span><span class="o">.</span><span class="na">neutralButton</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">neutral_button</span><span class="o">;</span>
+    <span class="n">labels</span><span class="o">.</span><span class="na">negativeButton</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">negative_button</span><span class="o">;</span>
+
+    <span class="c1">// Monitor launch times and duration of feeding period from installation</span>
+    <span class="n">AppRate</span><span class="o">.</span><span class="na">setInstallDays</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+           <span class="o">.</span><span class="na">setLaunchTimes</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span>
+           <span class="c1">// set labels</span>
+           <span class="o">.</span><span class="na">setDialogLabels</span><span class="o">(</span><span class="n">labels</span><span class="o">)</span>
+           <span class="o">.</span><span class="na">monitor</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+
+<h2>
+<a name="localization" class="anchor" href="#localization"><span class="octicon octicon-link"></span></a>Localization</h2>
+
+<p>Android-Rate currently supports the following languages:</p>
+
+<ul>
+<li>English</li>
+<li>Japanese</li>
+<li>French</li>
+<li>Spanish</li>
+<li>Chinese</li>
+<li>Korean</li>
+</ul><h2>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
+
+<p>Supports Android 2.2 or greater.</p>
+
+<h2>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Added some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol><h2>
+<a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>ToDo</h2>
+
+<ul>
+<li>Add Test</li>
+<li>Add Travis CI badge.</li>
+<li>Support uses per week condition.</li>
+</ul><h2>
+<a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a>ChangeLog</h2>
+
+<p>2014/02/12 v0.0.1 release.</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>This software is licensed under <a href="http://opensource.org/licenses/MIT">MIT Licence</a>.</p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
