@@ -1,0 +1,9 @@
+# setting
+.gradle
+local.properties
+
+# android studio
+.idea/
+*.iml
+
+.DS_Store

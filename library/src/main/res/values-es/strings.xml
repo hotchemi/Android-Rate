@@ -1,0 +1,7 @@
+<resources>
+    <string name="rate_dialog_title">Evaluación de la aplicación</string>
+    <string name="rate_dialog_message">Muchas gracias He utilizar esta aplicación. Debido a que sólo un 1 minuto si no te importa, me gustaría una evaluación de esta solicitud. Damos las gracias por su cooperación!</string>
+    <string name="rate_dialog_ok">Evalúo ahora</string>
+    <string name="rate_dialog_cancel">Más tarde me evaluación</string>
+    <string name="rate_dialog_no">¡No, gracias</string>
+</resources>
