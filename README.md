@@ -3,7 +3,7 @@ Android-Rate
 
 Android-Rate is a library to Help you promote your app by prompting users to rate the app after using it for a few days.
 
-![Screen shot](https://raw.github.com/hotchemi/Android-Rate/master/documents/screenshot.png)
+![Screen shot](https://github.com/hotchemi/Android-Rate/blob/master/documents/screenshot.png)
 
 ## Download
 
