@@ -23,7 +23,7 @@ uploadArchives {
     repositories {
         mavenDeployer {
             repository url: "file://${repos.absolutePath}"
-            pom.version = '0.0.1'
+            pom.version = '0.0.2'
             pom.groupId = 'hotchemi.android.rate'
             pom.artifactId = 'android-rate'
         }
