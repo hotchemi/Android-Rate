@@ -32,7 +32,7 @@ public class AppRate {
 
     private static boolean sIsAgreeShoWDialog = true;
 
-    private static DialogLabels sDialogLabels;
+    private static boolean sIsShoWNeutralButton = true;
 
     private AppRate() {
     }
@@ -47,8 +47,8 @@ public class AppRate {
         return INSTANCE;
     }
 
-    public static AppRate setDialogLabels(final DialogLabels dialogLabels) {
-        sDialogLabels = dialogLabels;
+    public static AppRate setIsShowNeutralButton(final boolean isShowNeutralButton) {
+        sIsShoWNeutralButton = isShowNeutralButton;
         return INSTANCE;
     }
 
@@ -76,14 +76,12 @@ public class AppRate {
      *
      * @param activity fragment activity
      */
-    public static void showRateDialogWhenMeetsConditions(final FragmentActivity activity) {
+    public static void showRateDialogWIfMeetsConditions(final FragmentActivity activity) {
         if (shouldShowRateDialog()) {
             final RateDialogSupportFragment fragment = new RateDialogSupportFragment();
-            if (sDialogLabels != null) {
-                final Bundle bundle = new Bundle();
-                bundle.putParcelable(Constants.BUNDLE_KEY_DIALOG_LABELS, sDialogLabels);
-                fragment.setArguments(bundle);
-            }
+            final Bundle bundle = new Bundle();
+            bundle.putBoolean(Constants.BUNDLE_KEY_IS_SHOW_NEUTRAL_BUTTON, sIsShoWNeutralButton);
+            fragment.setArguments(bundle);
             fragment.show(activity.getSupportFragmentManager(), TAG);
         }
     }
@@ -94,14 +92,12 @@ public class AppRate {
      * @param activity fragment activity
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static void showRateDialogWhenMeetsConditions(final Activity activity) {
+    public static void showRateDialogIfMeetsConditions(final Activity activity) {
         if (shouldShowRateDialog()) {
             final RateDialogFragment fragment = new RateDialogFragment();
-            if (sDialogLabels != null) {
-                final Bundle bundle = new Bundle();
-                bundle.putParcelable(Constants.BUNDLE_KEY_DIALOG_LABELS, sDialogLabels);
-                fragment.setArguments(bundle);
-            }
+            final Bundle bundle = new Bundle();
+            bundle.putBoolean(Constants.BUNDLE_KEY_IS_SHOW_NEUTRAL_BUTTON, sIsShoWNeutralButton);
+            fragment.setArguments(bundle);
             fragment.show(activity.getFragmentManager(), TAG);
         }
     }

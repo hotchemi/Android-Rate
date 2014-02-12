@@ -12,13 +12,9 @@ class RateDialogSupportFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final Bundle params = getArguments();
-        DialogLabels labels;
-        if (params != null) {
-            labels = params.getParcelable(Constants.BUNDLE_KEY_DIALOG_LABELS);
-        } else {
-            labels = new DialogLabels();
-        }
-        return DialogManager.createDialog(getActivity(), labels);
+        boolean isShowNeutralButton =
+                params.getBoolean(Constants.BUNDLE_KEY_IS_SHOW_NEUTRAL_BUTTON);
+        return DialogManager.createDialog(getActivity(), isShowNeutralButton);
     }
 
 }

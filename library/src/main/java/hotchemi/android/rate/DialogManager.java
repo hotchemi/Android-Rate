@@ -18,15 +18,13 @@ class DialogManager {
      * Create rate dialog.
      *
      * @param context context
+     * @param isShowNeutralButton whether neutral button show or not
      */
-    static Dialog createDialog(final Context context, final DialogLabels labels) {
+    static Dialog createDialog(final Context context, final boolean isShowNeutralButton) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        int titleId = labels.title == 0 ? R.string.rate_dialog_title : labels.title;
-        builder.setTitle(titleId);
-        int messageId = labels.message == 0 ? R.string.rate_dialog_message : labels.message;
-        builder.setMessage(messageId);
-        int positiveButtonId = labels.positiveButton == 0 ? R.string.rate_dialog_ok : labels.positiveButton;
-        builder.setPositiveButton(positiveButtonId, new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.rate_dialog_title);
+        builder.setMessage(R.string.rate_dialog_message);
+        builder.setPositiveButton(R.string.rate_dialog_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 final String packageName = context.getPackageName();
@@ -35,15 +33,15 @@ class DialogManager {
                 PreferenceUtils.setAgreeShowDialog(context, false);
             }
         });
-        int neutralButtonId = labels.neutralButton == 0 ? R.string.rate_dialog_cancel : labels.neutralButton;
-        builder.setNeutralButton(neutralButtonId, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                PreferenceUtils.clearSharedPreferences(context);
-            }
-        });
-        int negativeButtonId = labels.negativeButton == 0 ? R.string.rate_dialog_no : labels.negativeButton;
-        builder.setNegativeButton(negativeButtonId, new DialogInterface.OnClickListener() {
+        if (isShowNeutralButton) {
+            builder.setNeutralButton(R.string.rate_dialog_cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    PreferenceUtils.clearSharedPreferences(context);
+                }
+            });
+        }
+        builder.setNegativeButton(R.string.rate_dialog_no, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 PreferenceUtils.setAgreeShowDialog(context, false);
