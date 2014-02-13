@@ -33,9 +33,11 @@
         <h1>
 <a name="android-rate" class="anchor" href="#android-rate"><span class="octicon octicon-link"></span></a>Android-Rate</h1>
 
+<p><a href="https://app.wercker.com/project/bykey/787f5e7eb79d3b44b9bb7a63b3a6d2b7"><img src="https://app.wercker.com/status/787f5e7eb79d3b44b9bb7a63b3a6d2b7/m/" alt="wercker status" title="wercker status"></a></p>
+
 <p>Android-Rate is a library to help you promote your app by prompting users to rate the app after using it for a few days.</p>
 
-<p><img src="https://raw2.github.com/hotchemi/Android-Rate/master/documents/screenshot.png" alt="Screen shot"></p>
+<p><img src="https://raw2.github.com/hotchemi/Android-Rate/master/documents/screen_shot.png" alt="Screen shot"></p>
 
 <h2>
 <a name="download" class="anchor" href="#download"><span class="octicon octicon-link"></span></a>Download</h2>
@@ -48,7 +50,7 @@
 <span class="o">}</span>
 <span class="n">android</span> <span class="o">{</span>
     <span class="n">dependencies</span> <span class="o">{</span>
-        <span class="n">compile</span> <span class="s1">'hotchemi.android.rate:android-rate:0.0.2'</span>
+        <span class="n">compile</span> <span class="s1">'hotchemi.android.rate:android-rate:0.0.3'</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
@@ -56,7 +58,7 @@
 <h2>
 <a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo</h2>
 
-<p>Please try to move the <a href="https://github.com/hotchemi/Android-Rate/tree/master/sample">sample module</a>！</p>
+<p>Please try to move the <a href="https://github.com/hotchemi/Android-Rate/tree/master/sample/">sample module</a>.</p>
 
 <h2>
 <a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How to use</h2>
@@ -67,19 +69,21 @@
 <p>Call <code>AppRate.monitor(Context)</code> and <code>AppRate.showRateDialogIfMeetsConditions(Context)</code> in your launcher activity.</p>
 
 <div class="highlight highlight-java"><pre><span class="nd">@Override</span>
-<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">()</span> <span class="o">{</span>
-    <span class="kd">super</span><span class="o">.</span><span class="na">onStart</span><span class="o">();</span>
-    <span class="c1">// Monitor launch times and duration of feeding period from installation</span>
-    <span class="n">AppRate</span><span class="o">.</span><span class="na">monitor</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
-    <span class="c1">// call this method whenever event you want to trigger showing rate dialog</span>
-    <span class="n">AppRate</span><span class="o">.</span><span class="na">showRateDialogIfMeetsConditions</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+  <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_main</span><span class="o">);</span>
+
+  <span class="c1">// Monitor launch times and duration of feeding period from installation</span>
+  <span class="n">AppRate</span><span class="o">.</span><span class="na">monitor</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+  <span class="c1">// Show a dialog if meets conditions</span>
+  <span class="n">AppRate</span><span class="o">.</span><span class="na">showRateDialogIfMeetsConditions</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
 <span class="o">}</span>
 </pre></div>
 
 <h3>
 <a name="custom-conditions" class="anchor" href="#custom-conditions"><span class="octicon octicon-link"></span></a>Custom conditions</h3>
 
-<p>The default condition to show rate dialog is as below:</p>
+<p>The default conditions to show rate dialog is as below:</p>
 
 <ul>
 <li>App is launched more than 10 times</li>
@@ -87,19 +91,22 @@
 </ul><p>If you want to use your own condition, please call <code>AppRate.setLaunchTimes(int)</code> and <code>AppRate.setInstallDays(int)</code>.</p>
 
 <div class="highlight highlight-java"><pre><span class="nd">@Override</span>
-<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">()</span> <span class="o">{</span>
-    <span class="kd">super</span><span class="o">.</span><span class="na">onStart</span><span class="o">();</span>
-    <span class="c1">// method chain</span>
-    <span class="n">AppRate</span><span class="o">.</span><span class="na">setInstallDays</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="c1">// default 10</span>
-           <span class="o">.</span><span class="na">setLaunchTimes</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="c1">// default 10</span>
-           <span class="o">.</span><span class="na">monitor</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+    <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_main</span><span class="o">);</span>
+    <span class="c1">// Monitor launch times and duration of feeding period from installation</span>
+    <span class="n">AppRate</span><span class="o">.</span><span class="na">setInstallDays</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="c1">// default 10, 0 means install day.</span>
+         <span class="o">.</span><span class="na">setLaunchTimes</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="c1">// default 10</span>
+         <span class="o">.</span><span class="na">monitor</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+    <span class="c1">// Show a dialog if meets conditions</span>
+    <span class="n">AppRate</span><span class="o">.</span><span class="na">showRateDialogIfMeetsConditions</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
 <span class="o">}</span>
 </pre></div>
 
 <h3>
 <a name="custom-rate-dialog" class="anchor" href="#custom-rate-dialog"><span class="octicon octicon-link"></span></a>Custom rate dialog</h3>
 
-<p>If you want to use your own dialog labels, override string xml resources at your application.</p>
+<p>If you want to use your own dialog labels, override string xml resources on your application.</p>
 
 <div class="highlight highlight-xml"><pre><span class="nt">&lt;resources&gt;</span>
     <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">"rate_dialog_title"</span><span class="nt">&gt;</span>Rate this app<span class="nt">&lt;/string&gt;</span>
@@ -110,14 +117,15 @@
 <span class="nt">&lt;/resources&gt;</span>
 </pre></div>
 
-<p>And if you want to decide whether neutral button is appeared, please call <code>AppRate.setIsShowNeutralButton(boolean)</code>.</p>
+<p>And if you want to decide whether neutral button is appeared, please call <code>AppRate.setShowNeutralButton(boolean)</code>.</p>
 
 <div class="highlight highlight-java"><pre><span class="nd">@Override</span>
-<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">()</span> <span class="o">{</span>
-    <span class="kd">super</span><span class="o">.</span><span class="na">onStart</span><span class="o">();</span>
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+    <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_main</span><span class="o">);</span>
     <span class="c1">// method chain</span>
     <span class="n">AppRate</span><span class="o">.</span><span class="na">setInstallDays</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
-           <span class="o">.</span><span class="na">setIsShowNeutralButton</span><span class="o">(</span><span class="kc">false</span><span class="o">)</span> <span class="c1">// default true</span>
+           <span class="o">.</span><span class="na">setShowNeutralButton</span><span class="o">(</span><span class="kc">false</span><span class="o">)</span> <span class="c1">// default true</span>
            <span class="o">.</span><span class="na">monitor</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
 <span class="o">}</span>
 </pre></div>
@@ -158,19 +166,39 @@
 <a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>ToDo</h2>
 
 <ul>
-<li>Add unit test.</li>
-<li>Add travis badge.</li>
 <li>Support event counts condition.</li>
 <li>Support uses per week condition.</li>
+<li>deploy to maven central repository.</li>
 </ul><h2>
 <a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a>ChangeLog</h2>
 
-<p>2014/02/12 v0.0.2 release.</p>
-
-<h2>
+<ul>
+<li>2014/02/12 v0.0.2 release.</li>
+<li>2014/02/13 v0.0.3 release.</li>
+</ul><h2>
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
-<p>This software is licensed under <a href="http://opensource.org/licenses/MIT">MIT Licence</a>.</p>
+<pre><code>The MIT License (MIT)
+
+Copyright (c) 2014 Shintaro Katafuchi
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+</code></pre>
       </section>
       <footer>
         <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
