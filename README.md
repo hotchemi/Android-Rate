@@ -1,6 +1,8 @@
 Android-Rate
 ============
 
+[![wercker status](https://app.wercker.com/status/787f5e7eb79d3b44b9bb7a63b3a6d2b7/m/ "wercker status")](https://app.wercker.com/project/bykey/787f5e7eb79d3b44b9bb7a63b3a6d2b7)
+
 Android-Rate is a library to help you promote your app by prompting users to rate the app after using it for a few days.
 
 ![Screen shot](https://raw2.github.com/hotchemi/Android-Rate/master/documents/screen_shot.png)
@@ -33,18 +35,20 @@ Call `AppRate.monitor(Context)` and `AppRate.showRateDialogIfMeetsConditions(Con
 
 ```java
 @Override
-protected void onStart() {
-    super.onStart();
-    // Monitor launch times and duration of feeding period from installation
-    AppRate.monitor(this);
-    // call this method whenever event you want to trigger showing rate dialog
-    AppRate.showRateDialogIfMeetsConditions(this);
+protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.activity_main);
+
+  // Monitor launch times and duration of feeding period from installation
+  AppRate.monitor(this);
+  // Show a dialog if meets conditions
+  AppRate.showRateDialogIfMeetsConditions(this);
 }
 ```
 
 ### Custom conditions
 
-The default condition to show rate dialog is as below:
+The default conditions to show rate dialog is as below:
 
 * App is launched more than 10 times
 * App is launched more than 10 days later than installation.
@@ -53,18 +57,21 @@ If you want to use your own condition, please call `AppRate.setLaunchTimes(int)`
 
 ```java
 @Override
-protected void onStart() {
-    super.onStart();
-    // method chain
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    // Monitor launch times and duration of feeding period from installation
     AppRate.setInstallDays(0) // default 10, 0 means install day.
-           .setLaunchTimes(3) // default 10
-           .monitor(this);
+         .setLaunchTimes(3) // default 10
+         .monitor(this);
+    // Show a dialog if meets conditions
+    AppRate.showRateDialogIfMeetsConditions(this);
 }
 ```
 
 ### Custom rate dialog
 
-If you want to use your own dialog labels, override string xml resources  your application.
+If you want to use your own dialog labels, override string xml resources on your application.
 
 ```xml
 <resources>
@@ -79,8 +86,9 @@ And if you want to decide whether neutral button is appeared, please call `AppRa
 
 ```java
 @Override
-protected void onStart() {
-    super.onStart();
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
     // method chain
     AppRate.setInstallDays(0)
            .setShowNeutralButton(false) // default true
@@ -92,12 +100,12 @@ protected void onStart() {
 
 Android-Rate currently supports the following languages:
 
- * English
- * Japanese
- * French
- * Spanish
- * Chinese
- * Korean
+- English
+- Japanese
+- French
+- Spanish
+- Chinese
+- Korean
 
 ## Requirements
 

@@ -54,7 +54,7 @@ public class AppRate {
 
     /**
      * Monitor launch times and interval from installation.<br/>
-     * Call this method when the launcher activity is launched.(ex) onStart())
+     * Call this method when the launcher activity's onCreate() is launched.
      */
     public static void monitor(final Context context) {
         final SharedPreferences pref = PreferenceUtils.getPreferences(context);
@@ -62,7 +62,7 @@ public class AppRate {
         if (isFirstLaunch(pref)) {
             editor.putLong(Constants.PREF_KEY_INSTALL_DATE, sInstallDateTime);
         }
-        final int launchTimes = pref.getInt(Constants.PREF_KEY_LAUNCH_TIMES, 0);
+        int launchTimes = pref.getInt(Constants.PREF_KEY_LAUNCH_TIMES, 0);
         editor.putInt(Constants.PREF_KEY_LAUNCH_TIMES, launchTimes + 1);
         editor.commit();
 
