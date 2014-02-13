@@ -1,17 +1,12 @@
 apply plugin: 'android'
 
-repositories {
-    mavenCentral()
-    maven { url 'https://raw.github.com/hotchemi/Android-Rate/master/repository/' }
-}
-
 android {
-    compileSdkVersion 18
+    compileSdkVersion 19
     buildToolsVersion "19.0.1"
 
     defaultConfig {
         minSdkVersion 8
-        targetSdkVersion 16
+        targetSdkVersion 19
         versionCode 1
         versionName "1.0"
     }
@@ -23,8 +18,13 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+    maven { url 'https://raw.github.com/hotchemi/Android-Rate/master/repository/' }
+}
+
 dependencies {
-    compile 'hotchemi.android.rate:android-rate:0.0.2'
+    compile 'hotchemi.android.rate:android-rate:0.0.3'
     compile 'com.android.support:appcompat-v7:+'
     compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 }
