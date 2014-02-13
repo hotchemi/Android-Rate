@@ -6,12 +6,20 @@ repositories {
 }
 
 android {
+<<<<<<< HEAD
     compileSdkVersion 19
+<<<<<<< HEAD
     buildToolsVersion '19.0.1'
+=======
+=======
+    compileSdkVersion 18
+>>>>>>> 28d7a9d... v0.0.3 release.
+    buildToolsVersion "19.0.1"
+>>>>>>> 7adac95... v0.0.3 release.
 
     defaultConfig {
         minSdkVersion 8
-        targetSdkVersion 19
+        targetSdkVersion 16
         versionCode 1
         versionName "1.0"
     }
@@ -27,4 +35,12 @@ dependencies {
     compile 'hotchemi.android.rate:android-rate:0.0.2'
     compile 'com.android.support:appcompat-v7:+'
     compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+<<<<<<< HEAD
 }
+=======
+}
+<<<<<<< HEAD
+>>>>>>> 3876ba2... v0.0.2
+=======
+>>>>>>> 28d7a9d... v0.0.3 release.
+>>>>>>> 7adac95... v0.0.3 release.

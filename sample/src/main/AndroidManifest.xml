@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     package="hotchemi.android.late.sample" >
+=======
+    package="rate.andorid.sample">
+    
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
+=======
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="hotchemi.android.rate.sample" >
+>>>>>>> 28d7a9d... v0.0.3 release.
+>>>>>>> 7adac95... v0.0.3 release.
 
     <application
         android:allowBackup="true"
@@ -9,8 +22,18 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
+<<<<<<< HEAD
             android:name="hotchemi.android.late.sample.MainActivity"
             android:label="@string/app_name" >
+=======
+<<<<<<< HEAD
+            android:name="rate.andorid.sample.MainActivity"
+            android:label="@string/app_name">
+=======
+            android:name="hotchemi.android.rate.sample.MainActivity"
+            android:label="@string/app_name" >
+>>>>>>> 28d7a9d... v0.0.3 release.
+>>>>>>> 7adac95... v0.0.3 release.
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

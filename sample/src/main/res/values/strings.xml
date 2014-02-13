@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+<<<<<<< HEAD
     <string name="app_name">Android-Rate Sample</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -9,5 +10,15 @@
     <string name="positive_button">1</string>
     <string name="neutral_button">2</string>
     <string name="negative_button">3</string>
+=======
+<<<<<<< HEAD
+    <string name="app_name">Android-Rate sample</string>
+    <string name="hello_world">Hello world!</string>
+=======
+    <string name="app_name">My Module</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+>>>>>>> 28d7a9d... v0.0.3 release.
+>>>>>>> 7adac95... v0.0.3 release.
 
 </resources>

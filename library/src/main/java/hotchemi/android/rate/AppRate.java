@@ -47,7 +47,19 @@ public class AppRate {
         return INSTANCE;
     }
 
+<<<<<<< HEAD
     public static AppRate setIsShowNeutralButton(final boolean isShowNeutralButton) {
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+    public static AppRate setShowNeutralButton(final boolean isShowNeutralButton) {
+=======
+    public static AppRate setIsShowNeutralButton(final boolean isShowNeutralButton) {
+>>>>>>> 3876ba2... v0.0.2
+=======
+    public static AppRate setShowNeutralButton(final boolean isShowNeutralButton) {
+>>>>>>> 28d7a9d... v0.0.3 release.
+>>>>>>> 7adac95... v0.0.3 release.
         sIsShoWNeutralButton = isShowNeutralButton;
         return INSTANCE;
     }
@@ -76,7 +88,19 @@ public class AppRate {
      *
      * @param activity fragment activity
      */
+<<<<<<< HEAD
     public static void showRateDialogWIfMeetsConditions(final FragmentActivity activity) {
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+    public static void showRateDialogIfMeetsConditions(final FragmentActivity activity) {
+=======
+    public static void showRateDialogWIfMeetsConditions(final FragmentActivity activity) {
+>>>>>>> 3876ba2... v0.0.2
+=======
+    public static void showRateDialogIfMeetsConditions(final FragmentActivity activity) {
+>>>>>>> 28d7a9d... v0.0.3 release.
+>>>>>>> 7adac95... v0.0.3 release.
         if (shouldShowRateDialog()) {
             final RateDialogSupportFragment fragment = new RateDialogSupportFragment();
             final Bundle bundle = new Bundle();
