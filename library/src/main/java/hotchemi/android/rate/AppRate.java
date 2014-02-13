@@ -37,17 +37,17 @@ public class AppRate {
     private AppRate() {
     }
 
-    public static AppRate setLaunchTimes(final int launchTimes) {
-        sLaunchTimesThreshold = launchTimes;
+    public static AppRate setLaunchTimes(final int launchTimesThreshold) {
+        sLaunchTimesThreshold = launchTimesThreshold;
         return INSTANCE;
     }
 
-    public static AppRate setInstallDays(final int installDays) {
-        sInstallDaysThreshold = installDays;
+    public static AppRate setInstallDays(final int installDaysThreshold) {
+        sInstallDaysThreshold = installDaysThreshold;
         return INSTANCE;
     }
 
-    public static AppRate setIsShowNeutralButton(final boolean isShowNeutralButton) {
+    public static AppRate setShowNeutralButton(final boolean isShowNeutralButton) {
         sIsShoWNeutralButton = isShowNeutralButton;
         return INSTANCE;
     }
@@ -76,7 +76,7 @@ public class AppRate {
      *
      * @param activity fragment activity
      */
-    public static void showRateDialogWIfMeetsConditions(final FragmentActivity activity) {
+    public static void showRateDialogIfMeetsConditions(final FragmentActivity activity) {
         if (shouldShowRateDialog()) {
             final RateDialogSupportFragment fragment = new RateDialogSupportFragment();
             final Bundle bundle = new Bundle();
@@ -111,8 +111,7 @@ public class AppRate {
     }
 
     private static boolean isOverInstallDate() {
-        return new Date().getTime() - sInstallDateTime >=
-                sInstallDaysThreshold * 24 * 60 * 60 * 1000; //msec
+        return new Date().getTime() - sInstallDateTime >= sInstallDaysThreshold * 24 * 60 * 60 * 1000; //msec
     }
 
     private static boolean shouldShowRateDialog() {
