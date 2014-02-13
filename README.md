@@ -127,8 +127,6 @@ $ ./gradlew uploadArchives
 
 ## ToDo
 
-- Add unit test.
-- Add travis or wercker badge.
 - Support event counts condition.
 - Support uses per week condition.
 - deploy to maven central repository.
