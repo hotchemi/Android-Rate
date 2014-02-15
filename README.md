@@ -5,7 +5,7 @@ Android-Rate
 
 Android-Rate is a library to help you promote your app by prompting users to rate the app after using it for a few days.
 
-![Screen shot](https://raw2.github.com/hotchemi/Android-Rate/master/documents/screen_shot.png)
+![screen shot](https://raw2.github.com/hotchemi/Android-Rate/master/documents/screen_shot.png)
 
 ## Download
 
@@ -23,7 +23,7 @@ android {
 }
 ```
 
-## Demo
+## Sample
 
 Please try to move the [sample module](https://github.com/hotchemi/Android-Rate/tree/master/sample/).
 
@@ -38,7 +38,6 @@ Call `AppRate.monitor(Context)` and `AppRate.showRateDialogIfMeetsConditions(Con
 protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
-
   // Monitor launch times and duration of feeding period from installation
   AppRate.monitor(this);
   // Show a dialog if meets conditions
@@ -50,7 +49,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
 The default conditions to show rate dialog is as below:
 
-* App is launched more than 10 times
+* App is launched more than 10 times.
 * App is launched more than 10 days later than installation.
 
 If you want to use your own condition, please call `AppRate.setLaunchTimes(int)` and `AppRate.setInstallDays(int)`.
@@ -62,8 +61,8 @@ protected void onCreate(Bundle savedInstanceState) {
     setContentView(R.layout.activity_main);
     // Monitor launch times and duration of feeding period from installation
     AppRate.setInstallDays(0) // default 10, 0 means install day.
-         .setLaunchTimes(3) // default 10
-         .monitor(this);
+           .setLaunchTimes(3) // default 10
+           .monitor(this);
     // Show a dialog if meets conditions
     AppRate.showRateDialogIfMeetsConditions(this);
 }
@@ -101,20 +100,26 @@ protected void onCreate(Bundle savedInstanceState) {
 Android-Rate currently supports the following languages:
 
 - English
-- Japanese
-- French
 - Spanish
+- French
 - Chinese
 - Korean
+- Japanese
 
 ## Requirements
 
 Supports Android 2.2 or greater.
 
-## Build
+## Deploy
 
 ```sh
 $ ./gradlew uploadArchives
+```
+
+## Test
+
+```sh
+$ ./gradlew connectedCheck
 ```
 
 ## Contributing
@@ -127,8 +132,6 @@ $ ./gradlew uploadArchives
 
 ## ToDo
 
-- Add unit test.
-- Add travis or wercker badge.
 - Support event counts condition.
 - Support uses per week condition.
 - deploy to maven central repository.

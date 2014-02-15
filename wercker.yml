@@ -22,10 +22,3 @@ build:
         name: run gradle build
         code: |
           gradle --full-stacktrace --project-cache-dir=$WERCKER_CACHE_DIR build
-  after-steps:
-    # Use the build results
-    - script:
-        name: inspect build result
-        code: |
-          ls -la Android-Rate/library/build/apk/
-          cp Rebuild/library/build/apk/*.apk $WERCKER_REPORT_ARTIFACTS_DIR
