@@ -1,0 +1,23 @@
+language: java
+jdk: oraclejdk7
+before_install:
+    # Install base Android SDK and components
+    - sudo apt-get install -qq libstdc++6:i386 lib32z1
+    - export COMPONENTS=build-tools-19.0.1,android-18,sysimg-18,extra-android-support,extra-google-google_play_services,extra-google-gcm,build-tools-18.1.0,extra-google-m2repository,extra-android-m2repository
+    - curl -L https://raw.github.com/embarkmobile/android-sdk-installer/version-1/android-sdk-installer | bash /dev/stdin --install=$COMPONENTS
+    - source ~/.android-sdk-installer/env
+
+    # Create and start emulator
+    - echo no | android create avd --force -n test -t android-18 --abi armeabi-v7a
+    - emulator -avd test -no-skin -no-audio -no-window &
+
+install:
+    # Without TERM=dumb, we get mangled output in the Travis console
+    - TERM=dumb ./gradlew assemble
+
+before_script:
+    # Make sure the emulator has started before running tests
+    - wait_for_emulator
+
+script:
+    - TERM=dumb ./gradlew connectedCheck

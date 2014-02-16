@@ -1,9 +1,10 @@
 Android-Rate
 ============
 
+[![Build Status](https://travis-ci.org/hotchemi/Android-Rate.png?branch=master)](https://travis-ci.org/hotchemi/Android-Rate)
 [![wercker status](https://app.wercker.com/status/787f5e7eb79d3b44b9bb7a63b3a6d2b7/m/ "wercker status")](https://app.wercker.com/project/bykey/787f5e7eb79d3b44b9bb7a63b3a6d2b7)
 
-Android-Rate is a library to help you promote your app by prompting users to rate the app after using it for a few days.
+Android-Rate is a library to help you promote your android app by prompting users to rate the app after using it for a few days.
 
 ![screen shot](https://raw2.github.com/hotchemi/Android-Rate/master/documents/screen_shot.png)
 
