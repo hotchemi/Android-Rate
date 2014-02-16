@@ -18,6 +18,7 @@ install:
 before_script:
     # Make sure the emulator has started before running tests
     - wait_for_emulator
+    - chmod +x gradlew
 
 script:
     - TERM=dumb ./gradlew connectedCheck
