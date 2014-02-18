@@ -1,4 +1,4 @@
-# setting
+# project file
 .gradle
 local.properties
 
@@ -6,4 +6,5 @@ local.properties
 .idea/
 *.iml
 
+# mac
 .DS_Store

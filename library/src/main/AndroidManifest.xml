@@ -1,3 +1,11 @@
-<manifest package="hotchemi.android.rate">
-    <application />
+<manifest
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  package="hotchemi.android.rate">
+
+  <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
+
+  <application android:allowBackup="false" />
+    
 </manifest>

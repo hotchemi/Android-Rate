@@ -37,36 +37,24 @@ public class AppRate {
     private AppRate() {
     }
 
-    public static AppRate setLaunchTimes(final int launchTimes) {
-        sLaunchTimesThreshold = launchTimes;
+    public static AppRate setLaunchTimes(final int launchTimesThreshold) {
+        sLaunchTimesThreshold = launchTimesThreshold;
         return INSTANCE;
     }
 
-    public static AppRate setInstallDays(final int installDays) {
-        sInstallDaysThreshold = installDays;
+    public static AppRate setInstallDays(final int installDaysThreshold) {
+        sInstallDaysThreshold = installDaysThreshold;
         return INSTANCE;
     }
 
-<<<<<<< HEAD
-    public static AppRate setIsShowNeutralButton(final boolean isShowNeutralButton) {
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
     public static AppRate setShowNeutralButton(final boolean isShowNeutralButton) {
-=======
-    public static AppRate setIsShowNeutralButton(final boolean isShowNeutralButton) {
->>>>>>> 3876ba2... v0.0.2
-=======
-    public static AppRate setShowNeutralButton(final boolean isShowNeutralButton) {
->>>>>>> 28d7a9d... v0.0.3 release.
->>>>>>> 7adac95... v0.0.3 release.
         sIsShoWNeutralButton = isShowNeutralButton;
         return INSTANCE;
     }
 
     /**
      * Monitor launch times and interval from installation.<br/>
-     * Call this method when the launcher activity is launched.(ex) onStart())
+     * Call this method when the launcher activity's onCreate() is launched.
      */
     public static void monitor(final Context context) {
         final SharedPreferences pref = PreferenceUtils.getPreferences(context);
@@ -74,7 +62,7 @@ public class AppRate {
         if (isFirstLaunch(pref)) {
             editor.putLong(Constants.PREF_KEY_INSTALL_DATE, sInstallDateTime);
         }
-        final int launchTimes = pref.getInt(Constants.PREF_KEY_LAUNCH_TIMES, 0);
+        int launchTimes = pref.getInt(Constants.PREF_KEY_LAUNCH_TIMES, 0);
         editor.putInt(Constants.PREF_KEY_LAUNCH_TIMES, launchTimes + 1);
         editor.commit();
 
@@ -88,19 +76,7 @@ public class AppRate {
      *
      * @param activity fragment activity
      */
-<<<<<<< HEAD
-    public static void showRateDialogWIfMeetsConditions(final FragmentActivity activity) {
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
     public static void showRateDialogIfMeetsConditions(final FragmentActivity activity) {
-=======
-    public static void showRateDialogWIfMeetsConditions(final FragmentActivity activity) {
->>>>>>> 3876ba2... v0.0.2
-=======
-    public static void showRateDialogIfMeetsConditions(final FragmentActivity activity) {
->>>>>>> 28d7a9d... v0.0.3 release.
->>>>>>> 7adac95... v0.0.3 release.
         if (shouldShowRateDialog()) {
             final RateDialogSupportFragment fragment = new RateDialogSupportFragment();
             final Bundle bundle = new Bundle();
@@ -135,8 +111,7 @@ public class AppRate {
     }
 
     private static boolean isOverInstallDate() {
-        return new Date().getTime() - sInstallDateTime >=
-                sInstallDaysThreshold * 24 * 60 * 60 * 1000; //msec
+        return new Date().getTime() - sInstallDateTime >= sInstallDaysThreshold * 24 * 60 * 60 * 1000; //msec
     }
 
     private static boolean shouldShowRateDialog() {

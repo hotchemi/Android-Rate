@@ -1,19 +1,13 @@
 Android-Rate
 ============
 
-Android-Rate is a library to help you promote your app by prompting users to rate the app after using it for a few days.
+[![Build Status](https://travis-ci.org/hotchemi/Android-Rate.png?branch=master)](https://travis-ci.org/hotchemi/Android-Rate)
+[![wercker status](https://app.wercker.com/status/787f5e7eb79d3b44b9bb7a63b3a6d2b7/s/ "wercker status")](https://app.wercker.com/project/bykey/787f5e7eb79d3b44b9bb7a63b3a6d2b7)
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/hotchemi/android-rate/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
-<<<<<<< HEAD
-![Screen shot](https://raw.github.com/hotchemi/Android-Rate/master/documents/screenshot.png)
-=======
-<<<<<<< HEAD
 Android-Rate is a library to help you promote your android app by prompting users to rate the app after using it for a few days.
 
 ![screen shot](https://raw2.github.com/hotchemi/Android-Rate/master/documents/screen_shot.png)
-=======
-![Screen shot](https://raw2.github.com/hotchemi/Android-Rate/master/documents/screen_shot.png)
->>>>>>> 28d7a9d... v0.0.3 release.
->>>>>>> 7adac95... v0.0.3 release.
 
 ## Download
 
@@ -26,38 +20,14 @@ repositories {
 }
 android {
     dependencies {
-<<<<<<< HEAD
-        compile 'hotchemi.android.rate:android-rate:0.0.2'
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
         compile 'hotchemi.android.rate:android-rate:0.0.3'
-=======
-        compile 'hotchemi.android.rate:android-rate:0.0.2'
->>>>>>> 3876ba2... v0.0.2
-=======
-        compile 'hotchemi.android.rate:android-rate:0.0.3'
->>>>>>> 28d7a9d... v0.0.3 release.
->>>>>>> 7adac95... v0.0.3 release.
     }
 }
 ```
 
-## Demo
+## Sample
 
-<<<<<<< HEAD
-Please try to move the [sample module](https://github.com/hotchemi/Android-Rate/tree/master/sample)！
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
 Please try to move the [sample module](https://github.com/hotchemi/Android-Rate/tree/master/sample/).
-=======
-Please try to move the [sample module](https://github.com/hotchemi/Android-Rate/tree/master/sample)！
->>>>>>> 3876ba2... v0.0.2
-=======
-Please try to move the [sample module](https://github.com/hotchemi/Android-Rate/tree/master/sample/).
->>>>>>> 28d7a9d... v0.0.3 release.
->>>>>>> 7adac95... v0.0.3 release.
 
 ## How to use
 
@@ -67,46 +37,42 @@ Call `AppRate.monitor(Context)` and `AppRate.showRateDialogIfMeetsConditions(Con
 
 ```java
 @Override
-protected void onStart() {
-    super.onStart();
-    // Monitor launch times and duration of feeding period from installation
-    AppRate.monitor(this);
-    // call this method whenever event you want to trigger showing rate dialog
-    AppRate.showRateDialogIfMeetsConditions(this);
+protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.activity_main);
+  // Monitor launch times and duration of feeding period from installation
+  AppRate.monitor(this);
+  // Show a dialog if meets conditions
+  AppRate.showRateDialogIfMeetsConditions(this);
 }
 ```
 
 ### Custom conditions
 
-The default condition to show rate dialog is as below:
+The default conditions to show rate dialog is as below:
 
-* App is launched more than 10 times
+* App is launched more than 10 times.
 * App is launched more than 10 days later than installation.
 
 If you want to use your own condition, please call `AppRate.setLaunchTimes(int)` and `AppRate.setInstallDays(int)`.
 
 ```java
 @Override
-protected void onStart() {
-    super.onStart();
-    // method chain
-<<<<<<< HEAD
-    AppRate.setInstallDays(0) // default 10
-<<<<<<< HEAD
-=======
->>>>>>> 3876ba2... v0.0.2
-=======
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    // Monitor launch times and duration of feeding period from installation
     AppRate.setInstallDays(0) // default 10, 0 means install day.
->>>>>>> 28d7a9d... v0.0.3 release.
->>>>>>> 7adac95... v0.0.3 release.
            .setLaunchTimes(3) // default 10
            .monitor(this);
+    // Show a dialog if meets conditions
+    AppRate.showRateDialogIfMeetsConditions(this);
 }
 ```
 
 ### Custom rate dialog
 
-If you want to use your own dialog labels, override string xml resources  your application.
+If you want to use your own dialog labels, override string xml resources on your application.
 
 ```xml
 <resources>
@@ -117,10 +83,6 @@ If you want to use your own dialog labels, override string xml resources  your a
     <string name="rate_dialog_no">No, Thanks</string>
 </resources>
 ```
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
 And if you want to decide whether neutral button is appeared, please call `AppRate.setShowNeutralButton(boolean)`.
 
 ```java
@@ -131,28 +93,6 @@ protected void onCreate(Bundle savedInstanceState) {
     // method chain
     AppRate.setInstallDays(0)
            .setShowNeutralButton(false) // default true
-=======
->>>>>>> 7adac95... v0.0.3 release.
-And if you want to decide whether neutral button is appeared, please call `AppRate.setIsShowNeutralButton(boolean)`.
-=======
-And if you want to decide whether neutral button is appeared, please call `AppRate.setShowNeutralButton(boolean)`.
->>>>>>> 28d7a9d... v0.0.3 release.
-
-```java
-@Override
-protected void onStart() {
-    super.onStart();
-    // method chain
-    AppRate.setInstallDays(0)
-<<<<<<< HEAD
-           .setIsShowNeutralButton(false) // default true
-<<<<<<< HEAD
-=======
->>>>>>> 3876ba2... v0.0.2
-=======
-           .setShowNeutralButton(false) // default true
->>>>>>> 28d7a9d... v0.0.3 release.
->>>>>>> 7adac95... v0.0.3 release.
            .monitor(this);
 }
 ```
@@ -161,21 +101,27 @@ protected void onStart() {
 
 Android-Rate currently supports the following languages:
 
- * English
- * Japanese
- * French
- * Spanish
- * Chinese
- * Korean
+- English
+- Spanish
+- French
+- Chinese
+- Korean
+- Japanese
 
 ## Requirements
 
 Supports Android 2.2 or greater.
 
-## Build
+## Deploy
 
 ```sh
 $ ./gradlew uploadArchives
+```
+
+## Test
+
+```sh
+$ ./gradlew connectedCheck
 ```
 
 ## Contributing
@@ -188,39 +134,14 @@ $ ./gradlew uploadArchives
 
 ## ToDo
 
-- Add unit test.
-<<<<<<< HEAD
-- Add travis badge.
-<<<<<<< HEAD
-=======
->>>>>>> 3876ba2... v0.0.2
-=======
-- Add travis or wercker badge.
->>>>>>> 28d7a9d... v0.0.3 release.
->>>>>>> 7adac95... v0.0.3 release.
 - Support event counts condition.
 - Support uses per week condition.
+- deploy to maven central repository.
 
 ## ChangeLog
 
-<<<<<<< HEAD
-2014/02/12 v0.0.2 release.
-
-## License
-
-This software is licensed under [MIT Licence](http://opensource.org/licenses/MIT).
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
 - 2014/02/12 v0.0.2 release.
 - 2014/02/13 v0.0.3 release.
-=======
-2014/02/12 v0.0.2 release.
->>>>>>> 3876ba2... v0.0.2
-=======
-- 2014/02/12 v0.0.2 release.
-- 2014/02/13 v0.0.3 release.
->>>>>>> 28d7a9d... v0.0.3 release.
 
 ## License
 
@@ -245,9 +166,4 @@ FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-<<<<<<< HEAD
 ```
-=======
-```
->>>>>>> 28d7a9d... v0.0.3 release.
->>>>>>> 7adac95... v0.0.3 release.
