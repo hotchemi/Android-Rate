@@ -52,6 +52,11 @@ public class AppRate {
         return INSTANCE;
     }
 
+    public static AppRate clearAgreeShowDialog(final Context context) {
+        PreferenceUtils.setAgreeShowDialog(context, true);
+        return INSTANCE;
+    }
+
     /**
      * Monitor launch times and interval from installation.<br/>
      * Call this method when the launcher activity's onCreate() is launched.
