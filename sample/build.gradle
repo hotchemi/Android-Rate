@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    compile 'hotchemi.android.rate:android-rate:0.0.3'
+    compile 'com.github.hotchemi:android-rate:0.0.4'
     compile 'com.android.support:appcompat-v7:+'
     compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 }
