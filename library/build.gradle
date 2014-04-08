@@ -84,61 +84,63 @@ android.libraryVariants.all { variant ->
     }
 }
 
-/* See: http://www.vandalsoftware.com/post/52468430435/publishing-an-android-library-aar-to-a-maven */
-//uploadArchives {
-//    repositories.mavenDeployer {
-//        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-//
-//        def sonatypeRepo = isReleaseVersion ?
-//                "https://oss.sonatype.org/service/local/staging/deploy/maven2/" :
-//                "https://oss.sonatype.org/content/repositories/snapshots/"
-//        repository(url: sonatypeRepo) {
-//            authentication(userName: sonatypeUsername, password: sonatypePassword)
-//        }
-//
-//        pom.artifactId = 'android-rate'
-//        pom.project {
-//            name 'Android-Rate'
-//            packaging 'aar'
-//            description 'Library for Android applications, which provides rating dialog.'
-//            url 'https://github.com/hotchemi/Android-Rate'
-//
-//            scm {
-//                url 'scm:git@github.com:hotchemi/Android-Rate.git'
-//                connection 'scm:git@github.com:hotchemi/Android-Rate.git'
-//                developerConnection 'scm:git@github.com:hotchemi/Android-Rate.git'
-//            }
-//
-//            licenses {
-//                license {
-//                    name 'The Apache License, Version 2.0'
-//                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-//                    distribution 'repo'
-//                }
-//            }
-//
-//            developers {
-//                developer {
-//                    id 'hotchemi'
-//                    name 'Shintaro Katafuchi'
-//                    email 'hot.chemistry21@gmail.com'
-//                }
-//            }
-//
-//        }
-//    }
-//}
-
-apply plugin: 'maven'
-def repo = new File(rootDir, "repository")
-
+/**
+ * See: http://www.vandalsoftware.com/post/52468430435/publishing-an-android-library-aar-to-a-maven
+ */
 uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository url: "file://${repo.absolutePath}"
-            pom.version = '0.0.4'
-            pom.groupId = 'com.github.hotchemi'
-            pom.artifactId = 'android-rate'
+    repositories.mavenDeployer {
+        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+        def sonatypeRepo = isReleaseVersion ?
+                "https://oss.sonatype.org/service/local/staging/deploy/maven2/" :
+                "https://oss.sonatype.org/content/repositories/snapshots/"
+        repository(url: sonatypeRepo) {
+            authentication(userName: sonatypeUsername, password: sonatypePassword)
+        }
+
+        pom.artifactId = 'android-rate'
+        pom.project {
+            name 'Android-Rate'
+            packaging 'aar'
+            description 'Library for Android applications, which provides rating dialog.'
+            url 'https://github.com/hotchemi/Android-Rate'
+
+            scm {
+                url 'scm:git@github.com:hotchemi/Android-Rate.git'
+                connection 'scm:git@github.com:hotchemi/Android-Rate.git'
+                developerConnection 'scm:git@github.com:hotchemi/Android-Rate.git'
+            }
+
+            licenses {
+                license {
+                    name 'The Apache License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+
+            developers {
+                developer {
+                    id 'hotchemi'
+                    name 'Shintaro Katafuchi'
+                    email 'hot.chemistry21@gmail.com'
+                }
+            }
+
         }
     }
 }
+
+//apply plugin: 'maven'
+//def repo = new File(rootDir, "repository")
+//
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            repository url: "file://${repo.absolutePath}"
+//            pom.version = '0.0.4'
+//            pom.groupId = 'com.github.hotchemi'
+//            pom.artifactId = 'android-rate'
+//        }
+//    }
+//}

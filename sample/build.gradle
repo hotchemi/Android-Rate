@@ -20,7 +20,6 @@ android {
 
 repositories {
     mavenCentral()
-    maven { url 'https://raw.github.com/hotchemi/Android-Rate/master/repository/' }
 }
 
 dependencies {

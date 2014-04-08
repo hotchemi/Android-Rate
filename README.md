@@ -2,27 +2,20 @@ Android-Rate
 ============
 
 [![Build Status](https://travis-ci.org/hotchemi/Android-Rate.png?branch=master)](https://travis-ci.org/hotchemi/Android-Rate)
-[![wercker status](https://app.wercker.com/status/787f5e7eb79d3b44b9bb7a63b3a6d2b7/s/ "wercker status")](https://app.wercker.com/project/bykey/787f5e7eb79d3b44b9bb7a63b3a6d2b7)
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/hotchemi/android-rate/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 Android-Rate is a library to help you promote your android app by prompting users to rate the app after using it for a few days.
 
-![screen shot](https://raw2.github.com/hotchemi/Android-Rate/master/documents/screen_shot.png)
+![screen shot](http://f.st-hatena.com/images/fotolife/h/hotchemi/20140408/20140408114402.png)
 
 ## Download
 
-Download from maven repository(GitHub) via gradle.
+Download from maven central.
 
 ```groovy
-repositories {
-    mavenCentral()
-    maven { url 'https://raw.github.com/hotchemi/Android-Rate/master/repository/' }
-}
-android {
-    dependencies {
-        compile 'com.github.hotchemi:android-rate:0.0.4'
-    }
-}
+  dependencies {
+    compile 'com.github.hotchemi:android-rate:0.0.4'
+  }
 ```
 
 ## Sample
@@ -113,17 +106,17 @@ Android-Rate currently supports the following languages:
 
 Supports Android 2.2 or greater.
 
-## Deploy
-
-```sh
-$ ./gradlew uploadArchives
-```
-
 ## Test
 
 ```sh
 $ ./gradlew connectedCheck
 ```
+
+## ChangeLog
+
+- 2014/02/12 v0.0.2 release.
+- 2014/02/13 v0.0.3 release.
+- 2014/04/07 v0.0.4 release.
 
 ## Contributing
 
@@ -132,18 +125,6 @@ $ ./gradlew connectedCheck
 3. Commit your changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
-
-## ToDo
-
-- Support event counts condition.
-- Support uses per week condition.
-- deploy to maven central repository.
-
-## ChangeLog
-
-- 2014/02/12 v0.0.2 release.
-- 2014/02/13 v0.0.3 release.
-- 2014/04/07 v0.0.4 release.
 
 ## Contributor
 
