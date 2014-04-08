@@ -20,4 +20,4 @@ before_script:
     # Make sure the emulator has started before running tests
     - wait_for_emulator
 script:
-    - TERM=dumb ./gradlew connectedCheck
+    - TERM=dumb ./gradlew connectedCheck -PsonatypeUsername=test -PsonatypePassword=test
