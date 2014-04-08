@@ -13,14 +13,11 @@ before_install:
 install:
     # Without TERM=dumb, we get mangled output in the Travis console
     - chmod +x gradlew
-    - TERM=dumb ./gradlew assemble
+    # dummy username and password
+    - TERM=dumb ./gradlew assemble -PsonatypeUsername=test -PsonatypePassword=test
 
 before_script:
     # Make sure the emulator has started before running tests
     - wait_for_emulator
-script:
-    - TERM=dumb ./gradlew connectedCheck
-    - chmod +x gradlew
-
 script:
     - TERM=dumb ./gradlew connectedCheck

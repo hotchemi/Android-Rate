@@ -2,7 +2,6 @@ apply plugin: 'android-library'
 
 android {
     compileSdkVersion 19
-    //noinspection GradleDependency
     buildToolsVersion "19.0.1"
     defaultConfig {
         minSdkVersion 8
@@ -130,17 +129,3 @@ uploadArchives {
         }
     }
 }
-
-//apply plugin: 'maven'
-//def repo = new File(rootDir, "repository")
-//
-//uploadArchives {
-//    repositories {
-//        mavenDeployer {
-//            repository url: "file://${repo.absolutePath}"
-//            pom.version = '0.0.4'
-//            pom.groupId = 'com.github.hotchemi'
-//            pom.artifactId = 'android-rate'
-//        }
-//    }
-//}
