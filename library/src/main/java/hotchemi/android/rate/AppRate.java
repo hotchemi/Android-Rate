@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Build;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 
 import java.util.Date;
@@ -83,7 +82,7 @@ public class AppRate {
      */
     public static void showRateDialogIfMeetsConditions(final Activity activity) {
         if (shouldShowRateDialog()) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+            if (activity instanceof FragmentActivity) {
                 showRateDialog((FragmentActivity) activity);
             } else {
                 showRateDialog(activity);
@@ -96,7 +95,7 @@ public class AppRate {
      *
      * @param activity fragment activity
      */
-    public static void showRateDialog(final FragmentActivity activity) {
+    private static void showRateDialog(final FragmentActivity activity) {
         final RateDialogSupportFragment fragment = RateDialogSupportFragment
                 .newInstance(sIsShoWNeutralButton);
         fragment.show(activity.getSupportFragmentManager(), TAG);
@@ -108,7 +107,7 @@ public class AppRate {
      * @param activity fragment activity
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static void showRateDialog(final Activity activity) {
+    private static void showRateDialog(final Activity activity) {
         final RateDialogFragment fragment = RateDialogFragment.newInstance(sIsShoWNeutralButton);
         fragment.show(activity.getFragmentManager(), TAG);
     }
