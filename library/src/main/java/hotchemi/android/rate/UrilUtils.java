@@ -5,7 +5,7 @@ import android.net.Uri;
 /**
  * @author Shintaro Katafuchi
  */
-class UriUtils {
+final class UriUtils {
 
     private static final String GOOGLE_PLAY = "https://play.google.com/store/apps/details?id=";
 

@@ -17,10 +17,10 @@ class DialogManager {
     /**
      * Create rate dialog.
      *
-     * @param context context
+     * @param context             context
      * @param isShowNeutralButton whether neutral button show or not
      */
-    static Dialog createDialog(final Context context, final boolean isShowNeutralButton) {
+    static Dialog create(final Context context, final boolean isShowNeutralButton) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(R.string.rate_dialog_title);
         builder.setMessage(R.string.rate_dialog_message);

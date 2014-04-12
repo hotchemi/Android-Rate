@@ -2,13 +2,10 @@ apply plugin: 'android-library'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.1"
+    buildToolsVersion "19.0.3"
     defaultConfig {
         minSdkVersion 8
         targetSdkVersion 19
-    }
-    lintOptions {
-        abortOnError false
     }
 }
 
@@ -24,17 +21,19 @@ tasks.withType(JavaCompile) {
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-version = "0.0.4"
+version = "0.0.5"
 ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 group = 'com.github.hotchemi'
 
-/**
+/*
  * See: http://www.gradle.org/docs/current/userguide/signing_plugin.html
  * See: http://www.vandalsoftware.com/post/52468430435/publishing-an-android-library-aar-to-a-maven
  * See: http://gradle.monochromeroad.com/docs/userguide/signing_plugin.html
  */
 signing {
-    required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
+    required {
+        isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives")
+    }
     sign configurations.archives
 }
 
@@ -83,12 +82,14 @@ android.libraryVariants.all { variant ->
     }
 }
 
-/**
+/*
  * See: http://www.vandalsoftware.com/post/52468430435/publishing-an-android-library-aar-to-a-maven
  */
 uploadArchives {
     repositories.mavenDeployer {
-        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+        beforeDeployment {
+            MavenDeployment deployment -> signing.signPom(deployment)
+        }
 
         def sonatypeRepo = isReleaseVersion ?
                 "https://oss.sonatype.org/service/local/staging/deploy/maven2/" :
@@ -125,7 +126,6 @@ uploadArchives {
                     email 'hot.chemistry21@gmail.com'
                 }
             }
-
         }
     }
 }

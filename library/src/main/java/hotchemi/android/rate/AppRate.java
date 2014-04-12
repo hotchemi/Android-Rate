@@ -76,9 +76,9 @@ public class AppRate {
     }
 
     /**
-     * Show rate dialog when meets conditions
+     * Show rate dialog when meets conditions.
      *
-     * @param activity
+     * @param activity activity
      */
     public static void showRateDialogIfMeetsConditions(final Activity activity) {
         if (shouldShowRateDialog()) {
@@ -91,7 +91,7 @@ public class AppRate {
     }
 
     /**
-     * Show rate dialog for preHoneycomb devices
+     * Show rate dialog for preHoneycomb devices.
      *
      * @param activity fragment activity
      */
@@ -121,7 +121,8 @@ public class AppRate {
     }
 
     private static boolean isOverInstallDate() {
-        return new Date().getTime() - sInstallDateTime >= sInstallDaysThreshold * 24 * 60 * 60 * 1000; //msec
+        // msec
+        return new Date().getTime() - sInstallDateTime >= sInstallDaysThreshold * 24 * 60 * 60 * 1000;
     }
 
     private static boolean shouldShowRateDialog() {

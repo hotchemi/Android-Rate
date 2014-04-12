@@ -3,7 +3,7 @@ package hotchemi.android.rate;
 /**
  * @author Shintaro Katafuchi
  */
-class Constants {
+final class Constants {
 
     static final String PREF_KEY_INSTALL_DATE = "rate_install_date";
 

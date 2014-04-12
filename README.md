@@ -14,7 +14,7 @@ Download from maven central.
 
 ```groovy
   dependencies {
-    compile 'com.github.hotchemi:android-rate:0.0.4'
+    compile 'com.github.hotchemi:android-rate:0.0.5'
   }
 ```
 
@@ -117,6 +117,7 @@ $ ./gradlew connectedCheck
 - 2014/02/12 v0.0.2 release.
 - 2014/02/13 v0.0.3 release.
 - 2014/04/07 v0.0.4 release.
+- 2014/04/12 v0.0.5 release.
 
 ## Contributing
 
@@ -130,3 +131,4 @@ $ ./gradlew connectedCheck
 
 - [androhi](https://github.com/androhi)
 - [hoang8f](https://github.com/hoang8f)
+- [mrmike](https://github.com/mrmike)
