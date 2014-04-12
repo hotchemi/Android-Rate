@@ -1,4 +1,4 @@
-package rate.andorid.sample;
+package hotchemi.android.rate.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;

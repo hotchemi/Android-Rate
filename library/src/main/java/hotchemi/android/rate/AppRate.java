@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import java.util.Date;
@@ -77,34 +76,40 @@ public class AppRate {
     }
 
     /**
-     * Show rate dialog when meets conditions.
+     * Show rate dialog when meets conditions
      *
-     * @param activity fragment activity
+     * @param activity
      */
-    public static void showRateDialogIfMeetsConditions(final FragmentActivity activity) {
+    public static void showRateDialogIfMeetsConditions(final Activity activity) {
         if (shouldShowRateDialog()) {
-            final RateDialogSupportFragment fragment = new RateDialogSupportFragment();
-            final Bundle bundle = new Bundle();
-            bundle.putBoolean(Constants.BUNDLE_KEY_IS_SHOW_NEUTRAL_BUTTON, sIsShoWNeutralButton);
-            fragment.setArguments(bundle);
-            fragment.show(activity.getSupportFragmentManager(), TAG);
+            if (activity instanceof FragmentActivity) {
+                showRateDialog((FragmentActivity) activity);
+            } else {
+                showRateDialog(activity);
+            }
         }
     }
 
     /**
-     * Show rate dialog when meets conditions.
+     * Show rate dialog for preHoneycomb devices
+     *
+     * @param activity fragment activity
+     */
+    private static void showRateDialog(final FragmentActivity activity) {
+        final RateDialogSupportFragment fragment = RateDialogSupportFragment
+                .newInstance(sIsShoWNeutralButton);
+        fragment.show(activity.getSupportFragmentManager(), TAG);
+    }
+
+    /**
+     * Show rate dialog for Honeycomb devices
      *
      * @param activity fragment activity
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static void showRateDialogIfMeetsConditions(final Activity activity) {
-        if (shouldShowRateDialog()) {
-            final RateDialogFragment fragment = new RateDialogFragment();
-            final Bundle bundle = new Bundle();
-            bundle.putBoolean(Constants.BUNDLE_KEY_IS_SHOW_NEUTRAL_BUTTON, sIsShoWNeutralButton);
-            fragment.setArguments(bundle);
-            fragment.show(activity.getFragmentManager(), TAG);
-        }
+    private static void showRateDialog(final Activity activity) {
+        final RateDialogFragment fragment = RateDialogFragment.newInstance(sIsShoWNeutralButton);
+        fragment.show(activity.getFragmentManager(), TAG);
     }
 
     private static boolean isFirstLaunch(final SharedPreferences pref) {
