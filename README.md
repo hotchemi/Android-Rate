@@ -10,17 +10,24 @@ Android-Rate is a library to help you promote your android app by prompting user
 
 ## Download
 
-Download from maven central.
+Download from [maven central](http://search.maven.org/#browse%7C-2029320689).
 
 ```groovy
   dependencies {
-    compile 'com.github.hotchemi:android-rate:0.0.5'
+    compile 'com.github.hotchemi:android-rate:{latest.version}'
   }
 ```
 
+## ChangeLog
+
+- 2014/02/12 0.0.2 release.
+- 2014/02/13 0.0.3 release.
+- 2014/04/07 0.0.4 release.
+- 2014/04/12 0.0.5 release.
+
 ## Sample
 
-Please try to move the [sample module](https://github.com/hotchemi/Android-Rate/tree/master/sample/).
+Please try to move the [sample](https://github.com/hotchemi/Android-Rate/tree/master/sample/).
 
 ## How to use
 
@@ -112,14 +119,7 @@ Supports Android 2.2 or greater.
 $ ./gradlew connectedCheck
 ```
 
-## ChangeLog
-
-- 2014/02/12 v0.0.2 release.
-- 2014/02/13 v0.0.3 release.
-- 2014/04/07 v0.0.4 release.
-- 2014/04/12 v0.0.5 release.
-
-## Contributing
+## Contribute
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
