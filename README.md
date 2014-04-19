@@ -108,6 +108,7 @@ Android-Rate currently supports the following languages:
 - Korean
 - Japanese
 - Vietnamese
+- Polish
 
 ## Requirements
 
