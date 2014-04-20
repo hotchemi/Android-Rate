@@ -24,6 +24,7 @@ Download from [maven central](http://search.maven.org/#browse%7C-2029320689).
 - 2014/02/13 0.0.3 release.
 - 2014/04/07 0.0.4 release.
 - 2014/04/12 0.0.5 release.
+- 2014/04/13 0.0.6 release.
 
 ## Sample
 

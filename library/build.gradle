@@ -21,7 +21,7 @@ tasks.withType(JavaCompile) {
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-version = "0.0.5"
+version = "0.0.6"
 ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 group = 'com.github.hotchemi'
 
