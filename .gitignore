@@ -1,6 +1,5 @@
 # project file
 .gradle
-gradle.properties
 local.properties
 
 # android studio

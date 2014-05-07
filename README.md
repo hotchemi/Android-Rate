@@ -134,3 +134,7 @@ $ ./gradlew connectedCheck
 - [androhi](https://github.com/androhi)
 - [hoang8f](https://github.com/hoang8f)
 - [mrmike](https://github.com/mrmike)
+
+## Used
+
+- [Zaim](https://play.google.com/store/apps/details?id=net.zaim.android)
