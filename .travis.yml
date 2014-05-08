@@ -13,7 +13,6 @@ before_install:
 install:
     # Without TERM=dumb, we get mangled output in the Travis console
     - chmod +x gradlew
-    # dummy username and password
     - TERM=dumb ./gradlew assemble
 
 before_script:

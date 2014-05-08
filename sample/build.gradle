@@ -2,7 +2,7 @@ apply plugin: 'android'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.1"
+    buildToolsVersion "19.0.3"
 
     defaultConfig {
         minSdkVersion 8
@@ -23,7 +23,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.hotchemi:android-rate:0.0.4'
+    compile 'com.github.hotchemi:android-rate:0.0.6'
     compile 'com.android.support:appcompat-v7:+'
     compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 }
