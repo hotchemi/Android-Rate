@@ -81,7 +81,17 @@ public class AppRate {
      * @param activity activity
      */
     public static void showRateDialogIfMeetsConditions(final Activity activity) {
-        if (shouldShowRateDialog()) {
+        showRateDialog(activity, false);
+    }
+
+    /**
+     * Show rate dialog
+     *
+     * @param activity activity
+     * @param force    if true force the display.
+     */
+    public static void showRateDialog(final Activity activity, boolean force) {
+        if (force || shouldShowRateDialog()) {
             if (activity instanceof FragmentActivity) {
                 showRateDialog((FragmentActivity) activity);
             } else {
