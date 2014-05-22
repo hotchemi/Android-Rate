@@ -134,6 +134,7 @@ $ ./gradlew connectedCheck
 - [androhi](https://github.com/androhi)
 - [hoang8f](https://github.com/hoang8f)
 - [mrmike](https://github.com/mrmike)
+- [maarekj](https://github.com/maarekj)
 
 ## Used
 
