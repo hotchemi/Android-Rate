@@ -93,7 +93,7 @@ public class AppRate {
      *
      * @param activity fragment activity
      */
-    private static void showRateDialog(final FragmentActivity activity) {
+    public static void showRateDialog(final FragmentActivity activity) {
         final RateDialogSupportFragment fragment = RateDialogSupportFragment
                 .newInstance(sIsShoWNeutralButton);
         fragment.show(activity.getSupportFragmentManager(), TAG);
@@ -105,7 +105,7 @@ public class AppRate {
      * @param activity fragment activity
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private static void showRateDialog(final Activity activity) {
+    public static void showRateDialog(final Activity activity) {
         final RateDialogFragment fragment = RateDialogFragment.newInstance(sIsShoWNeutralButton);
         fragment.show(activity.getFragmentManager(), TAG);
     }
