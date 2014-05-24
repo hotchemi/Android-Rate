@@ -4,9 +4,21 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import java.util.Date;
+
 class PreferenceUtils {
 
     private static final String PREF_FILE_NAME = "Android-Rate";
+
+    static final String PREF_KEY_INSTALL_DATE = "rate_install_date";
+
+    static final String PREF_KEY_LAUNCH_TIMES = "rate_launch_times";
+
+    static final String PREF_KEY_IS_AGREE_SHOW_DIALOG = "rate_is_agree_show_dialog";
+
+    static final String PREF_KEY_REMIND_INTERVAL = "rate_remind_interval";
+
+    static final String BUNDLE_KEY_IS_SHOW_NEUTRAL_BUTTON = "rate_is_show_neutral_button";
 
     private PreferenceUtils() {
     }
@@ -27,8 +39,8 @@ class PreferenceUtils {
      */
     static void clearSharedPreferences(final Context context) {
         final SharedPreferences.Editor editor = getPreferencesEditor(context);
-        editor.remove(Constants.PREF_KEY_INSTALL_DATE);
-        editor.remove(Constants.PREF_KEY_LAUNCH_TIMES);
+        editor.remove(PREF_KEY_INSTALL_DATE);
+        editor.remove(PREF_KEY_LAUNCH_TIMES);
         editor.commit();
     }
 
@@ -41,8 +53,47 @@ class PreferenceUtils {
      */
     static void setAgreeShowDialog(final Context context, final boolean isAgree) {
         final SharedPreferences.Editor editor = getPreferencesEditor(context);
-        editor.putBoolean(Constants.PREF_KEY_IS_AGREE_SHOW_DIALOG, isAgree);
+        editor.putBoolean(PREF_KEY_IS_AGREE_SHOW_DIALOG, isAgree);
         editor.commit();
+    }
+
+    static boolean getIsAgreeShowDialog(Context context) {
+        return getPreferences(context).getBoolean(PREF_KEY_IS_AGREE_SHOW_DIALOG, true);
+    }
+
+    static void setRemindInterval(Context context) {
+        SharedPreferences.Editor editor = getPreferencesEditor(context);
+        editor.remove(PREF_KEY_REMIND_INTERVAL);
+        editor.putLong(PREF_KEY_REMIND_INTERVAL, new Date().getTime());
+        editor.commit();
+    }
+
+    static long getRemindInterval(Context context) {
+        return getPreferences(context).getLong(PREF_KEY_REMIND_INTERVAL, 0);
+    }
+
+    static void setInstallDate(Context context, long installDate) {
+        SharedPreferences.Editor editor = getPreferencesEditor(context);
+        editor.putLong(PREF_KEY_INSTALL_DATE, installDate);
+        editor.commit();
+    }
+
+    static long getInstallDate(Context context) {
+        return getPreferences(context).getLong(PREF_KEY_INSTALL_DATE, 0);
+    }
+
+    static void setLaunchTimes(Context context, int launchTimes) {
+        SharedPreferences.Editor editor = getPreferencesEditor(context);
+        editor.putInt(PREF_KEY_LAUNCH_TIMES, launchTimes);
+        editor.commit();
+    }
+
+    static int getLaunchTimes(Context context) {
+        return getPreferences(context).getInt(PREF_KEY_LAUNCH_TIMES, 0);
+    }
+
+    static boolean isFirstLaunch(Context context) {
+        return getPreferences(context).getLong(PREF_KEY_INSTALL_DATE, 0) == 0L;
     }
 
 }

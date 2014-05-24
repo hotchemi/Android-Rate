@@ -14,7 +14,7 @@ class RateDialogFragment extends DialogFragment {
 
     public static RateDialogFragment newInstance(boolean showNeutralButton) {
         final Bundle bundle = new Bundle();
-        bundle.putBoolean(Constants.BUNDLE_KEY_IS_SHOW_NEUTRAL_BUTTON, showNeutralButton);
+        bundle.putBoolean(PreferenceUtils.BUNDLE_KEY_IS_SHOW_NEUTRAL_BUTTON, showNeutralButton);
         RateDialogFragment dialogFragment = new RateDialogFragment();
         dialogFragment.setArguments(bundle);
         return dialogFragment;
@@ -23,7 +23,7 @@ class RateDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final Bundle params = getArguments();
-        boolean isShowNeutralButton = params.getBoolean(Constants.BUNDLE_KEY_IS_SHOW_NEUTRAL_BUTTON);
+        boolean isShowNeutralButton = params.getBoolean(PreferenceUtils.BUNDLE_KEY_IS_SHOW_NEUTRAL_BUTTON);
         return DialogManager.create(getActivity(), isShowNeutralButton);
     }
 
