@@ -6,12 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
-import static hotchemi.android.rate.PreferenceUtils.clearSharedPreferences;
 import static hotchemi.android.rate.PreferenceUtils.setAgreeShowDialog;
 import static hotchemi.android.rate.PreferenceUtils.setRemindInterval;
 import static hotchemi.android.rate.UriUtils.getGooglePlayUri;
 
 final class DialogManager {
+
+    static final String BUNDLE_KEY_IS_SHOW_NEUTRAL_BUTTON = "rate_is_show_neutral_button";
 
     private DialogManager() {
     }
@@ -41,12 +42,6 @@ final class DialogManager {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 setAgreeShowDialog(context, false);
-            }
-        });
-        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                clearSharedPreferences(context);
             }
         });
         return builder.create();

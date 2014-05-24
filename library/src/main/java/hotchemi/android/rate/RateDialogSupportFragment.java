@@ -1,8 +1,12 @@
 package hotchemi.android.rate;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+
+import static hotchemi.android.rate.DialogManager.BUNDLE_KEY_IS_SHOW_NEUTRAL_BUTTON;
+import static hotchemi.android.rate.PreferenceUtils.clearSharedPreferences;
 
 class RateDialogSupportFragment extends DialogFragment {
 
@@ -10,8 +14,8 @@ class RateDialogSupportFragment extends DialogFragment {
     }
 
     public static RateDialogSupportFragment newInstance(boolean showNeutralButton) {
-        final Bundle bundle = new Bundle();
-        bundle.putBoolean(PreferenceUtils.BUNDLE_KEY_IS_SHOW_NEUTRAL_BUTTON, showNeutralButton);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(BUNDLE_KEY_IS_SHOW_NEUTRAL_BUTTON, showNeutralButton);
         RateDialogSupportFragment dialogFragment = new RateDialogSupportFragment();
         dialogFragment.setArguments(bundle);
         return dialogFragment;
@@ -19,9 +23,15 @@ class RateDialogSupportFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final Bundle params = getArguments();
-        boolean isShowNeutralButton = params.getBoolean(PreferenceUtils.BUNDLE_KEY_IS_SHOW_NEUTRAL_BUTTON);
+        Bundle params = getArguments();
+        boolean isShowNeutralButton = params.getBoolean(BUNDLE_KEY_IS_SHOW_NEUTRAL_BUTTON);
         return DialogManager.create(getActivity(), isShowNeutralButton);
+    }
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
+        clearSharedPreferences(getActivity());
     }
 
 }

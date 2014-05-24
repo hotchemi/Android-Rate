@@ -99,7 +99,6 @@ public class AppRate {
             setInstallDate(context, sInstallDate);
         }
         PreferenceUtils.setLaunchTimes(context, getLaunchTimes(context) + 1);
-
         sInstallDate = getInstallDate(context);
         sLaunchTimes = getLaunchTimes(context);
         sIsAgreeShowDialog = getIsAgreeShowDialog(context);
