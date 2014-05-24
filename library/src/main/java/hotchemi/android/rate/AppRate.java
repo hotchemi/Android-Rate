@@ -19,17 +19,19 @@ public class AppRate {
 
     private static final AppRate INSTANCE = new AppRate();
 
-    private static int sLaunchTimesThreshold = 10;
+    private static long sInstallDateTime = new Date().getTime();
 
     private static int sInstallDaysThreshold = 10;
 
-    private static long sInstallDateTime = new Date().getTime();
+    private static int sLaunchTimesThreshold = 10;
 
     private static int sLaunchTimes = 0;
 
     private static boolean sIsAgreeShoWDialog = true;
 
     private static boolean sIsShoWNeutralButton = true;
+
+    private static boolean sIsDebug = false;
 
     private AppRate() {
     }
@@ -51,6 +53,17 @@ public class AppRate {
 
     public static AppRate clearAgreeShowDialog(final Context context) {
         PreferenceUtils.setAgreeShowDialog(context, true);
+        return INSTANCE;
+    }
+
+    /**
+     * Set debug flag.<br/>
+     * when debug flag is true, always show rating dialog.
+     *
+     * @param isDebug set debug mode or not
+     */
+    public static AppRate setDebug(final boolean isDebug) {
+        sIsDebug = isDebug;
         return INSTANCE;
     }
 
@@ -79,7 +92,7 @@ public class AppRate {
      * @param activity activity
      */
     public static void showRateDialogIfMeetsConditions(final Activity activity) {
-        if (shouldShowRateDialog()) {
+        if (sIsDebug || shouldShowRateDialog()) {
             if (activity instanceof FragmentActivity) {
                 showRateDialog((FragmentActivity) activity);
             } else {
@@ -119,7 +132,6 @@ public class AppRate {
     }
 
     private static boolean isOverInstallDate() {
-        // msec
         return new Date().getTime() - sInstallDateTime >= sInstallDaysThreshold * 24 * 60 * 60 * 1000;
     }
 
