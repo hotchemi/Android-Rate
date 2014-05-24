@@ -12,8 +12,6 @@ import java.util.Date;
 
 /**
  * Help you promote your app by prompting users to rate the app after using it for a few days.
- *
- * @author Shintaro Katafuchi
  */
 public class AppRate {
 

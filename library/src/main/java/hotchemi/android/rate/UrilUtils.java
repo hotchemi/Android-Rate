@@ -2,9 +2,6 @@ package hotchemi.android.rate;
 
 import android.net.Uri;
 
-/**
- * @author Shintaro Katafuchi
- */
 final class UriUtils {
 
     private static final String GOOGLE_PLAY = "https://play.google.com/store/apps/details?id=";

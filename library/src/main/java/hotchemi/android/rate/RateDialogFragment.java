@@ -6,9 +6,6 @@ import android.app.DialogFragment;
 import android.os.Build;
 import android.os.Bundle;
 
-/**
- * @author Shintaro Katafuchi
- */
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 class RateDialogFragment extends DialogFragment {
 

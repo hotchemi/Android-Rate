@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-/**
- * @author Shintaro Katafuchi
- */
 class PreferenceUtils {
 
     private static final String PREF_FILE_NAME = "Android-Rate";

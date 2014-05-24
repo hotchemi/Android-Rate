@@ -6,9 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
-/**
- * @author Shintaro Katafuchi
- */
 class DialogManager {
 
     private DialogManager() {
@@ -17,7 +14,7 @@ class DialogManager {
     /**
      * Create rate dialog.
      *
-     * @param context             context
+     * @param context context
      * @param isShowNeutralButton whether neutral button show or not
      */
     static Dialog create(final Context context, final boolean isShowNeutralButton) {
