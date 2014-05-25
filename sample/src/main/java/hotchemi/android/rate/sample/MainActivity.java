@@ -12,11 +12,13 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Monitor launch times and duration of feeding period from installation
         AppRate.setInstallDays(0) // default 10, 0 means install day.
                 .setLaunchTimes(3) // default 10
+                .setRemindInterval(2) // default 1
                 .setShowNeutralButton(true) // default true
+                .setDebug(false) // default false
                 .monitor(this);
+
         // Show a dialog if meets conditions
         AppRate.showRateDialogIfMeetsConditions(this);
     }
