@@ -13,11 +13,10 @@ import static hotchemi.android.rate.PreferenceUtils.getIsAgreeShowDialog;
 import static hotchemi.android.rate.PreferenceUtils.getLaunchTimes;
 import static hotchemi.android.rate.PreferenceUtils.getRemindInterval;
 import static hotchemi.android.rate.PreferenceUtils.isFirstLaunch;
+import static hotchemi.android.rate.PreferenceUtils.setAgreeShowDialog;
 import static hotchemi.android.rate.PreferenceUtils.setInstallDate;
+import static hotchemi.android.rate.RateDialogSupportFragment.newInstance;
 
-/**
- * Help you promote your app by prompting users to rate the app after using it for a few days.
- */
 public class AppRate {
 
     private static final String TAG = AppRate.class.getName();
@@ -36,9 +35,9 @@ public class AppRate {
 
     private static int sRemindIntervalThreshold = 1;
 
-    private static int sEventsUntilPrompt = 0;
+    private static int sEventsTimes = 0;
 
-    private static int sEventsUntilPromptThreshold = -1;
+    private static int sEventsTimesThreshold = -1;
 
     private static boolean sIsAgreeShowDialog = true;
 
@@ -49,13 +48,13 @@ public class AppRate {
     protected AppRate() {
     }
 
-    public static AppRate setLaunchTimes(int launchTimesThreshold) {
-        sLaunchTimesThreshold = launchTimesThreshold;
+    public static AppRate setLaunchTimes(int launchTimes) {
+        sLaunchTimesThreshold = launchTimes;
         return INSTANCE;
     }
 
-    public static AppRate setInstallDays(int installDaysThreshold) {
-        sInstallDateThreshold = installDaysThreshold;
+    public static AppRate setInstallDays(int installDays) {
+        sInstallDateThreshold = installDays;
         return INSTANCE;
     }
 
@@ -69,13 +68,13 @@ public class AppRate {
         return INSTANCE;
     }
 
-    public static AppRate setEventsUntilPrompt(int eventsUntilPrompt) {
-        sEventsUntilPromptThreshold = eventsUntilPrompt;
+    public static AppRate setEventsTimes(int eventsTimes) {
+        sEventsTimesThreshold = eventsTimes;
         return INSTANCE;
     }
 
     public static AppRate clearAgreeShowDialog(Context context) {
-        PreferenceUtils.setAgreeShowDialog(context, true);
+        setAgreeShowDialog(context, true);
         return INSTANCE;
     }
 
@@ -83,7 +82,7 @@ public class AppRate {
      * Set debug flag.<br/>
      * when debug flag is true, always show rating dialog.
      *
-     * @param isDebug set debug flag
+     * @param isDebug debug flag
      */
     public static AppRate setDebug(boolean isDebug) {
         sIsDebug = isDebug;
@@ -106,17 +105,15 @@ public class AppRate {
     }
 
     public static void showRateDialogIfMeetsConditions(Activity activity) {
-        if (sIsDebug || shouldShowRateDialog())
-            showRateDialog(activity instanceof FragmentActivity ? (FragmentActivity) activity : activity);
+        if (sIsDebug || shouldShowRateDialog()) showRateDialog(getActivityType(activity));
     }
 
     public static void passSignificantEvent(Activity activity) {
-        if (sIsDebug || isOverEventsPass())
-            showRateDialog(activity instanceof FragmentActivity ? (FragmentActivity) activity : activity);
+        if (sIsDebug || isOverEventsPass()) showRateDialog(getActivityType(activity));
     }
 
     public static void showRateDialog(FragmentActivity activity) {
-        RateDialogSupportFragment fragment = RateDialogSupportFragment.newInstance(sIsShowNeutralButton);
+        RateDialogSupportFragment fragment = newInstance(sIsShowNeutralButton);
         fragment.show(activity.getSupportFragmentManager(), TAG);
     }
 
@@ -131,19 +128,27 @@ public class AppRate {
     }
 
     private static boolean isOverInstallDate() {
-        return new Date().getTime() - sInstallDate >= sInstallDateThreshold * 24 * 60 * 60 * 1000;
+        return isOverDate(sInstallDate, sInstallDateThreshold);
     }
 
     private static boolean isOverRemindDate() {
-        return new Date().getTime() - sRemindInterval >= sRemindIntervalThreshold * 24 * 60 * 60 * 1000;
+        return isOverDate(sRemindInterval, sRemindIntervalThreshold);
+    }
+
+    private static boolean isOverDate(long targetDate, int threshold) {
+        return new Date().getTime() - targetDate >= threshold * 24 * 60 * 60 * 1000;
     }
 
     private static boolean isOverEventsPass() {
-        return sEventsUntilPromptThreshold != -1 && ++sEventsUntilPrompt > sEventsUntilPromptThreshold;
+        return sEventsTimesThreshold != -1 && ++sEventsTimes > sEventsTimesThreshold;
     }
 
     private static boolean shouldShowRateDialog() {
         return sIsAgreeShowDialog && isOverLaunchTimes() && isOverInstallDate() && isOverRemindDate();
+    }
+
+    private static Activity getActivityType(Activity activity) {
+        return activity instanceof FragmentActivity ? (FragmentActivity) activity : activity;
     }
 
 }

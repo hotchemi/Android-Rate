@@ -21,11 +21,11 @@ class PreferenceUtils {
     private PreferenceUtils() {
     }
 
-    static SharedPreferences getPreferences(final Context context) {
+    static SharedPreferences getPreferences(Context context) {
         return context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
     }
 
-    static Editor getPreferencesEditor(final Context context) {
+    static Editor getPreferencesEditor(Context context) {
         return getPreferences(context).edit();
     }
 
@@ -35,7 +35,7 @@ class PreferenceUtils {
      *
      * @param context context
      */
-    static void clearSharedPreferences(final Context context) {
+    static void clearSharedPreferences(Context context) {
         final SharedPreferences.Editor editor = getPreferencesEditor(context);
         editor.remove(PREF_KEY_INSTALL_DATE);
         editor.remove(PREF_KEY_LAUNCH_TIMES);
@@ -49,7 +49,7 @@ class PreferenceUtils {
      * @param context context
      * @param isAgree agree with showing rate dialog
      */
-    static void setAgreeShowDialog(final Context context, final boolean isAgree) {
+    static void setAgreeShowDialog(Context context, boolean isAgree) {
         final SharedPreferences.Editor editor = getPreferencesEditor(context);
         editor.putBoolean(PREF_KEY_IS_AGREE_SHOW_DIALOG, isAgree);
         editor.commit();
