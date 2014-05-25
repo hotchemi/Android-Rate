@@ -2,76 +2,92 @@ Android-Rate
 ============
 
 [![Build Status](https://travis-ci.org/hotchemi/Android-Rate.png?branch=master)](https://travis-ci.org/hotchemi/Android-Rate)
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/hotchemi/android-rate/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 Android-Rate is a library to help you promote your android app by prompting users to rate the app after using it for a few days.
 
-![screen shot](http://f.st-hatena.com/images/fotolife/h/hotchemi/20140408/20140408114402.png)
+![screen shot](http://gifzo.net/BI5e2qMJVi0.gif)
 
-## Download
+## Getting Started
 
-Download from [maven central](http://search.maven.org/#browse%7C-2029320689).
+you can download from maven central. current version is **0.1.0**.
 
 ```groovy
-  dependencies {
-    compile 'com.github.hotchemi:android-rate:{latest.version}'
-  }
+dependencies {
+  compile 'com.github.hotchemi:android-rate:{latest.version}'
+}
 ```
-
-## ChangeLog
-
-- 2014/02/12 0.0.2 release.
-- 2014/02/13 0.0.3 release.
-- 2014/04/07 0.0.4 release.
-- 2014/04/12 0.0.5 release.
-- 2014/04/13 0.0.6 release.
 
 ## Sample
 
-Please try to move the [sample](https://github.com/hotchemi/Android-Rate/tree/master/sample/).
+Please try to move the [sample module](https://github.com/hotchemi/Android-Rate/tree/master/sample).
 
 ## How to use
 
-### Implementation
+### Configuration
 
-Call `AppRate.monitor(Context)` and `AppRate.showRateDialogIfMeetsConditions(Context)` in your launcher activity.
+Android-rate provides class methods to configure its behavior.
 
 ```java
 @Override
 protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
-  // Monitor launch times and duration of feeding period from installation
-  AppRate.monitor(this);
+
+  AppRate.setInstallDays(0) // default 10, 0 means install day.
+      .setLaunchTimes(3) // default 10
+      .setRemindInterval(2) // default 1
+      .setShowNeutralButton(true) // default true
+      .setDebug(false) // default false
+      .monitor(this);
+  
   // Show a dialog if meets conditions
   AppRate.showRateDialogIfMeetsConditions(this);
 }
 ```
 
-### Custom conditions
-
 The default conditions to show rate dialog is as below:
 
-* App is launched more than 10 times.
-* App is launched more than 10 days later than installation.
+1. App is launched more than 10 days later than installation. Chenge via `AppRate.setInstallDays(int)`.
+2. App is launched more than 10 times. Change via `AppRate.setLaunchTimes(int)`.
+3. App is launched more than 2 days after neutral button clicked. Change via `AppRate.setRemindInterval(int)`.
+4. App shows neutra dialog(Remind me later) by default. Change via `setShowNeutralButton(boolean)`.
+4. Setting `AppRate.setDebug(boolean)` will ensure that the rating request is shown each time the app is launched. **This feature is only development!**.
 
-If you want to use your own condition, please call `AppRate.setLaunchTimes(int)` and `AppRate.setInstallDays(int)`.
+### Event Tracking
+
+When you want to track significant events, write code as below.
 
 ```java
 @Override
 protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    // Monitor launch times and duration of feeding period from installation
-    AppRate.setInstallDays(0) // default 10, 0 means install day.
-           .setLaunchTimes(3) // default 10
-           .monitor(this);
-    // Show a dialog if meets conditions
-    AppRate.showRateDialogIfMeetsConditions(this);
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.activity_main);
+  AppRate.setEventTimes(2).monitor(this);
+}
+
+@Override
+public void onClick() {
+  AppRate.passSignificantEvent(this); // when user pass this line for the third time, dialog appears.
 }
 ```
 
-### Custom rate dialog
+### Clear show dialog flag
+
+When you want to show the dialog again, call `AppRate.clearAgreeShowDialog(Context)`.
+
+```java
+AppRate.clearAgreeShowDialog(this);
+```
+
+### When the button presses on
+
+call `AppRate.showDialog(Context)`.
+
+```java
+AppRate.showDialog(this);
+```
+
+### Custom dialog
 
 If you want to use your own dialog labels, override string xml resources on your application.
 
@@ -83,19 +99,6 @@ If you want to use your own dialog labels, override string xml resources on your
     <string name="rate_dialog_cancel">Remind Me Later</string>
     <string name="rate_dialog_no">No, Thanks</string>
 </resources>
-```
-And if you want to decide whether neutral button is appeared, please call `AppRate.setShowNeutralButton(boolean)`.
-
-```java
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    // method chain
-    AppRate.setInstallDays(0)
-           .setShowNeutralButton(false) // default true
-           .monitor(this);
-}
 ```
 
 ## Localization
@@ -113,13 +116,23 @@ Android-Rate currently supports the following languages:
 
 ## Requirements
 
-Supports Android 2.2 or greater.
+Supports Android 1.6 or greater.
 
 ## Test
 
 ```sh
 $ ./gradlew connectedCheck
 ```
+
+## ChangeLog
+
+- 2014/05/25 0.1.0 release.
+- 2014/04/13 0.0.6 release.
+- 2014/04/12 0.0.5 release.
+- 2014/04/07 0.0.4 release.
+- 2014/02/13 0.0.3 release.
+- 2014/02/12 0.0.2 release.
+- 2014/02/11 0.0.1 release.
 
 ## Contribute
 
