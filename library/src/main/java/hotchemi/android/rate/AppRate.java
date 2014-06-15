@@ -105,11 +105,19 @@ public class AppRate {
     }
 
     public static void showRateDialogIfMeetsConditions(Activity activity) {
-        if (sIsDebug || shouldShowRateDialog()) showRateDialog(getActivityType(activity));
+        if (sIsDebug || shouldShowRateDialog()) showRateDialog(activity);
+    }
+
+    public static void showRateDialogIfMeetsConditions(FragmentActivity activity) {
+        if (sIsDebug || shouldShowRateDialog()) showRateDialog(activity);
     }
 
     public static void passSignificantEvent(Activity activity) {
-        if (sIsDebug || isOverEventsPass()) showRateDialog(getActivityType(activity));
+        if (sIsDebug || isOverEventsPass()) showRateDialog(activity);
+    }
+
+    public static void passSignificantEvent(FragmentActivity activity) {
+        if (sIsDebug || isOverEventsPass()) showRateDialog(activity);
     }
 
     public static void showRateDialog(FragmentActivity activity) {
@@ -145,10 +153,6 @@ public class AppRate {
 
     private static boolean shouldShowRateDialog() {
         return sIsAgreeShowDialog && isOverLaunchTimes() && isOverInstallDate() && isOverRemindDate();
-    }
-
-    private static Activity getActivityType(Activity activity) {
-        return activity instanceof FragmentActivity ? (FragmentActivity) activity : activity;
     }
 
 }
