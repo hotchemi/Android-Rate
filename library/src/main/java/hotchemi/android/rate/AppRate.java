@@ -23,7 +23,7 @@ public class AppRate {
 
     private static final AppRate INSTANCE = new AppRate();
 
-    private static long sInstallDate = new Date().getTime();
+    private static volatile long sInstallDate = new Date().getTime();
 
     private static int sInstallDateThreshold = 10;
 
@@ -31,7 +31,7 @@ public class AppRate {
 
     private static int sLaunchTimesThreshold = 10;
 
-    private static long sRemindInterval = 0;
+    private static volatile long sRemindInterval = 0;
 
     private static int sRemindIntervalThreshold = 1;
 
