@@ -4,7 +4,7 @@ import android.net.Uri;
 import android.test.AndroidTestCase;
 
 /**
- * @author Shintaro Katafuchi
+ * Unit test for {@link hotchemi.android.rate.UriUtil}
  */
 public class UriUtilsTest extends AndroidTestCase {
 
@@ -12,12 +12,12 @@ public class UriUtilsTest extends AndroidTestCase {
 
     public void testGetGooglePlayUri() {
         {
-            Uri uri = UriUtils.getGooglePlayUri("");
+            Uri uri = UriUtil.getGooglePlayUri("");
             assertEquals(uri.toString(), GOOGLE_PLAY);
         }
         {
             final String packageName = "hotchemi.android.rate";
-            Uri uri = UriUtils.getGooglePlayUri(packageName);
+            Uri uri = UriUtil.getGooglePlayUri(packageName);
             assertEquals(uri.toString(), GOOGLE_PLAY + packageName);
         }
     }

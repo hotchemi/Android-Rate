@@ -4,14 +4,13 @@ android {
     compileSdkVersion 19
     buildToolsVersion "19.1.0"
     defaultConfig {
-        minSdkVersion 4
+        minSdkVersion 7
         targetSdkVersion 19
     }
 }
 
 dependencies {
     compile 'com.android.support:appcompat-v7:+'
-    compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 }
 
 apply from: 'https://raw.github.com/hotchemi/gradle-mvn-push/master/gradle-mvn-push.gradle'

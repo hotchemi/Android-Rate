@@ -7,11 +7,10 @@ import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 
-import static hotchemi.android.rate.DialogManager.BUNDLE_KEY_IS_SHOW_NEUTRAL_BUTTON;
 import static hotchemi.android.rate.PreferenceUtils.clearSharedPreferences;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-class RateDialogFragment extends DialogFragment {
+final class RateDialogFragment extends DialogFragment implements BaseDialogFragment {
 
     public RateDialogFragment() {
     }

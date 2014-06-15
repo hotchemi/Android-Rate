@@ -8,11 +8,9 @@ import android.content.Intent;
 
 import static hotchemi.android.rate.PreferenceUtils.setAgreeShowDialog;
 import static hotchemi.android.rate.PreferenceUtils.setRemindInterval;
-import static hotchemi.android.rate.UriUtils.getGooglePlayUri;
+import static hotchemi.android.rate.UriUtil.getGooglePlayUri;
 
 final class DialogManager {
-
-    static final String BUNDLE_KEY_IS_SHOW_NEUTRAL_BUTTON = "rate_is_show_neutral_button";
 
     private DialogManager() {
     }

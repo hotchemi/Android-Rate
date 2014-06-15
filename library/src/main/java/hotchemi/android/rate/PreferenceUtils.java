@@ -6,17 +6,17 @@ import android.content.SharedPreferences.Editor;
 
 import java.util.Date;
 
-class PreferenceUtils {
+final class PreferenceUtils {
 
-    private static final String PREF_FILE_NAME = "Android-Rate";
+    private static final String PREF_FILE_NAME = "android_rate_pref_file";
 
-    private static final String PREF_KEY_INSTALL_DATE = "rate_install_date";
+    private static final String PREF_KEY_INSTALL_DATE = "android_rate_install_date";
 
-    private static final String PREF_KEY_LAUNCH_TIMES = "rate_launch_times";
+    private static final String PREF_KEY_LAUNCH_TIMES = "android_rate_launch_times";
 
-    private static final String PREF_KEY_IS_AGREE_SHOW_DIALOG = "rate_is_agree_show_dialog";
+    private static final String PREF_KEY_IS_AGREE_SHOW_DIALOG = "android_rate_is_agree_show_dialog";
 
-    private static final String PREF_KEY_REMIND_INTERVAL = "rate_remind_interval";
+    private static final String PREF_KEY_REMIND_INTERVAL = "android_rate_remind_interval";
 
     private PreferenceUtils() {
     }
