@@ -6,7 +6,7 @@ import android.test.AndroidTestCase;
 /**
  * Unit test for {@link hotchemi.android.rate.UriHelper}
  */
-public class UriUtilsTest extends AndroidTestCase {
+public class UriHelperTest extends AndroidTestCase {
 
     private static final String GOOGLE_PLAY = "https://play.google.com/store/apps/details?id=";
 
