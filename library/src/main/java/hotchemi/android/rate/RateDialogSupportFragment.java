@@ -5,7 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
-import static hotchemi.android.rate.PreferenceUtils.clearSharedPreferences;
+import static hotchemi.android.rate.PreferenceHelper.clearSharedPreferences;
 
 final class RateDialogSupportFragment extends DialogFragment implements BaseDialogFragment {
 

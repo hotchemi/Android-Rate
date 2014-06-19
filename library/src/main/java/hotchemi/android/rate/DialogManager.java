@@ -6,9 +6,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
-import static hotchemi.android.rate.PreferenceUtils.setAgreeShowDialog;
-import static hotchemi.android.rate.PreferenceUtils.setRemindInterval;
-import static hotchemi.android.rate.UriUtil.getGooglePlayUri;
+import static hotchemi.android.rate.PreferenceHelper.setAgreeShowDialog;
+import static hotchemi.android.rate.PreferenceHelper.setRemindInterval;
+import static hotchemi.android.rate.UriHelper.getGooglePlay;
 
 final class DialogManager {
 
@@ -23,7 +23,7 @@ final class DialogManager {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 final String packageName = context.getPackageName();
-                Intent intent = new Intent(Intent.ACTION_VIEW, getGooglePlayUri(packageName));
+                Intent intent = new Intent(Intent.ACTION_VIEW, getGooglePlay(packageName));
                 context.startActivity(intent);
                 setAgreeShowDialog(context, false);
             }

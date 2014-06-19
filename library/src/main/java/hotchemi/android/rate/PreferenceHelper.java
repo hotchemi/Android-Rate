@@ -6,7 +6,7 @@ import android.content.SharedPreferences.Editor;
 
 import java.util.Date;
 
-final class PreferenceUtils {
+final class PreferenceHelper {
 
     private static final String PREF_FILE_NAME = "android_rate_pref_file";
 
@@ -18,7 +18,7 @@ final class PreferenceUtils {
 
     private static final String PREF_KEY_REMIND_INTERVAL = "android_rate_remind_interval";
 
-    private PreferenceUtils() {
+    private PreferenceHelper() {
     }
 
     static SharedPreferences getPreferences(Context context) {
@@ -70,9 +70,9 @@ final class PreferenceUtils {
         return getPreferences(context).getLong(PREF_KEY_REMIND_INTERVAL, 0);
     }
 
-    static void setInstallDate(Context context, long installDate) {
+    static void setInstallDate(Context context) {
         SharedPreferences.Editor editor = getPreferencesEditor(context);
-        editor.putLong(PREF_KEY_INSTALL_DATE, installDate);
+        editor.putLong(PREF_KEY_INSTALL_DATE, new Date().getTime());
         editor.commit();
     }
 

@@ -7,7 +7,7 @@ import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 
-import static hotchemi.android.rate.PreferenceUtils.clearSharedPreferences;
+import static hotchemi.android.rate.PreferenceHelper.clearSharedPreferences;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 final class RateDialogFragment extends DialogFragment implements BaseDialogFragment {
@@ -32,7 +32,6 @@ final class RateDialogFragment extends DialogFragment implements BaseDialogFragm
 
     @Override
     public void onCancel(DialogInterface dialog) {
-        super.onCancel(dialog);
         clearSharedPreferences(getActivity());
     }
 
