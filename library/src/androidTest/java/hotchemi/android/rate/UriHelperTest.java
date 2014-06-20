@@ -16,6 +16,10 @@ public class UriHelperTest extends AndroidTestCase {
             assertEquals(uri.toString(), GOOGLE_PLAY);
         }
         {
+            Uri uri = UriHelper.getGooglePlay(null);
+            assertNull(uri);
+        }
+        {
             final String packageName = "hotchemi.android.rate";
             Uri uri = UriHelper.getGooglePlay(packageName);
             assertEquals(uri.toString(), GOOGLE_PLAY + packageName);

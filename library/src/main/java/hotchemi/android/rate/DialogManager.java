@@ -6,10 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
-import static hotchemi.android.rate.PreferenceHelper.setAgreeShowDialog;
-import static hotchemi.android.rate.PreferenceHelper.setRemindInterval;
-import static hotchemi.android.rate.UriHelper.getGooglePlay;
-
 final class DialogManager {
 
     private DialogManager() {
@@ -23,23 +19,23 @@ final class DialogManager {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 final String packageName = context.getPackageName();
-                Intent intent = new Intent(Intent.ACTION_VIEW, getGooglePlay(packageName));
+                Intent intent = new Intent(Intent.ACTION_VIEW, UriHelper.getGooglePlay(packageName));
                 context.startActivity(intent);
-                setAgreeShowDialog(context, false);
+                PreferenceHelper.setAgreeShowDialog(context, false);
             }
         });
         if (isShowNeutralButton) {
             builder.setNeutralButton(R.string.rate_dialog_cancel, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    setRemindInterval(context);
+                    PreferenceHelper.setRemindInterval(context);
                 }
             });
         }
         builder.setNegativeButton(R.string.rate_dialog_no, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                setAgreeShowDialog(context, false);
+                PreferenceHelper.setAgreeShowDialog(context, false);
             }
         });
         return builder.create();

@@ -10,7 +10,7 @@ final class UriHelper {
     }
 
     static Uri getGooglePlay(String packageName) {
-        return Uri.parse(GOOGLE_PLAY + packageName);
+        return packageName == null ? null : Uri.parse(GOOGLE_PLAY + packageName);
     }
 
 }

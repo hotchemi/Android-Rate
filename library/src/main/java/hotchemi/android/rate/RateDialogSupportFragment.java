@@ -5,8 +5,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
-import static hotchemi.android.rate.PreferenceHelper.clearSharedPreferences;
-
 final class RateDialogSupportFragment extends DialogFragment implements BaseDialogFragment {
 
     public RateDialogSupportFragment() {
@@ -15,9 +13,9 @@ final class RateDialogSupportFragment extends DialogFragment implements BaseDial
     public static RateDialogSupportFragment newInstance(boolean showNeutralButton) {
         Bundle bundle = new Bundle();
         bundle.putBoolean(BUNDLE_KEY_IS_SHOW_NEUTRAL_BUTTON, showNeutralButton);
-        RateDialogSupportFragment dialogFragment = new RateDialogSupportFragment();
-        dialogFragment.setArguments(bundle);
-        return dialogFragment;
+        RateDialogSupportFragment dialog = new RateDialogSupportFragment();
+        dialog.setArguments(bundle);
+        return dialog;
     }
 
     @Override
@@ -29,8 +27,7 @@ final class RateDialogSupportFragment extends DialogFragment implements BaseDial
 
     @Override
     public void onCancel(DialogInterface dialog) {
-        super.onCancel(dialog);
-        clearSharedPreferences(getActivity());
+        PreferenceHelper.clearSharedPreferences(getActivity());
     }
 
 }

@@ -8,28 +8,23 @@ import android.support.v4.app.FragmentActivity;
 
 import java.util.Date;
 
-import static hotchemi.android.rate.PreferenceHelper.getInstallDate;
-import static hotchemi.android.rate.PreferenceHelper.getIsAgreeShowDialog;
-import static hotchemi.android.rate.PreferenceHelper.getLaunchTimes;
-import static hotchemi.android.rate.PreferenceHelper.getRemindInterval;
-import static hotchemi.android.rate.PreferenceHelper.isFirstLaunch;
-import static hotchemi.android.rate.PreferenceHelper.setAgreeShowDialog;
-import static hotchemi.android.rate.PreferenceHelper.setInstallDate;
-import static hotchemi.android.rate.RateDialogSupportFragment.newInstance;
-
 public class AppRate {
 
-    private static final String TAG = AppRate.class.getName();
     private static final AppRate SINGLETON = new AppRate();
+
     private static int sInstallDate = 10;
+
     private static int sLaunchTimes = 10;
+
     private static int sRemindInterval = 1;
-    private static int sEventsTimes = 0;
-    private static int sEventsTimesThreshold = -1;
+
+    private static int sEventsTimes = -1;
+
     private static boolean sIsShowNeutralButton = true;
+
     private static boolean sIsDebug = false;
 
-    protected AppRate() {
+    private AppRate() {
     }
 
     public static AppRate setLaunchTimes(int launchTimes) {
@@ -53,21 +48,15 @@ public class AppRate {
     }
 
     public static AppRate setEventsTimes(int eventsTimes) {
-        sEventsTimesThreshold = eventsTimes;
+        sEventsTimes = eventsTimes;
         return SINGLETON;
     }
 
     public static AppRate clearAgreeShowDialog(Context context) {
-        setAgreeShowDialog(context, true);
+        PreferenceHelper.setAgreeShowDialog(context, true);
         return SINGLETON;
     }
 
-    /**
-     * Set debug flag.<br/>
-     * when debug flag is true, always show rating dialog.
-     *
-     * @param isDebug debug flag
-     */
     public static AppRate setDebug(boolean isDebug) {
         sIsDebug = isDebug;
         return SINGLETON;
@@ -75,13 +64,13 @@ public class AppRate {
 
     /**
      * Monitor launch times and interval from installation.<br/>
-     * Call this method when the launcher activity is launched.
+     * Call this method when the activity is launched.
      */
     public static void monitor(Context context) {
-        if (isFirstLaunch(context)) {
-            setInstallDate(context);
+        if (PreferenceHelper.isFirstLaunch(context)) {
+            PreferenceHelper.setInstallDate(context);
         }
-        PreferenceHelper.setLaunchTimes(context, getLaunchTimes(context) + 1);
+        PreferenceHelper.setLaunchTimes(context, PreferenceHelper.getLaunchTimes(context) + 1);
     }
 
     public static void showRateDialogIfMeetsConditions(Activity activity) {
@@ -93,46 +82,58 @@ public class AppRate {
     }
 
     public static void passSignificantEvent(Activity activity) {
-        if (sIsDebug || isOverEventPass()) showRateDialog(activity);
+        if (sIsDebug || isOverEventPass(activity.getApplicationContext())) {
+            showRateDialog(activity);
+        } else {
+            Context context = activity.getApplicationContext();
+            int eventTimes = PreferenceHelper.getEventTimes(context);
+            PreferenceHelper.setEventTimes(context, ++eventTimes);
+        }
     }
 
     public static void passSignificantEvent(FragmentActivity activity) {
-        if (sIsDebug || isOverEventPass()) showRateDialog(activity);
+        if (sIsDebug || isOverEventPass(activity.getApplicationContext())) {
+            showRateDialog(activity);
+        } else {
+            Context context = activity.getApplicationContext();
+            int eventTimes = PreferenceHelper.getEventTimes(context);
+            PreferenceHelper.setEventTimes(context, ++eventTimes);
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static void showRateDialog(Activity activity) {
         RateDialogFragment fragment = RateDialogFragment.newInstance(sIsShowNeutralButton);
-        fragment.show(activity.getFragmentManager(), TAG);
+        fragment.show(activity.getFragmentManager(), AppRate.class.getName());
     }
 
     public static void showRateDialog(FragmentActivity activity) {
-        RateDialogSupportFragment fragment = newInstance(sIsShowNeutralButton);
-        fragment.show(activity.getSupportFragmentManager(), TAG);
+        RateDialogSupportFragment fragment = RateDialogSupportFragment.newInstance(sIsShowNeutralButton);
+        fragment.show(activity.getSupportFragmentManager(), AppRate.class.getName());
     }
 
     private static boolean isOverLaunchTimes(Context context) {
-        return getLaunchTimes(context) >= sLaunchTimes;
+        return PreferenceHelper.getLaunchTimes(context) >= sLaunchTimes;
     }
 
     private static boolean isOverInstallDate(Context context) {
-        return isOverDate(getInstallDate(context), sInstallDate);
+        return isOverDate(PreferenceHelper.getInstallDate(context), sInstallDate);
     }
 
     private static boolean isOverRemindDate(Context context) {
-        return isOverDate(getRemindInterval(context), sRemindInterval);
+        return isOverDate(PreferenceHelper.getRemindInterval(context), sRemindInterval);
     }
 
     private static boolean isOverDate(long targetDate, int threshold) {
         return new Date().getTime() - targetDate >= threshold * 24 * 60 * 60 * 1000;
     }
 
-    private static boolean isOverEventPass() {
-        return sEventsTimesThreshold != -1 && ++sEventsTimes > sEventsTimesThreshold;
+    private static boolean isOverEventPass(Context context) {
+        return sEventsTimes != -1 && PreferenceHelper.getEventTimes(context) > sEventsTimes;
     }
 
     private static boolean shouldShowRateDialog(Context context) {
-        return getIsAgreeShowDialog(context) &&
+        return PreferenceHelper.getIsAgreeShowDialog(context) &&
                 isOverLaunchTimes(context) &&
                 isOverInstallDate(context) &&
                 isOverRemindDate(context);
