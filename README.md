@@ -9,7 +9,7 @@ Android-Rate is a library to help you promote your android app by prompting user
 
 ## Getting Started
 
-you can download from maven central. current version is **0.1.2**.
+you can download from maven central. current version is **0.2.0**.
 
 ```groovy
 dependencies {
@@ -38,8 +38,14 @@ protected void onCreate(Bundle savedInstanceState) {
       .setRemindInterval(2) // default 1
       .setShowNeutralButton(true) // default true
       .setDebug(false) // default false
+      .setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
+          @Override
+          public void onClickButton(int which) {
+              Log.d(MainActivity.class.getName(), Integer.toString(which));
+          }
+      })
       .monitor(this);
-  
+
   // Show a dialog if meets conditions
   AppRate.showRateDialogIfMeetsConditions(this);
 }
@@ -50,8 +56,9 @@ The default conditions to show rate dialog is as below:
 1. App is launched more than 10 days later than installation. Chenge via `AppRate.setInstallDays(int)`.
 2. App is launched more than 10 times. Change via `AppRate.setLaunchTimes(int)`.
 3. App is launched more than 2 days after neutral button clicked. Change via `AppRate.setRemindInterval(int)`.
-4. App shows neutra dialog(Remind me later) by default. Change via `setShowNeutralButton(boolean)`.
-4. Setting `AppRate.setDebug(boolean)` will ensure that the rating request is shown each time the app is launched. **This feature is only development!**.
+4. App shows neutral dialog(Remind me later) by default. Change via `setShowNeutralButton(boolean)`.
+5. To specify the callback when the button is pressed. The same value as the second argument of `DialogInterface.OnClickListener#onClick` will be passed in the argument of `onClickButton`. 
+6. Setting `AppRate.setDebug(boolean)` will ensure that the rating request is shown each time the app is launched. **This feature is only development!**.
 
 ### Event Tracking
 
@@ -126,6 +133,8 @@ $ ./gradlew connectedCheck
 
 ## ChangeLog
 
+- 2014/06/20 0.2.0 release.
+- 2014/06/19 0.1.3 release.
 - 2014/06/16 0.1.2 release.
 - 2014/06/15 0.1.1 release.
 - 2014/05/25 0.1.0 release.

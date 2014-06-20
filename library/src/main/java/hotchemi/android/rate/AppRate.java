@@ -24,6 +24,8 @@ public class AppRate {
 
     private static boolean sIsDebug = false;
 
+    private static OnClickButtonListener sListener;
+
     private AppRate() {
     }
 
@@ -62,10 +64,11 @@ public class AppRate {
         return SINGLETON;
     }
 
-    /**
-     * Monitor launch times and interval from installation.<br/>
-     * Call this method when the activity is launched.
-     */
+    public static AppRate setOnClickButtonListener(OnClickButtonListener listener) {
+        sListener = listener;
+        return SINGLETON;
+    }
+
     public static void monitor(Context context) {
         if (PreferenceHelper.isFirstLaunch(context)) {
             PreferenceHelper.setInstallDate(context);
@@ -103,12 +106,12 @@ public class AppRate {
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static void showRateDialog(Activity activity) {
-        RateDialogFragment fragment = RateDialogFragment.newInstance(sIsShowNeutralButton);
+        RateDialogFragment fragment = RateDialogFragment.getInstance(sIsShowNeutralButton, sListener);
         fragment.show(activity.getFragmentManager(), AppRate.class.getName());
     }
 
     public static void showRateDialog(FragmentActivity activity) {
-        RateDialogSupportFragment fragment = RateDialogSupportFragment.newInstance(sIsShowNeutralButton);
+        RateDialogSupportFragment fragment = RateDialogSupportFragment.newInstance(sIsShowNeutralButton, sListener);
         fragment.show(activity.getSupportFragmentManager(), AppRate.class.getName());
     }
 

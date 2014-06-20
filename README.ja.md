@@ -9,7 +9,7 @@ Android-Rateはアプリのレーティング促進ダイアログを出す事�
 
 ## Getting Started
 
-maven centralからダウンロードできます. 最新バージョンは **0.1.2**です.
+maven centralからダウンロードできます. 最新バージョンは **0.2.0**です.
 
 ```groovy
 dependencies {
@@ -38,6 +38,12 @@ protected void onCreate(Bundle savedInstanceState) {
       .setRemindInterval(2) // default 1
       .setShowNeutralButton(true) // default true
       .setDebug(false) // default false
+      .setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
+          @Override
+          public void onClickButton(int which) {
+              Log.d(MainActivity.class.getName(), Integer.toString(which));
+          }
+      })
       .monitor(this);
   
   // Show a dialog if meets conditions
@@ -45,13 +51,14 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 ```
 
-デフォルトの条件設定は下記の:
+設定できるパラメータは下記の通りです.:
 
 1. アプリのインストール後日数をモニタリング.デフォルトは10日.`AppRate.setInstallDays(int)`を使用して変更.
 2. アプリの起動回数をモニタリング.デフォルトは10.`AppRate.setLaunchTimes(int)`を利用して変更.
 3. ｢後でする｣を押下した後の日数経過をモニタリング.デフォルトは2日.`AppRate.setRemindInterval(int)`を利用して変更.
 4. ｢後でする｣ボタンを出現させるかどうかを設定します.デフォルトはtrue.`setShowNeutralButton(boolean)`を利用して変更.
-4. `AppRate.setDebug(boolean)`をtrueにすると常時ダイアログが出現する用になります. **必ずデバッグ時のみの利用としてください!**.
+5. ボタンが押された時のcallbackを指定します.`onClickButton`の引数whichには`DialogInterface.OnClickListener#onClick`の第二引数と同じ値が渡ります.
+6. `AppRate.setDebug(boolean)`をtrueにすると常時ダイアログが出現する用になります. **必ずデバッグ時のみの利用としてください!**.
 
 ### Event Tracking
 
@@ -128,6 +135,8 @@ $ ./gradlew connectedCheck
 
 ## ChangeLog
 
+- 2014/06/20 0.2.0 release.
+- 2014/06/19 0.1.3 release.
 - 2014/06/16 0.1.2 release.
 - 2014/06/15 0.1.1 release.
 - 2014/05/25 0.1.0 release.
