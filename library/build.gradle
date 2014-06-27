@@ -10,7 +10,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:+'
+    compile 'com.android.support:appcompat-v7:19.1.0'
 }
 
 apply from: 'https://raw.github.com/hotchemi/gradle-mvn-push/master/gradle-mvn-push.gradle'

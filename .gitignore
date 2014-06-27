@@ -9,4 +9,4 @@ local.properties
 # mac
 .DS_Store
 
-build/
+/build
