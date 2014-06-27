@@ -88,9 +88,7 @@ public class AppRate {
         if (sIsDebug || isOverEventPass(activity.getApplicationContext())) {
             showRateDialog(activity);
         } else {
-            Context context = activity.getApplicationContext();
-            int eventTimes = PreferenceHelper.getEventTimes(context);
-            PreferenceHelper.setEventTimes(context, ++eventTimes);
+            setEventsTimes(activity.getApplicationContext());
         }
     }
 
@@ -98,9 +96,7 @@ public class AppRate {
         if (sIsDebug || isOverEventPass(activity.getApplicationContext())) {
             showRateDialog(activity);
         } else {
-            Context context = activity.getApplicationContext();
-            int eventTimes = PreferenceHelper.getEventTimes(context);
-            PreferenceHelper.setEventTimes(context, ++eventTimes);
+            setEventsTimes(activity.getApplicationContext());
         }
     }
 
@@ -140,6 +136,11 @@ public class AppRate {
                 isOverLaunchTimes(context) &&
                 isOverInstallDate(context) &&
                 isOverRemindDate(context);
+    }
+
+    private static void setEventsTimes(Context context) {
+        int eventTimes = PreferenceHelper.getEventTimes(context);
+        PreferenceHelper.setEventTimes(context, ++eventTimes);
     }
 
 }
