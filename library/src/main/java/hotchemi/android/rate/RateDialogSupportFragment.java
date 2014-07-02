@@ -14,7 +14,7 @@ public final class RateDialogSupportFragment extends DialogFragment implements A
         RateDialogSupportFragment dialog = new RateDialogSupportFragment();
         Bundle bundle = new Bundle();
         bundle.putBoolean(KEY_IS_SHOW_NEUTRAL_BUTTON, showNeutralButton);
-        bundle.putSerializable(KEY_ON_CLICK_BUTTON_LISTENER, listener);
+        bundle.putParcelable(KEY_ON_CLICK_BUTTON_LISTENER, listener);
         dialog.setArguments(bundle);
         return dialog;
     }
@@ -23,7 +23,7 @@ public final class RateDialogSupportFragment extends DialogFragment implements A
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Bundle arguments = getArguments();
         boolean isShowNeutralButton = arguments.getBoolean(KEY_IS_SHOW_NEUTRAL_BUTTON);
-        OnClickButtonListener listener = (OnClickButtonListener) arguments.getSerializable(KEY_ON_CLICK_BUTTON_LISTENER);
+        OnClickButtonListener listener = arguments.getParcelable(KEY_ON_CLICK_BUTTON_LISTENER);
         return DialogManager.create(getActivity(), isShowNeutralButton, listener);
     }
 

@@ -1,8 +1,8 @@
 package hotchemi.android.rate;
 
-import java.io.Serializable;
+import android.os.Parcelable;
 
-public interface OnClickButtonListener extends Serializable {
+public interface OnClickButtonListener extends Parcelable {
 
     void onClickButton(int which);
 

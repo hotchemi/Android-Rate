@@ -9,7 +9,7 @@ Android-Rate is a library to help you promote your android app by prompting user
 
 ## Getting Started
 
-you can download from maven central. current version is **0.2.0**.
+you can download from maven central. current version is **0.2.1**.
 
 ```groovy
 dependencies {
@@ -42,6 +42,14 @@ protected void onCreate(Bundle savedInstanceState) {
           @Override
           public void onClickButton(int which) {
               Log.d(MainActivity.class.getName(), Integer.toString(which));
+          }
+          @Override
+          public int describeContents() {
+              return 0;
+          }
+          @Override
+          public void writeToParcel(Parcel dest, int flags) {
+              // nothing to do
           }
       })
       .monitor(this);
@@ -120,6 +128,7 @@ Android-Rate currently supports the following languages:
 - Japanese
 - Vietnamese
 - Polish
+- Czech
 
 ## Requirements
 
@@ -133,6 +142,7 @@ $ ./gradlew connectedCheck
 
 ## ChangeLog
 
+- 2014/07/02 0.2.1 release.
 - 2014/06/20 0.2.0 release.
 - 2014/06/19 0.1.3 release.
 - 2014/06/16 0.1.2 release.
@@ -159,6 +169,7 @@ $ ./gradlew connectedCheck
 - [hoang8f](https://github.com/hoang8f)
 - [mrmike](https://github.com/mrmike)
 - [maarekj](https://github.com/maarekj)
+- [TomasValenta](https://github.com/TomasValenta)
 
 ## Used
 

@@ -1,6 +1,7 @@
 package hotchemi.android.rate.sample;
 
 import android.os.Bundle;
+import android.os.Parcel;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
@@ -23,6 +24,16 @@ public class MainActivity extends ActionBarActivity {
                     @Override
                     public void onClickButton(int which) {
                         Log.d(MainActivity.class.getName(), Integer.toString(which));
+                    }
+
+                    @Override
+                    public int describeContents() {
+                        return 0;
+                    }
+
+                    @Override
+                    public void writeToParcel(Parcel dest, int flags) {
+                        // nothing to do
                     }
                 })
                 .monitor(this);

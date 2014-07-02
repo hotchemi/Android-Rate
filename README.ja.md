@@ -9,7 +9,7 @@ Android-Rateはアプリのレーティング促進ダイアログを出す事�
 
 ## Getting Started
 
-maven centralからダウンロードできます. 最新バージョンは **0.2.0**です.
+maven centralからダウンロードできます. 最新バージョンは **0.2.1**です.
 
 ```groovy
 dependencies {
@@ -42,6 +42,14 @@ protected void onCreate(Bundle savedInstanceState) {
           @Override
           public void onClickButton(int which) {
               Log.d(MainActivity.class.getName(), Integer.toString(which));
+          }
+          @Override
+          public int describeContents() {
+              return 0;
+          }
+          @Override
+          public void writeToParcel(Parcel dest, int flags) {
+              // nothing to do
           }
       })
       .monitor(this);
@@ -122,6 +130,7 @@ Android-Rateは下記の言語をサポートしています:
 - 日本語
 - ベトナム語
 - ポーランド語
+- チェコ語
 
 ## Requirements
 
@@ -135,6 +144,7 @@ $ ./gradlew connectedCheck
 
 ## ChangeLog
 
+- 2014/07/02 0.2.1 release.
 - 2014/06/20 0.2.0 release.
 - 2014/06/19 0.1.3 release.
 - 2014/06/16 0.1.2 release.
@@ -161,6 +171,7 @@ $ ./gradlew connectedCheck
 - [hoang8f](https://github.com/hoang8f)
 - [mrmike](https://github.com/mrmike)
 - [maarekj](https://github.com/maarekj)
+- [TomasValenta](https://github.com/TomasValenta)
 
 ## Used
 
