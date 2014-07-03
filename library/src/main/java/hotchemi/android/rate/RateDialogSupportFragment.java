@@ -10,11 +10,11 @@ public final class RateDialogSupportFragment extends DialogFragment implements A
     public RateDialogSupportFragment() {
     }
 
-    public static RateDialogSupportFragment newInstance(boolean showNeutralButton, OnClickButtonListener listener) {
+    public static RateDialogSupportFragment newInstance(boolean showNeutralButton,int requestCode) {
         RateDialogSupportFragment dialog = new RateDialogSupportFragment();
         Bundle bundle = new Bundle();
         bundle.putBoolean(KEY_IS_SHOW_NEUTRAL_BUTTON, showNeutralButton);
-        bundle.putParcelable(KEY_ON_CLICK_BUTTON_LISTENER, listener);
+        bundle.putInt(KEY_REQUEST_CODE,requestCode);
         dialog.setArguments(bundle);
         return dialog;
     }
@@ -23,8 +23,14 @@ public final class RateDialogSupportFragment extends DialogFragment implements A
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Bundle arguments = getArguments();
         boolean isShowNeutralButton = arguments.getBoolean(KEY_IS_SHOW_NEUTRAL_BUTTON);
-        OnClickButtonListener listener = arguments.getParcelable(KEY_ON_CLICK_BUTTON_LISTENER);
-        return DialogManager.create(getActivity(), isShowNeutralButton, listener);
+        int requestCode = arguments.getInt(KEY_REQUEST_CODE);
+        OnClickButtonListener listener = null;
+        if(getTargetFragment() instanceof OnClickButtonListener){
+            listener = (OnClickButtonListener)getTargetFragment();
+        }else if(getActivity() instanceof OnClickButtonListener){
+            listener = (OnClickButtonListener)getActivity();
+        }
+        return DialogManager.create(getActivity(), isShowNeutralButton, listener,requestCode);
     }
 
     @Override
