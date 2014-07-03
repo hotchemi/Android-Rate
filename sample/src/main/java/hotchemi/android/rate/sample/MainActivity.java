@@ -14,21 +14,23 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AppRate.setInstallDays(0) // default 10, 0 means install day.
-                .setLaunchTimes(3) // default 10 times.
-                .setRemindInterval(2) // default 1 day.
-                .setShowNeutralButton(true) // default true.
-                .setDebug(false) // default false.
-                .setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
-                    @Override
-                    public void onClickButton(int which) {
-                        Log.d(MainActivity.class.getName(), Integer.toString(which));
-                    }
-                })
-                .monitor(this);
+        AppRate appRate =
+                AppRate.build()
+                        .setInstallDays(0) // default 10, 0 means install day.
+                        .setLaunchTimes(3) // default 10 times.
+                        .setRemindInterval(2) // default 1 day.
+                        .setShowNeutralButton(false) // default true.
+                        .setDebug(true) // default false.
+                        .setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
+                            @Override
+                            public void onClickButton(int which) {
+                                Log.d(MainActivity.class.getName(), Integer.toString(which));
+                            }
+                        })
+                        .monitor(this);
 
         // Show a dialog if meets conditions.
-        AppRate.showRateDialogIfMeetsConditions(this);
+        appRate.showRateDialogIfMeetsConditions(this);
     }
 
 }
