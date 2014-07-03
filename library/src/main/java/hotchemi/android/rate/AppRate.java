@@ -2,6 +2,7 @@ package hotchemi.android.rate;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.os.Build;
 import android.support.v4.app.FragmentActivity;
@@ -9,6 +10,9 @@ import android.support.v4.app.FragmentActivity;
 import java.util.Date;
 
 public class AppRate {
+
+    public static final String EXTRA_WHICH = "extra_which";
+
 
     private static final AppRate SINGLETON = new AppRate();
 
@@ -24,7 +28,9 @@ public class AppRate {
 
     private static boolean sIsDebug = false;
 
-    private static OnClickButtonListener sListener;
+    private static Fragment sTargetFragment;
+
+    private static android.support.v4.app.Fragment sTargetSupportFragment;
 
     private AppRate() {
     }
@@ -64,8 +70,14 @@ public class AppRate {
         return SINGLETON;
     }
 
-    public static AppRate setOnClickButtonListener(OnClickButtonListener listener) {
-        sListener = listener;
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public static AppRate setTargetFragment(Fragment targetFragment) {
+        sTargetFragment = targetFragment;
+        return SINGLETON;
+    }
+
+    public static AppRate setTargetFragment(android.support.v4.app.Fragment targetFragment) {
+        sTargetSupportFragment = targetFragment;
         return SINGLETON;
     }
 
@@ -76,38 +88,44 @@ public class AppRate {
         PreferenceHelper.setLaunchTimes(context, PreferenceHelper.getLaunchTimes(context) + 1);
     }
 
-    public static void showRateDialogIfMeetsConditions(Activity activity) {
-        if (sIsDebug || shouldShowRateDialog(activity)) showRateDialog(activity);
+    public static void showRateDialogIfMeetsConditions(Activity activity,int requestCode) {
+        if (sIsDebug || shouldShowRateDialog(activity)) showRateDialog(activity,requestCode);
     }
 
-    public static void showRateDialogIfMeetsConditions(FragmentActivity activity) {
-        if (sIsDebug || shouldShowRateDialog(activity)) showRateDialog(activity);
+    public static void showRateDialogIfMeetsConditions(FragmentActivity activity,int requestCode) {
+        if (sIsDebug || shouldShowRateDialog(activity)) showRateDialog(activity,requestCode);
     }
 
-    public static void passSignificantEvent(Activity activity) {
+    public static void passSignificantEvent(Activity activity,int requestCode) {
         if (sIsDebug || isOverEventPass(activity.getApplicationContext())) {
-            showRateDialog(activity);
+            showRateDialog(activity,requestCode);
         } else {
             setEventsTimes(activity.getApplicationContext());
         }
     }
 
-    public static void passSignificantEvent(FragmentActivity activity) {
+    public static void passSignificantEvent(FragmentActivity activity,int requestCode) {
         if (sIsDebug || isOverEventPass(activity.getApplicationContext())) {
-            showRateDialog(activity);
+            showRateDialog(activity,requestCode);
         } else {
             setEventsTimes(activity.getApplicationContext());
         }
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static void showRateDialog(Activity activity) {
-        RateDialogFragment fragment = RateDialogFragment.getInstance(sIsShowNeutralButton, sListener);
+    public static void showRateDialog(Activity activity,int requestCode) {
+        RateDialogFragment fragment = RateDialogFragment.getInstance(sIsShowNeutralButton,requestCode);
+        if(sTargetFragment!=null){
+            fragment.setTargetFragment(sTargetFragment,requestCode);
+        }
         fragment.show(activity.getFragmentManager(), AppRate.class.getName());
     }
 
-    public static void showRateDialog(FragmentActivity activity) {
-        RateDialogSupportFragment fragment = RateDialogSupportFragment.newInstance(sIsShowNeutralButton, sListener);
+    public static void showRateDialog(FragmentActivity activity,int requestCode) {
+        RateDialogSupportFragment fragment = RateDialogSupportFragment.newInstance(sIsShowNeutralButton,requestCode);
+        if(sTargetSupportFragment!=null){
+            fragment.setTargetFragment(sTargetSupportFragment,requestCode);
+        }
         fragment.show(activity.getSupportFragmentManager(), AppRate.class.getName());
     }
 
