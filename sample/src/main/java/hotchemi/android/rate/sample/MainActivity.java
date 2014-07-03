@@ -1,16 +1,15 @@
+
 package hotchemi.android.rate.sample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
 import hotchemi.android.rate.AppRate;
-import hotchemi.android.rate.OnClickButtonListener;
 
-public class MainActivity extends ActionBarActivity implements  OnClickButtonListener{
-
-
+public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +24,16 @@ public class MainActivity extends ActionBarActivity implements  OnClickButtonLis
                 .monitor(this);
 
         // Show a dialog if meets conditions.
-        AppRate.showRateDialogIfMeetsConditions(this,999);
+        AppRate.showRateDialogIfMeetsConditions(this, 999);
     }
 
     @Override
-    public void onClickButton(int requestCode, int which) {
-        // callback listener.
-        Log.d(MainActivity.class.getName(), Integer.toString(requestCode));
-        Log.d(MainActivity.class.getName(), Integer.toString(which));
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 999)
+            Log.d(MainActivity.class.getName(), Integer.toString(requestCode));
+            Log.d(MainActivity.class.getName(), Integer.toString(resultCode));
+        Log.d(MainActivity.class.getName(),
+                Integer.toString(data.getIntExtra(AppRate.EXTRA_WHICH, -1)));
     }
 
 }

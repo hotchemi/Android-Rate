@@ -11,7 +11,7 @@ final class DialogManager {
     private DialogManager() {
     }
 
-    static Dialog create(final Context context, final boolean isShowNeutralButton, final OnClickButtonListener listener,final int requestCoce) {
+    static Dialog create(final Context context, final boolean isShowNeutralButton, final DialogInterface.OnClickListener listener) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(R.string.rate_dialog_title);
         builder.setMessage(R.string.rate_dialog_message);
@@ -22,7 +22,7 @@ final class DialogManager {
                 Intent intent = new Intent(Intent.ACTION_VIEW, UriHelper.getGooglePlay(packageName));
                 context.startActivity(intent);
                 PreferenceHelper.setAgreeShowDialog(context, false);
-                if (listener != null) listener.onClickButton(requestCoce,which);
+                if (listener != null) listener.onClick(dialog,which);
             }
         });
         if (isShowNeutralButton) {
@@ -30,7 +30,7 @@ final class DialogManager {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     PreferenceHelper.setRemindInterval(context);
-                    if (listener != null) listener.onClickButton(requestCoce,which);
+                    if (listener != null) listener.onClick(dialog,which);
                 }
             });
         }
@@ -38,7 +38,7 @@ final class DialogManager {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 PreferenceHelper.setAgreeShowDialog(context, false);
-                if (listener != null) listener.onClickButton(requestCoce,which);
+                if (listener != null) listener.onClick(dialog,which);
             }
         });
         return builder.create();

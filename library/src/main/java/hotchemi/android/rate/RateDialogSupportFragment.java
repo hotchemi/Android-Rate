@@ -1,11 +1,14 @@
 package hotchemi.android.rate;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
-public final class RateDialogSupportFragment extends DialogFragment implements AppRateDialog {
+public final class RateDialogSupportFragment extends DialogFragment implements AppRateDialog,DialogInterface.OnClickListener {
 
     public RateDialogSupportFragment() {
     }
@@ -23,14 +26,7 @@ public final class RateDialogSupportFragment extends DialogFragment implements A
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Bundle arguments = getArguments();
         boolean isShowNeutralButton = arguments.getBoolean(KEY_IS_SHOW_NEUTRAL_BUTTON);
-        int requestCode = arguments.getInt(KEY_REQUEST_CODE);
-        OnClickButtonListener listener = null;
-        if(getTargetFragment() instanceof OnClickButtonListener){
-            listener = (OnClickButtonListener)getTargetFragment();
-        }else if(getActivity() instanceof OnClickButtonListener){
-            listener = (OnClickButtonListener)getActivity();
-        }
-        return DialogManager.create(getActivity(), isShowNeutralButton, listener,requestCode);
+        return DialogManager.create(getActivity(), isShowNeutralButton, this);
     }
 
     @Override
@@ -38,4 +34,23 @@ public final class RateDialogSupportFragment extends DialogFragment implements A
         PreferenceHelper.clearSharedPreferences(getActivity());
     }
 
+
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+        int requestCode = getArguments().getInt(KEY_REQUEST_CODE);
+        Intent result = new Intent();
+        result.putExtra(AppRate.EXTRA_WHICH, which);
+
+        if (getTargetFragment() != null) {
+            getTargetFragment().onActivityResult(requestCode, Activity.RESULT_OK, result);
+        } else {
+            PendingIntent pi = getActivity().createPendingResult(requestCode, result,
+                    PendingIntent.FLAG_ONE_SHOT);
+            try {
+                pi.send();
+            } catch (PendingIntent.CanceledException ex) {
+                // send failed
+            }
+        }
+    }
 }

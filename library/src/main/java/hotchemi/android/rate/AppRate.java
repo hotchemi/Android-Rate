@@ -11,6 +11,9 @@ import java.util.Date;
 
 public class AppRate {
 
+    public static final String EXTRA_WHICH = "extra_which";
+
+
     private static final AppRate SINGLETON = new AppRate();
 
     private static int sInstallDate = 10;
