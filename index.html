@@ -40,7 +40,7 @@
 <h2>
 <a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
 
-<p>you can download from maven central. current version is <strong>0.2.1</strong>.</p>
+<p>you can download from maven central. current version is <strong>0.3.0</strong>.</p>
 
 <div class="highlight highlight-groovy"><pre><span class="n">dependencies</span> <span class="o">{</span>
   <span class="n">compile</span> <span class="s1">'com.github.hotchemi:android-rate:{latest.version}'</span>
@@ -65,7 +65,8 @@
   <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
   <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_main</span><span class="o">);</span>
 
-  <span class="n">AppRate</span><span class="o">.</span><span class="na">setInstallDays</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="c1">// default 10, 0 means install day.</span>
+  <span class="n">AppRate</span> <span class="n">appRate</span> <span class="o">=</span> <span class="n">AppRate</span><span class="o">.</span><span class="na">build</span><span class="o">()</span>
+      <span class="o">.</span><span class="na">setInstallDays</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="c1">// default 10, 0 means install day.</span>
       <span class="o">.</span><span class="na">setLaunchTimes</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="c1">// default 10</span>
       <span class="o">.</span><span class="na">setRemindInterval</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="c1">// default 1</span>
       <span class="o">.</span><span class="na">setShowNeutralButton</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="c1">// default true</span>
@@ -75,63 +76,58 @@
           <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClickButton</span><span class="o">(</span><span class="kt">int</span> <span class="n">which</span><span class="o">)</span> <span class="o">{</span>
               <span class="n">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="n">MainActivity</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="n">Integer</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">which</span><span class="o">));</span>
           <span class="o">}</span>
-          <span class="nd">@Override</span>
-          <span class="kd">public</span> <span class="kt">int</span> <span class="nf">describeContents</span><span class="o">()</span> <span class="o">{</span>
-              <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-          <span class="o">}</span>
-          <span class="nd">@Override</span>
-          <span class="kd">public</span> <span class="kt">void</span> <span class="nf">writeToParcel</span><span class="o">(</span><span class="n">Parcel</span> <span class="n">dest</span><span class="o">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="o">)</span> <span class="o">{</span>
-              <span class="c1">// nothing to do</span>
-          <span class="o">}</span>
       <span class="o">})</span>
       <span class="o">.</span><span class="na">monitor</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
 
   <span class="c1">// Show a dialog if meets conditions</span>
-  <span class="n">AppRate</span><span class="o">.</span><span class="na">showRateDialogIfMeetsConditions</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+  <span class="n">appRate</span><span class="o">.</span><span class="na">showRateDialogIfMeetsConditions</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
 <span class="o">}</span>
 </pre></div>
 
 <p>The default conditions to show rate dialog is as below:</p>
 
 <ol>
-<li>App is launched more than 10 days later than installation. Chenge via <code>AppRate.setInstallDays(int)</code>.</li>
-<li>App is launched more than 10 times. Change via <code>AppRate.setLaunchTimes(int)</code>.</li>
-<li>App is launched more than 2 days after neutral button clicked. Change via <code>AppRate.setRemindInterval(int)</code>.</li>
+<li>App is launched more than 10 days later than installation. Chenge via <code>AppRate#setInstallDays(int)</code>.</li>
+<li>App is launched more than 10 times. Change via <code>AppRate#setLaunchTimes(int)</code>.</li>
+<li>App is launched more than 2 days after neutral button clicked. Change via <code>AppRate#setRemindInterval(int)</code>.</li>
 <li>App shows neutral dialog(Remind me later) by default. Change via <code>setShowNeutralButton(boolean)</code>.</li>
 <li>To specify the callback when the button is pressed. The same value as the second argument of <code>DialogInterface.OnClickListener#onClick</code> will be passed in the argument of <code>onClickButton</code>. </li>
-<li>Setting <code>AppRate.setDebug(boolean)</code> will ensure that the rating request is shown each time the app is launched. <strong>This feature is only development!</strong>.</li>
+<li>Setting <code>AppRate#setDebug(boolean)</code> will ensure that the rating request is shown each time the app is launched. <strong>This feature is only development!</strong>.</li>
 </ol><h3>
 <a name="event-tracking" class="anchor" href="#event-tracking"><span class="octicon octicon-link"></span></a>Event Tracking</h3>
 
 <p>When you want to track significant events, write code as below.</p>
 
-<div class="highlight highlight-java"><pre><span class="nd">@Override</span>
+<div class="highlight highlight-java"><pre>
+<span class="kd">private</span> <span class="n">AppRate</span> <span class="n">mAppRate</span><span class="o">;</span>
+
+<span class="nd">@Override</span>
 <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
   <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
   <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_main</span><span class="o">);</span>
-  <span class="n">AppRate</span><span class="o">.</span><span class="na">setEventTimes</span><span class="o">(</span><span class="mi">2</span><span class="o">).</span><span class="na">monitor</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+  <span class="n">mAppRate</span> <span class="o">=</span> <span class="n">AppRate</span><span class="o">.</span><span class="na">build</span><span class="o">().</span><span class="na">setEventTimes</span><span class="o">(</span><span class="mi">2</span><span class="o">).</span><span class="na">monitor</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
 <span class="o">}</span>
 
 <span class="nd">@Override</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">()</span> <span class="o">{</span>
-  <span class="n">AppRate</span><span class="o">.</span><span class="na">passSignificantEvent</span><span class="o">(</span><span class="k">this</span><span class="o">);</span> <span class="c1">// when user pass this line for the third time, dialog appears.</span>
+  <span class="n">mAppRate</span><span class="o">.</span><span class="na">passSignificantEvent</span><span class="o">(</span><span class="k">this</span><span class="o">);</span> <span class="c1">// when user pass this line for the third time, dialog appears.</span>
 <span class="o">}</span>
 </pre></div>
 
 <h3>
 <a name="clear-show-dialog-flag" class="anchor" href="#clear-show-dialog-flag"><span class="octicon octicon-link"></span></a>Clear show dialog flag</h3>
 
-<p>When you want to show the dialog again, call <code>AppRate.clearAgreeShowDialog(Context)</code>.</p>
+<p>When you want to show the dialog again, call <code>AppRate#clearAgreeShowDialog(Context)</code>.</p>
 
-<div class="highlight highlight-java"><pre><span class="n">AppRate</span><span class="o">.</span><span class="na">clearAgreeShowDialog</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+<div class="highlight highlight-java"><pre><span class="n">AppRate</span><span class="err">#</span><span class="n">clearAgreeShowDialog</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
 </pre></div>
 
 <h3>
 <a name="when-the-button-presses-on" class="anchor" href="#when-the-button-presses-on"><span class="octicon octicon-link"></span></a>When the button presses on</h3>
 
-<p>call <code>AppRate.showDialog(Context)</code>.</p>
+<p>call <code>AppRate#showDialog(Context)</code>.</p>
 
-<div class="highlight highlight-java"><pre><span class="n">AppRate</span><span class="o">.</span><span class="na">showDialog</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+<div class="highlight highlight-java"><pre><span class="n">AppRate</span><span class="err">#</span><span class="n">showDialog</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
 </pre></div>
 
 <h3>
@@ -178,6 +174,7 @@
 <a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a>ChangeLog</h2>
 
 <ul>
+<li>2014/07/03 0.3.0 release.</li>
 <li>2014/07/02 0.2.1 release.</li>
 <li>2014/06/20 0.2.0 release.</li>
 <li>2014/06/19 0.1.3 release.</li>
@@ -208,6 +205,8 @@
 <li><a href="https://github.com/mrmike">mrmike</a></li>
 <li><a href="https://github.com/maarekj">maarekj</a></li>
 <li><a href="https://github.com/TomasValenta">TomasValenta</a></li>
+<li><a href="https://github.com/nein37">nein37</a></li>
+<li><a href="https://github.com/marta-rodriguez">marta-rodriguez</a></li>
 </ul><h2>
 <a name="used" class="anchor" href="#used"><span class="octicon octicon-link"></span></a>Used</h2>
 
