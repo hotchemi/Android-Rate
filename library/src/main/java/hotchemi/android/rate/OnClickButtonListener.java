@@ -2,8 +2,8 @@ package hotchemi.android.rate;
 
 import android.os.Parcelable;
 
-public interface OnClickButtonListener extends Parcelable {
+public interface OnClickButtonListener  {
 
-    void onClickButton(int which);
+    void onClickButton(int requestCode,int which);
 
 }
