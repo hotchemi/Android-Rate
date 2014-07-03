@@ -1,10 +1,7 @@
 package hotchemi.android.rate;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
-import android.os.Build;
-import android.support.v4.app.FragmentActivity;
 
 import java.util.Date;
 
@@ -80,35 +77,18 @@ public class AppRate {
         if (sIsDebug || shouldShowRateDialog(activity)) showRateDialog(activity);
     }
 
-    public static void showRateDialogIfMeetsConditions(FragmentActivity activity) {
-        if (sIsDebug || shouldShowRateDialog(activity)) showRateDialog(activity);
-    }
-
     public static void passSignificantEvent(Activity activity) {
         if (sIsDebug || isOverEventPass(activity.getApplicationContext())) {
             showRateDialog(activity);
         } else {
-            setEventsTimes(activity.getApplicationContext());
+            Context context = activity.getApplicationContext();
+            int eventTimes = PreferenceHelper.getEventTimes(context);
+            PreferenceHelper.setEventTimes(context, ++eventTimes);
         }
     }
 
-    public static void passSignificantEvent(FragmentActivity activity) {
-        if (sIsDebug || isOverEventPass(activity.getApplicationContext())) {
-            showRateDialog(activity);
-        } else {
-            setEventsTimes(activity.getApplicationContext());
-        }
-    }
-
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static void showRateDialog(Activity activity) {
-        RateDialogFragment fragment = RateDialogFragment.getInstance(sIsShowNeutralButton, sListener);
-        fragment.show(activity.getFragmentManager(), AppRate.class.getName());
-    }
-
-    public static void showRateDialog(FragmentActivity activity) {
-        RateDialogSupportFragment fragment = RateDialogSupportFragment.newInstance(sIsShowNeutralButton, sListener);
-        fragment.show(activity.getSupportFragmentManager(), AppRate.class.getName());
+        DialogManager.create(activity, sIsShowNeutralButton, sListener).show();
     }
 
     private static boolean isOverLaunchTimes(Context context) {
@@ -136,11 +116,6 @@ public class AppRate {
                 isOverLaunchTimes(context) &&
                 isOverInstallDate(context) &&
                 isOverRemindDate(context);
-    }
-
-    private static void setEventsTimes(Context context) {
-        int eventTimes = PreferenceHelper.getEventTimes(context);
-        PreferenceHelper.setEventTimes(context, ++eventTimes);
     }
 
 }
