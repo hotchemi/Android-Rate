@@ -9,7 +9,7 @@ Android-Rateはアプリのレーティング促進ダイアログを出す事�
 
 ## Getting Started
 
-maven centralからダウンロードできます. 最新バージョンは **0.2.1**です.
+maven centralからダウンロードできます. 最新バージョンは **0.3.0**です.
 
 ```groovy
 dependencies {
@@ -25,7 +25,7 @@ dependencies {
 
 ### Configuration
 
-Android-Rateはレーティングを出す条件設定をする為のクラスメソッドを提供しています.
+Android-Rateはレーティングを出す条件設定をする為のメソッドを提供しています.
 
 ```java
 @Override
@@ -33,7 +33,8 @@ protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
 
-  AppRate.setInstallDays(0) // default 10, 0 means install day.
+  AppRate appRate = AppRate.build().
+      .setInstallDays(0) // default 10, 0 means install day.
       .setLaunchTimes(3) // default 10
       .setRemindInterval(2) // default 1
       .setShowNeutralButton(true) // default true
@@ -43,30 +44,22 @@ protected void onCreate(Bundle savedInstanceState) {
           public void onClickButton(int which) {
               Log.d(MainActivity.class.getName(), Integer.toString(which));
           }
-          @Override
-          public int describeContents() {
-              return 0;
-          }
-          @Override
-          public void writeToParcel(Parcel dest, int flags) {
-              // nothing to do
-          }
       })
       .monitor(this);
   
   // Show a dialog if meets conditions
-  AppRate.showRateDialogIfMeetsConditions(this);
+  appRate.showRateDialogIfMeetsConditions(this);
 }
 ```
 
 設定できるパラメータは下記の通りです.:
 
-1. アプリのインストール後日数をモニタリング.デフォルトは10日.`AppRate.setInstallDays(int)`を使用して変更.
-2. アプリの起動回数をモニタリング.デフォルトは10.`AppRate.setLaunchTimes(int)`を利用して変更.
-3. ｢後でする｣を押下した後の日数経過をモニタリング.デフォルトは2日.`AppRate.setRemindInterval(int)`を利用して変更.
+1. アプリのインストール後日数をモニタリング.デフォルトは10日.`AppRate#setInstallDays(int)`を使用して変更.
+2. アプリの起動回数をモニタリング.デフォルトは10.`AppRate#setLaunchTimes(int)`を利用して変更.
+3. ｢後でする｣を押下した後の日数経過をモニタリング.デフォルトは2日.`AppRate#setRemindInterval(int)`を利用して変更.
 4. ｢後でする｣ボタンを出現させるかどうかを設定します.デフォルトはtrue.`setShowNeutralButton(boolean)`を利用して変更.
 5. ボタンが押された時のcallbackを指定します.`onClickButton`の引数whichには`DialogInterface.OnClickListener#onClick`の第二引数と同じ値が渡ります.
-6. `AppRate.setDebug(boolean)`をtrueにすると常時ダイアログが出現する用になります. **必ずデバッグ時のみの利用としてください!**.
+6. `AppRate#setDebug(boolean)`をtrueにすると常時ダイアログが出現する用になります. **必ずデバッグ時のみの利用としてください!**.
 
 ### Event Tracking
 
@@ -75,33 +68,36 @@ protected void onCreate(Bundle savedInstanceState) {
 > Configurationで説明した条件設定とは独立して動作しますのでご注意下さい.
 
 ```java
+
+private AppRate mAppRate;
+
 @Override
 protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
-  AppRate.setEventTimes(2).monitor(this);// Event通過回数が3回以上でダイアログを出現させる
+  mAppRate = AppRate.build().setEventTimes(2).monitor(this);// Event通過回数が3回以上でダイアログを出現させる
 }
 
 @Override
 public void onClick() {
-  AppRate.passSignificantEvent(this); // when user pass this line for the third time, dialog appears.
+  mAppRate.passSignificantEvent(this); // when user pass this line for the third time, dialog appears.
 }
 ```
 
 ### Clear show dialog flag
 
-アプリのアップデート時に再度ダイアログを出現させたい場合は､`AppRate.clearAgreeShowDialog(Context)`を利用してフラグをクリアしてください.
+アプリのアップデート時に再度ダイアログを出現させたい場合は､`AppRate#clearAgreeShowDialog(Context)`を利用してフラグをクリアしてください.
 
 ```java
-AppRate.clearAgreeShowDialog(this);
+AppRate#clearAgreeShowDialog(this);
 ```
 
 ### When the button presses on
 
-ボタンを押下した際にダイアログを出したい場合は`AppRate.showDialog(Context)`を直接呼び出してください.
+ボタンを押下した際にダイアログを出したい場合は`AppRate#showDialog(Context)`を直接呼び出してください.
 
 ```java
-AppRate.showDialog(this);
+AppRate#showDialog(this);
 ```
 
 ### Custom dialog
@@ -144,6 +140,7 @@ $ ./gradlew connectedCheck
 
 ## ChangeLog
 
+- 2014/07/03 0.3.0 release.
 - 2014/07/02 0.2.1 release.
 - 2014/06/20 0.2.0 release.
 - 2014/06/19 0.1.3 release.
@@ -172,6 +169,8 @@ $ ./gradlew connectedCheck
 - [mrmike](https://github.com/mrmike)
 - [maarekj](https://github.com/maarekj)
 - [TomasValenta](https://github.com/TomasValenta)
+- [nein37](https://github.com/nein37)
+- [marta-rodriguez](https://github.com/marta-rodriguez)
 
 ## Used
 
