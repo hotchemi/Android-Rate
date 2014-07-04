@@ -1,3 +1,4 @@
+
 package hotchemi.android.rate;
 
 import android.app.Activity;
@@ -76,17 +77,23 @@ public class AppRate {
         return this;
     }
 
-    public void showRateDialogIfMeetsConditions(Activity activity) {
-        if (mIsDebug || shouldShowRateDialog(activity)) showRateDialog(activity);
+    public boolean showRateDialogIfMeetsConditions(Activity activity) {
+        if (mIsDebug || shouldShowRateDialog(activity)) {
+            showRateDialog(activity);
+            return true;
+        }
+        return false;
     }
 
-    public void passSignificantEvent(Activity activity) {
+    public boolean passSignificantEvent(Activity activity) {
         if (mIsDebug || isOverEventPass(activity.getApplicationContext())) {
             showRateDialog(activity);
+            return true;
         } else {
             Context context = activity.getApplicationContext();
             int eventTimes = PreferenceHelper.getEventTimes(context);
             PreferenceHelper.setEventTimes(context, ++eventTimes);
+            return false;
         }
     }
 
@@ -110,11 +117,11 @@ public class AppRate {
         return new Date().getTime() - targetDate >= threshold * 24 * 60 * 60 * 1000;
     }
 
-    private boolean isOverEventPass(Context context) {
+    public boolean isOverEventPass(Context context) {
         return mEventsTimes != -1 && PreferenceHelper.getEventTimes(context) > mEventsTimes;
     }
 
-    private boolean shouldShowRateDialog(Context context) {
+    public boolean shouldShowRateDialog(Context context) {
         return PreferenceHelper.getIsAgreeShowDialog(context) &&
                 isOverLaunchTimes(context) &&
                 isOverInstallDate(context) &&
