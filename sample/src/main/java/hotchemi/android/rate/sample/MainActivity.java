@@ -19,8 +19,8 @@ public class MainActivity extends ActionBarActivity {
                         .setInstallDays(0) // default 10, 0 means install day.
                         .setLaunchTimes(3) // default 10 times.
                         .setRemindInterval(2) // default 1 day.
-                        .setShowNeutralButton(false) // default true.
-                        .setDebug(true) // default false.
+                        .setShowNeutralButton(true) // default true.
+                        .setDebug(false) // default false.
                         .setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
                             @Override
                             public void onClickButton(int which) {

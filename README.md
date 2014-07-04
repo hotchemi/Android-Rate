@@ -125,6 +125,8 @@ Android-Rate currently supports the following languages:
 - Vietnamese
 - Polish
 - Czech
+- Russian
+- Ukrainian
 
 ## Requirements
 
@@ -138,6 +140,7 @@ $ ./gradlew connectedCheck
 
 ## ChangeLog
 
+- 2014/07/05 0.3.1 release.
 - 2014/07/03 0.3.0 release.
 - 2014/07/02 0.2.1 release.
 - 2014/06/20 0.2.0 release.
@@ -169,6 +172,7 @@ $ ./gradlew connectedCheck
 - [TomasValenta](https://github.com/TomasValenta)
 - [nein37](https://github.com/nein37)
 - [marta-rodriguez](https://github.com/marta-rodriguez)
+- [Bersh](https://github.com/Bersh)
 
 ## Used
 
