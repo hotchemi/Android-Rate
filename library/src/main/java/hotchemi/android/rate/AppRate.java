@@ -1,4 +1,3 @@
-
 package hotchemi.android.rate;
 
 import android.app.Activity;
@@ -7,6 +6,8 @@ import android.content.Context;
 import java.util.Date;
 
 public class AppRate {
+
+    private static final AppRate SINGLETON = new AppRate();
 
     private int mInstallDate = 10;
 
@@ -26,7 +27,7 @@ public class AppRate {
     }
 
     public static AppRate build() {
-        return new AppRate();
+        return SINGLETON;
     }
 
     public AppRate setLaunchTimes(int launchTimes) {
@@ -101,6 +102,17 @@ public class AppRate {
         DialogManager.create(activity, mIsShowNeutralButton, mListener).show();
     }
 
+    public boolean isOverEventPass(Context context) {
+        return mEventsTimes != -1 && PreferenceHelper.getEventTimes(context) > mEventsTimes;
+    }
+
+    public boolean shouldShowRateDialog(Context context) {
+        return PreferenceHelper.getIsAgreeShowDialog(context) &&
+                isOverLaunchTimes(context) &&
+                isOverInstallDate(context) &&
+                isOverRemindDate(context);
+    }
+
     private boolean isOverLaunchTimes(Context context) {
         return PreferenceHelper.getLaunchTimes(context) >= mLaunchTimes;
     }
@@ -115,17 +127,6 @@ public class AppRate {
 
     private boolean isOverDate(long targetDate, int threshold) {
         return new Date().getTime() - targetDate >= threshold * 24 * 60 * 60 * 1000;
-    }
-
-    public boolean isOverEventPass(Context context) {
-        return mEventsTimes != -1 && PreferenceHelper.getEventTimes(context) > mEventsTimes;
-    }
-
-    public boolean shouldShowRateDialog(Context context) {
-        return PreferenceHelper.getIsAgreeShowDialog(context) &&
-                isOverLaunchTimes(context) &&
-                isOverInstallDate(context) &&
-                isOverRemindDate(context);
     }
 
 }
