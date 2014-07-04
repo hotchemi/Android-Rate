@@ -117,11 +117,11 @@ public class AppRate {
         return new Date().getTime() - targetDate >= threshold * 24 * 60 * 60 * 1000;
     }
 
-    private boolean isOverEventPass(Context context) {
+    public boolean isOverEventPass(Context context) {
         return mEventsTimes != -1 && PreferenceHelper.getEventTimes(context) > mEventsTimes;
     }
 
-    private boolean shouldShowRateDialog(Context context) {
+    public boolean shouldShowRateDialog(Context context) {
         return PreferenceHelper.getIsAgreeShowDialog(context) &&
                 isOverLaunchTimes(context) &&
                 isOverInstallDate(context) &&
