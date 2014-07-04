@@ -9,7 +9,7 @@ Android-Rate is a library to help you promote your android app by prompting user
 
 ## Getting Started
 
-you can download from maven central. current version is **0.3.0**.
+you can download from maven central. current version is **0.3.1**.
 
 ```groovy
 dependencies {

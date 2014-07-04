@@ -9,7 +9,7 @@ Android-Rateはアプリのレーティング促進ダイアログを出す事�
 
 ## Getting Started
 
-maven centralからダウンロードできます. 最新バージョンは **0.3.0**です.
+maven centralからダウンロードできます. 最新バージョンは **0.3.1**です.
 
 ```groovy
 dependencies {
