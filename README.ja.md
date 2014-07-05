@@ -9,11 +9,11 @@ Android-Rateはアプリのレーティング促進ダイアログを出す事�
 
 ## Getting Started
 
-maven centralからダウンロードできます. 最新バージョンは **0.3.1**です.
+maven centralからダウンロードできます.
 
 ```groovy
 dependencies {
-  compile 'com.github.hotchemi:android-rate:{latest.version}'
+  compile 'com.github.hotchemi:android-rate:0.3.1'
 }
 ```
 
@@ -89,7 +89,7 @@ public void onClick() {
 アプリのアップデート時に再度ダイアログを出現させたい場合は､`AppRate#clearAgreeShowDialog(Context)`を利用してフラグをクリアしてください.
 
 ```java
-AppRate#clearAgreeShowDialog(this);
+AppRate.clearAgreeShowDialog(this);
 ```
 
 ### When the button presses on
@@ -97,7 +97,7 @@ AppRate#clearAgreeShowDialog(this);
 ボタンを押下した際にダイアログを出したい場合は`AppRate#showDialog(Context)`を直接呼び出してください.
 
 ```java
-AppRate#showDialog(this);
+AppRate.showDialog(this);
 ```
 
 ### Custom dialog
@@ -129,16 +129,6 @@ Android-Rateは下記の言語をサポートしています:
 - チェコ語
 - ロシア語
 - ウクライナ語
-
-## Requirements
-
-Android 2.1以上をサポートしています.
-
-## Test
-
-```sh
-$ ./gradlew connectedCheck
-```
 
 ## ChangeLog
 

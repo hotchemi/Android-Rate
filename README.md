@@ -9,11 +9,11 @@ Android-Rate is a library to help you promote your android app by prompting user
 
 ## Getting Started
 
-you can download from maven central. current version is **0.3.1**.
+you can download from maven central.
 
 ```groovy
 dependencies {
-  compile 'com.github.hotchemi:android-rate:{latest.version}'
+  compile 'com.github.hotchemi:android-rate:0.3.1'
 }
 ```
 
@@ -127,16 +127,6 @@ Android-Rate currently supports the following languages:
 - Czech
 - Russian
 - Ukrainian
-
-## Requirements
-
-Supports Android 2.1 or greater.
-
-## Test
-
-```sh
-$ ./gradlew connectedCheck
-```
 
 ## ChangeLog
 
