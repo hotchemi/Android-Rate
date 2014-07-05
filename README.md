@@ -87,7 +87,7 @@ public void onClick() {
 When you want to show the dialog again, call `AppRate#clearAgreeShowDialog(Context)`.
 
 ```java
-AppRate#clearAgreeShowDialog(this);
+AppRate.clearAgreeShowDialog(this);
 ```
 
 ### When the button presses on
@@ -95,7 +95,7 @@ AppRate#clearAgreeShowDialog(this);
 call `AppRate#showDialog(Context)`.
 
 ```java
-AppRate#showDialog(this);
+AppRate.showDialog(this);
 ```
 
 ### Custom dialog
