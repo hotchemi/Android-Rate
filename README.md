@@ -167,3 +167,4 @@ Android-Rate currently supports the following languages:
 ## Used
 
 - [Zaim](https://play.google.com/store/apps/details?id=net.zaim.android)
+- [就活マネージャー](https://play.google.com/store/apps/details?id=jp.co.recruit.shukatsumgr2016)
