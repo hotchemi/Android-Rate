@@ -13,7 +13,7 @@ maven centralからダウンロードできます.
 
 ```groovy
 dependencies {
-  compile 'com.github.hotchemi:android-rate:0.3.1'
+  compile 'com.github.hotchemi:android-rate:0.3.2'
 }
 ```
 
@@ -129,9 +129,11 @@ Android-Rateは下記の言語をサポートしています:
 - チェコ語
 - ロシア語
 - ウクライナ語
+- ヘブライ語
 
 ## ChangeLog
 
+- 2014/07/23 0.3.2 release.
 - 2014/07/05 0.3.1 release.
 - 2014/07/03 0.3.0 release.
 - 2014/07/02 0.2.1 release.
@@ -165,6 +167,7 @@ Android-Rateは下記の言語をサポートしています:
 - [nein37](https://github.com/nein37)
 - [marta-rodriguez](https://github.com/marta-rodriguez)
 - [Bersh](https://github.com/Bersh)
+- [amitkot](https://github.com/amitkot)
 
 ## Used
 
