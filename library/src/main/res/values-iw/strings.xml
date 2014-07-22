@@ -1,11 +1,4 @@
 <resources>
-    <string name="rate_dialog_title">Rate this app</string>
-    <string name="rate_dialog_message">If you enjoy playing this app, would you mind taking a moment to rate it? It won\'t take more than a minute. Thanks for your support!</string>
-    <string name="rate_dialog_ok">Rate It Now</string>
-    <string name="rate_dialog_cancel">Remind Me Later</string>
-    <string name="rate_dialog_no">No, Thanks</string>
-</resources>
-<resources>
     <string name="rate_dialog_title">דרגי את האפלקציה</string>
     <string name="rate_dialog_message">אם את נהנית מהשימוש באפליקציה, מה דעתך לדרג אותה? זה לא ייקח יותר מדקה. תודה על התמיכה!</string>
     <string name="rate_dialog_ok">דרגי כעת</string>
