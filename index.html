@@ -40,10 +40,10 @@
 <h2>
 <a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
 
-<p>you can download from maven central.</p>
+<p>You can download from maven central.</p>
 
 <div class="highlight highlight-groovy"><pre><span class="n">dependencies</span> <span class="o">{</span>
-  <span class="n">compile</span> <span class="s1">'com.github.hotchemi:android-rate:0.3.2'</span>
+  <span class="n">compile</span> <span class="s1">'com.github.hotchemi:android-rate:0.3.3'</span>
 <span class="o">}</span>
 </pre></div>
 
@@ -131,6 +131,16 @@
 </pre></div>
 
 <h3>
+<a name="set-custom-view" class="anchor" href="#set-custom-view"><span class="octicon octicon-link"></span></a>Set custom view</h3>
+
+<p>call <code>AppRate#setView(View)</code>.</p>
+
+<div class="highlight highlight-java"><pre><span class="n">LayoutInflater</span> <span class="n">inflater</span> <span class="o">=</span> <span class="o">(</span><span class="n">LayoutInflater</span><span class="o">)</span><span class="k">this</span><span class="o">.</span><span class="na">getSystemService</span><span class="o">(</span><span class="n">LAYOUT_INFLATER_SERVICE</span><span class="o">);</span>
+<span class="n">View</span> <span class="n">view</span> <span class="o">=</span> <span class="n">inflater</span><span class="o">.</span><span class="na">inflate</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">custom_dialog</span><span class="o">,</span> <span class="o">(</span><span class="n">ViewGroup</span><span class="o">)</span><span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">layout_root</span><span class="o">));</span>
+<span class="n">AppRate</span><span class="o">.</span><span class="na">build</span><span class="o">().</span><span class="na">setView</span><span class="o">(</span><span class="n">view</span><span class="o">).</span><span class="na">monitor</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+</pre></div>
+
+<h3>
 <a name="custom-dialog" class="anchor" href="#custom-dialog"><span class="octicon octicon-link"></span></a>Custom dialog</h3>
 
 <p>If you want to use your own dialog labels, override string xml resources on your application.</p>
@@ -162,25 +172,6 @@
 <li>Russian</li>
 <li>Ukrainian</li>
 <li>Hebrew</li>
-</ul><h2>
-<a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a>ChangeLog</h2>
-
-<ul>
-<li>2014/07/23 0.3.2 release.</li>
-<li>2014/07/05 0.3.1 release.</li>
-<li>2014/07/03 0.3.0 release.</li>
-<li>2014/07/02 0.2.1 release.</li>
-<li>2014/06/20 0.2.0 release.</li>
-<li>2014/06/19 0.1.3 release.</li>
-<li>2014/06/16 0.1.2 release.</li>
-<li>2014/06/15 0.1.1 release.</li>
-<li>2014/05/25 0.1.0 release.</li>
-<li>2014/04/13 0.0.6 release.</li>
-<li>2014/04/12 0.0.5 release.</li>
-<li>2014/04/07 0.0.4 release.</li>
-<li>2014/02/13 0.0.3 release.</li>
-<li>2014/02/12 0.0.2 release.</li>
-<li>2014/02/11 0.0.1 release.</li>
 </ul><h2>
 <a name="contribute" class="anchor" href="#contribute"><span class="octicon octicon-link"></span></a>Contribute</h2>
 
