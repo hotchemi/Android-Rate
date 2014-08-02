@@ -13,7 +13,7 @@ maven centralからダウンロードできます.
 
 ```groovy
 dependencies {
-  compile 'com.github.hotchemi:android-rate:0.3.2'
+  compile 'com.github.hotchemi:android-rate:0.3.3'
 }
 ```
 
