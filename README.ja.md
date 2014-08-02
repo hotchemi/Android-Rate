@@ -13,7 +13,7 @@ maven centralからダウンロードできます.
 
 ```groovy
 dependencies {
-  compile 'com.github.hotchemi:android-rate:0.3.2'
+  compile 'com.github.hotchemi:android-rate:0.3.3'
 }
 ```
 
@@ -100,6 +100,16 @@ AppRate.clearAgreeShowDialog(this);
 AppRate.showDialog(this);
 ```
 
+### Set custom view
+
+`AppRate#setView(View)`を呼び出して下さい.
+
+```java
+LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
+View view = inflater.inflate(R.layout.custom_dialog, (ViewGroup)findViewById(R.id.layout_root));
+AppRate.build().setView(view).monitor(this);
+```
+
 ### Custom dialog
 
 ダイアログの文言をカスタマイズしたい場合は､アプリ側でxmlリソースを上書きしてください.
@@ -130,47 +140,3 @@ Android-Rateは下記の言語をサポートしています:
 - ロシア語
 - ウクライナ語
 - ヘブライ語
-
-## ChangeLog
-
-- 2014/07/23 0.3.2 release.
-- 2014/07/05 0.3.1 release.
-- 2014/07/03 0.3.0 release.
-- 2014/07/02 0.2.1 release.
-- 2014/06/20 0.2.0 release.
-- 2014/06/19 0.1.3 release.
-- 2014/06/16 0.1.2 release.
-- 2014/06/15 0.1.1 release.
-- 2014/05/25 0.1.0 release.
-- 2014/04/13 0.0.6 release.
-- 2014/04/12 0.0.5 release.
-- 2014/04/07 0.0.4 release.
-- 2014/02/13 0.0.3 release.
-- 2014/02/12 0.0.2 release.
-- 2014/02/11 0.0.1 release.
-
-## Contribute
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
-
-## Contributor
-
-- [androhi](https://github.com/androhi)
-- [hoang8f](https://github.com/hoang8f)
-- [mrmike](https://github.com/mrmike)
-- [maarekj](https://github.com/maarekj)
-- [TomasValenta](https://github.com/TomasValenta)
-- [nein37](https://github.com/nein37)
-- [marta-rodriguez](https://github.com/marta-rodriguez)
-- [Bersh](https://github.com/Bersh)
-- [amitkot](https://github.com/amitkot)
-
-## Used
-
-- [Zaim](https://play.google.com/store/apps/details?id=net.zaim.android)
-- [就活マネージャー](https://play.google.com/store/apps/details?id=jp.co.recruit.shukatsumgr2016)
-- [キャンドルケーキ](https://play.google.com/store/apps/details?id=com.eranamit.candlecake&referrer=utm_source%3DAndroid-Rate)

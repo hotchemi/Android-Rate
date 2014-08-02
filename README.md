@@ -9,11 +9,11 @@ Android-Rate is a library to help you promote your android app by prompting user
 
 ## Getting Started
 
-you can download from maven central.
+You can download from maven central.
 
 ```groovy
 dependencies {
-  compile 'com.github.hotchemi:android-rate:0.3.2'
+  compile 'com.github.hotchemi:android-rate:0.3.3'
 }
 ```
 
@@ -98,6 +98,16 @@ call `AppRate#showDialog(Context)`.
 AppRate.showDialog(this);
 ```
 
+### Set custom view
+
+call `AppRate#setView(View)`.
+
+```java
+LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
+View view = inflater.inflate(R.layout.custom_dialog, (ViewGroup)findViewById(R.id.layout_root));
+AppRate.build().setView(view).monitor(this);
+```
+
 ### Custom dialog
 
 If you want to use your own dialog labels, override string xml resources on your application.
@@ -128,24 +138,6 @@ Android-Rate currently supports the following languages:
 - Russian
 - Ukrainian
 - Hebrew
-
-## ChangeLog
-
-- 2014/07/23 0.3.2 release.
-- 2014/07/05 0.3.1 release.
-- 2014/07/03 0.3.0 release.
-- 2014/07/02 0.2.1 release.
-- 2014/06/20 0.2.0 release.
-- 2014/06/19 0.1.3 release.
-- 2014/06/16 0.1.2 release.
-- 2014/06/15 0.1.1 release.
-- 2014/05/25 0.1.0 release.
-- 2014/04/13 0.0.6 release.
-- 2014/04/12 0.0.5 release.
-- 2014/04/07 0.0.4 release.
-- 2014/02/13 0.0.3 release.
-- 2014/02/12 0.0.2 release.
-- 2014/02/11 0.0.1 release.
 
 ## Contribute
 
