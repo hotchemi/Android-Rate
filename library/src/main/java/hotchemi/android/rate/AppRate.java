@@ -2,6 +2,7 @@ package hotchemi.android.rate;
 
 import android.app.Activity;
 import android.content.Context;
+import android.view.View;
 
 import java.util.Date;
 
@@ -20,6 +21,8 @@ public class AppRate {
     private boolean mIsShowNeutralButton = true;
 
     private boolean mIsDebug = false;
+
+    private View mView;
 
     private OnClickButtonListener mListener;
 
@@ -65,6 +68,11 @@ public class AppRate {
         return this;
     }
 
+    public AppRate setView(View view) {
+        mView = view;
+        return this;
+    }
+
     public AppRate setOnClickButtonListener(OnClickButtonListener listener) {
         mListener = listener;
         return this;
@@ -99,7 +107,7 @@ public class AppRate {
     }
 
     public void showRateDialog(Activity activity) {
-        DialogManager.create(activity, mIsShowNeutralButton, mListener).show();
+        DialogManager.create(activity, mIsShowNeutralButton, mListener, mView).show();
     }
 
     public boolean isOverEventPass(Context context) {

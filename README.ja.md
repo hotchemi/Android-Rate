@@ -100,6 +100,16 @@ AppRate.clearAgreeShowDialog(this);
 AppRate.showDialog(this);
 ```
 
+### Set custom view
+
+`AppRate#setView(View)`を呼び出して下さい.
+
+```java
+LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
+View view = inflater.inflate(R.layout.custom_dialog, (ViewGroup)findViewById(R.id.layout_root));
+AppRate.build().setView(view).monitor(this);
+```
+
 ### Custom dialog
 
 ダイアログの文言をカスタマイズしたい場合は､アプリ側でxmlリソースを上書きしてください.

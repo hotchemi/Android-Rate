@@ -98,6 +98,16 @@ call `AppRate#showDialog(Context)`.
 AppRate.showDialog(this);
 ```
 
+### Set custom view
+
+call `AppRate#setView(View)`.
+
+```java
+LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
+View view = inflater.inflate(R.layout.custom_dialog, (ViewGroup)findViewById(R.id.layout_root));
+AppRate.build().setView(view).monitor(this);
+```
+
 ### Custom dialog
 
 If you want to use your own dialog labels, override string xml resources on your application.
