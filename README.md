@@ -13,7 +13,7 @@ You can download from maven central.
 
 ```groovy
 dependencies {
-  compile 'com.github.hotchemi:android-rate:0.3.3'
+  compile 'com.github.hotchemi:android-rate:0.4.0'
 }
 ```
 
@@ -25,7 +25,7 @@ Please try to move the [sample module](https://github.com/hotchemi/Android-Rate/
 
 ### Configuration
 
-Android-rate provides class methods to configure its behavior.
+Android-Rate provides methods to configure its behavior.
 
 ```java
 @Override
@@ -33,7 +33,7 @@ protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
 
-  AppRate appRate = AppRate.build()
+  AppRate.getInstance()
       .setInstallDays(0) // default 10, 0 means install day.
       .setLaunchTimes(3) // default 10
       .setRemindInterval(2) // default 1
@@ -48,13 +48,13 @@ protected void onCreate(Bundle savedInstanceState) {
       .monitor(this);
 
   // Show a dialog if meets conditions
-  appRate.showRateDialogIfMeetsConditions(this);
+  AppRate.showRateDialogIfMeetsConditions(this);
 }
 ```
 
 The default conditions to show rate dialog is as below:
 
-1. App is launched more than 10 days later than installation. Chenge via `AppRate#setInstallDays(int)`.
+1. App is launched more than 10 days later than installation. Change via `AppRate#setInstallDays(int)`.
 2. App is launched more than 10 times. Change via `AppRate#setLaunchTimes(int)`.
 3. App is launched more than 2 days after neutral button clicked. Change via `AppRate#setRemindInterval(int)`.
 4. App shows neutral dialog(Remind me later) by default. Change via `setShowNeutralButton(boolean)`.
@@ -67,18 +67,16 @@ When you want to track significant events, write code as below.
 
 ```java
 
-private AppRate mAppRate;
-
 @Override
 protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
-  mAppRate = AppRate.build().setEventTimes(2).monitor(this);
+  AppRate.getInstance().setEventTimes(2).monitor(this);
 }
 
 @Override
 public void onClick() {
-  mAppRate.passSignificantEvent(this); // when user pass this line for the third time, dialog appears.
+  AppRate.passSignificantEvent(this); // when user pass this line for the third time, dialog appears.
 }
 ```
 
@@ -87,7 +85,7 @@ public void onClick() {
 When you want to show the dialog again, call `AppRate#clearAgreeShowDialog(Context)`.
 
 ```java
-AppRate.clearAgreeShowDialog(this);
+AppRate.getInstance().clearAgreeShowDialog(this);
 ```
 
 ### When the button presses on
@@ -95,7 +93,7 @@ AppRate.clearAgreeShowDialog(this);
 call `AppRate#showDialog(Context)`.
 
 ```java
-AppRate.showDialog(this);
+AppRate.getInstance().showDialog(this);
 ```
 
 ### Set custom view
@@ -105,7 +103,7 @@ call `AppRate#setView(View)`.
 ```java
 LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
 View view = inflater.inflate(R.layout.custom_dialog, (ViewGroup)findViewById(R.id.layout_root));
-AppRate.build().setView(view).monitor(this);
+AppRate.getInstance().setView(view).monitor(this);
 ```
 
 ### Custom dialog

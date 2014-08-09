@@ -10,51 +10,51 @@ public class AppRate {
 
     private static final AppRate SINGLETON = new AppRate();
 
-    private int mInstallDate = 10;
+    private int installDate = 10;
 
-    private int mLaunchTimes = 10;
+    private int launchTimes = 10;
 
-    private int mRemindInterval = 1;
+    private int remindInterval = 1;
 
-    private int mEventsTimes = -1;
+    private int eventsTimes = -1;
 
-    private boolean mIsShowNeutralButton = true;
+    private boolean isShowNeutralButton = true;
 
-    private boolean mIsDebug = false;
+    private boolean isDebug = false;
 
-    private View mView;
+    private View view;
 
-    private OnClickButtonListener mListener;
+    private OnClickButtonListener listener;
 
     private AppRate() {
     }
 
-    public static AppRate build() {
+    public static AppRate getInstance() {
         return SINGLETON;
     }
 
     public AppRate setLaunchTimes(int launchTimes) {
-        mLaunchTimes = launchTimes;
+        this.launchTimes = launchTimes;
         return this;
     }
 
-    public AppRate setInstallDays(int installDays) {
-        mInstallDate = installDays;
+    public AppRate setInstallDays(int installDate) {
+        this.installDate = installDate;
         return this;
     }
 
     public AppRate setRemindInterval(int remindInterval) {
-        mRemindInterval = remindInterval;
+        this.remindInterval = remindInterval;
         return this;
     }
 
     public AppRate setShowNeutralButton(boolean isShowNeutralButton) {
-        mIsShowNeutralButton = isShowNeutralButton;
+        this.isShowNeutralButton = isShowNeutralButton;
         return this;
     }
 
     public AppRate setEventsTimes(int eventsTimes) {
-        mEventsTimes = eventsTimes;
+        this.eventsTimes = eventsTimes;
         return this;
     }
 
@@ -64,39 +64,38 @@ public class AppRate {
     }
 
     public AppRate setDebug(boolean isDebug) {
-        mIsDebug = isDebug;
+        this.isDebug = isDebug;
         return this;
     }
 
     public AppRate setView(View view) {
-        mView = view;
+        this.view = view;
         return this;
     }
 
     public AppRate setOnClickButtonListener(OnClickButtonListener listener) {
-        mListener = listener;
+        this.listener = listener;
         return this;
     }
 
-    public AppRate monitor(Context context) {
+    public void monitor(Context context) {
         if (PreferenceHelper.isFirstLaunch(context)) {
             PreferenceHelper.setInstallDate(context);
         }
         PreferenceHelper.setLaunchTimes(context, PreferenceHelper.getLaunchTimes(context) + 1);
-        return this;
     }
 
-    public boolean showRateDialogIfMeetsConditions(Activity activity) {
-        if (mIsDebug || shouldShowRateDialog(activity)) {
-            showRateDialog(activity);
+    public static boolean showRateDialogIfMeetsConditions(Activity activity) {
+        if (SINGLETON.isDebug || SINGLETON.shouldShowRateDialog(activity)) {
+            SINGLETON.showRateDialog(activity);
             return true;
         }
         return false;
     }
 
-    public boolean passSignificantEvent(Activity activity) {
-        if (mIsDebug || isOverEventPass(activity.getApplicationContext())) {
-            showRateDialog(activity);
+    public static boolean passSignificantEvent(Activity activity) {
+        if (SINGLETON.isDebug || SINGLETON.isOverEventPass(activity.getApplicationContext())) {
+            SINGLETON.showRateDialog(activity);
             return true;
         } else {
             Context context = activity.getApplicationContext();
@@ -107,11 +106,11 @@ public class AppRate {
     }
 
     public void showRateDialog(Activity activity) {
-        DialogManager.create(activity, mIsShowNeutralButton, mListener, mView).show();
+        DialogManager.create(activity, isShowNeutralButton, listener, view).show();
     }
 
     public boolean isOverEventPass(Context context) {
-        return mEventsTimes != -1 && PreferenceHelper.getEventTimes(context) > mEventsTimes;
+        return eventsTimes != -1 && PreferenceHelper.getEventTimes(context) > eventsTimes;
     }
 
     public boolean shouldShowRateDialog(Context context) {
@@ -122,15 +121,15 @@ public class AppRate {
     }
 
     private boolean isOverLaunchTimes(Context context) {
-        return PreferenceHelper.getLaunchTimes(context) >= mLaunchTimes;
+        return PreferenceHelper.getLaunchTimes(context) >= launchTimes;
     }
 
     private boolean isOverInstallDate(Context context) {
-        return isOverDate(PreferenceHelper.getInstallDate(context), mInstallDate);
+        return isOverDate(PreferenceHelper.getInstallDate(context), installDate);
     }
 
     private boolean isOverRemindDate(Context context) {
-        return isOverDate(PreferenceHelper.getRemindInterval(context), mRemindInterval);
+        return isOverDate(PreferenceHelper.getRemindInterval(context), remindInterval);
     }
 
     private boolean isOverDate(long targetDate, int threshold) {
