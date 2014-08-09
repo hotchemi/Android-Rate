@@ -13,7 +13,7 @@ maven centralからダウンロードできます.
 
 ```groovy
 dependencies {
-  compile 'com.github.hotchemi:android-rate:0.3.3'
+  compile 'com.github.hotchemi:android-rate:0.4.0'
 }
 ```
 
@@ -33,7 +33,7 @@ protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
 
-  AppRate appRate = AppRate.build().
+  AppRate.getInstance().
       .setInstallDays(0) // default 10, 0 means install day.
       .setLaunchTimes(3) // default 10
       .setRemindInterval(2) // default 1
@@ -48,7 +48,7 @@ protected void onCreate(Bundle savedInstanceState) {
       .monitor(this);
   
   // Show a dialog if meets conditions
-  appRate.showRateDialogIfMeetsConditions(this);
+  AppRate.showRateDialogIfMeetsConditions(this);
 }
 ```
 
@@ -68,19 +68,16 @@ protected void onCreate(Bundle savedInstanceState) {
 > Configurationで説明した条件設定とは独立して動作しますのでご注意下さい.
 
 ```java
-
-private AppRate mAppRate;
-
 @Override
 protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
-  mAppRate = AppRate.build().setEventTimes(2).monitor(this);// Event通過回数が3回以上でダイアログを出現させる
+  AppRate.getInstance().setEventTimes(2).monitor(this);// Event通過回数が3回以上でダイアログを出現させる
 }
 
 @Override
 public void onClick() {
-  mAppRate.passSignificantEvent(this); // when user pass this line for the third time, dialog appears.
+  AppRate.passSignificantEvent(this); // when user pass this line for the third time, dialog appears.
 }
 ```
 
@@ -89,7 +86,7 @@ public void onClick() {
 アプリのアップデート時に再度ダイアログを出現させたい場合は､`AppRate#clearAgreeShowDialog(Context)`を利用してフラグをクリアしてください.
 
 ```java
-AppRate.clearAgreeShowDialog(this);
+AppRate.getInstance().clearAgreeShowDialog(this);
 ```
 
 ### When the button presses on
@@ -97,7 +94,7 @@ AppRate.clearAgreeShowDialog(this);
 ボタンを押下した際にダイアログを出したい場合は`AppRate#showDialog(Context)`を直接呼び出してください.
 
 ```java
-AppRate.showDialog(this);
+AppRate.getInstance().showDialog(this);
 ```
 
 ### Set custom view
@@ -107,7 +104,7 @@ AppRate.showDialog(this);
 ```java
 LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
 View view = inflater.inflate(R.layout.custom_dialog, (ViewGroup)findViewById(R.id.layout_root));
-AppRate.build().setView(view).monitor(this);
+AppRate.getInstance().setView(view).monitor(this);
 ```
 
 ### Custom dialog
@@ -140,3 +137,4 @@ Android-Rateは下記の言語をサポートしています:
 - ロシア語
 - ウクライナ語
 - ヘブライ語
+- ポルトガル語

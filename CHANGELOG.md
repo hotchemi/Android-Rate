@@ -1,5 +1,6 @@
 # ChangeLog
 
+- 2014/08/09 0.4.0 release.
 - 2014/08/02 0.3.3 release.
 - 2014/07/23 0.3.2 release.
 - 2014/07/05 0.3.1 release.
