@@ -43,7 +43,7 @@
 <p>You can download from maven central.</p>
 
 <div class="highlight highlight-groovy"><pre><span class="n">dependencies</span> <span class="o">{</span>
-  <span class="n">compile</span> <span class="s1">'com.github.hotchemi:android-rate:0.3.3'</span>
+  <span class="n">compile</span> <span class="s1">'com.github.hotchemi:android-rate:0.4.0'</span>
 <span class="o">}</span>
 </pre></div>
 
@@ -58,14 +58,14 @@
 <h3>
 <a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h3>
 
-<p>Android-rate provides class methods to configure its behavior.</p>
+<p>Android-Rate provides methods to configure its behavior.</p>
 
 <div class="highlight highlight-java"><pre><span class="nd">@Override</span>
 <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
   <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
   <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_main</span><span class="o">);</span>
 
-  <span class="n">AppRate</span> <span class="n">appRate</span> <span class="o">=</span> <span class="n">AppRate</span><span class="o">.</span><span class="na">build</span><span class="o">()</span>
+  <span class="n">AppRate</span><span class="o">.</span><span class="na">getInstance</span><span class="o">()</span>
       <span class="o">.</span><span class="na">setInstallDays</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="c1">// default 10, 0 means install day.</span>
       <span class="o">.</span><span class="na">setLaunchTimes</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="c1">// default 10</span>
       <span class="o">.</span><span class="na">setRemindInterval</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="c1">// default 1</span>
@@ -80,14 +80,14 @@
       <span class="o">.</span><span class="na">monitor</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
 
   <span class="c1">// Show a dialog if meets conditions</span>
-  <span class="n">appRate</span><span class="o">.</span><span class="na">showRateDialogIfMeetsConditions</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+  <span class="n">AppRate</span><span class="o">.</span><span class="na">showRateDialogIfMeetsConditions</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
 <span class="o">}</span>
 </pre></div>
 
 <p>The default conditions to show rate dialog is as below:</p>
 
 <ol>
-<li>App is launched more than 10 days later than installation. Chenge via <code>AppRate#setInstallDays(int)</code>.</li>
+<li>App is launched more than 10 days later than installation. Change via <code>AppRate#setInstallDays(int)</code>.</li>
 <li>App is launched more than 10 times. Change via <code>AppRate#setLaunchTimes(int)</code>.</li>
 <li>App is launched more than 2 days after neutral button clicked. Change via <code>AppRate#setRemindInterval(int)</code>.</li>
 <li>App shows neutral dialog(Remind me later) by default. Change via <code>setShowNeutralButton(boolean)</code>.</li>
@@ -99,18 +99,16 @@
 <p>When you want to track significant events, write code as below.</p>
 
 <div class="highlight highlight-java"><pre>
-<span class="kd">private</span> <span class="n">AppRate</span> <span class="n">mAppRate</span><span class="o">;</span>
-
 <span class="nd">@Override</span>
 <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
   <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
   <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_main</span><span class="o">);</span>
-  <span class="n">mAppRate</span> <span class="o">=</span> <span class="n">AppRate</span><span class="o">.</span><span class="na">build</span><span class="o">().</span><span class="na">setEventTimes</span><span class="o">(</span><span class="mi">2</span><span class="o">).</span><span class="na">monitor</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+  <span class="n">AppRate</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">setEventTimes</span><span class="o">(</span><span class="mi">2</span><span class="o">).</span><span class="na">monitor</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
 <span class="o">}</span>
 
 <span class="nd">@Override</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">()</span> <span class="o">{</span>
-  <span class="n">mAppRate</span><span class="o">.</span><span class="na">passSignificantEvent</span><span class="o">(</span><span class="k">this</span><span class="o">);</span> <span class="c1">// when user pass this line for the third time, dialog appears.</span>
+  <span class="n">AppRate</span><span class="o">.</span><span class="na">passSignificantEvent</span><span class="o">(</span><span class="k">this</span><span class="o">);</span> <span class="c1">// when user pass this line for the third time, dialog appears.</span>
 <span class="o">}</span>
 </pre></div>
 
@@ -119,7 +117,7 @@
 
 <p>When you want to show the dialog again, call <code>AppRate#clearAgreeShowDialog(Context)</code>.</p>
 
-<div class="highlight highlight-java"><pre><span class="n">AppRate</span><span class="o">.</span><span class="na">clearAgreeShowDialog</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+<div class="highlight highlight-java"><pre><span class="n">AppRate</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">clearAgreeShowDialog</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
 </pre></div>
 
 <h3>
@@ -127,7 +125,7 @@
 
 <p>call <code>AppRate#showDialog(Context)</code>.</p>
 
-<div class="highlight highlight-java"><pre><span class="n">AppRate</span><span class="o">.</span><span class="na">showDialog</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+<div class="highlight highlight-java"><pre><span class="n">AppRate</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">showDialog</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
 </pre></div>
 
 <h3>
@@ -137,7 +135,7 @@
 
 <div class="highlight highlight-java"><pre><span class="n">LayoutInflater</span> <span class="n">inflater</span> <span class="o">=</span> <span class="o">(</span><span class="n">LayoutInflater</span><span class="o">)</span><span class="k">this</span><span class="o">.</span><span class="na">getSystemService</span><span class="o">(</span><span class="n">LAYOUT_INFLATER_SERVICE</span><span class="o">);</span>
 <span class="n">View</span> <span class="n">view</span> <span class="o">=</span> <span class="n">inflater</span><span class="o">.</span><span class="na">inflate</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">custom_dialog</span><span class="o">,</span> <span class="o">(</span><span class="n">ViewGroup</span><span class="o">)</span><span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">layout_root</span><span class="o">));</span>
-<span class="n">AppRate</span><span class="o">.</span><span class="na">build</span><span class="o">().</span><span class="na">setView</span><span class="o">(</span><span class="n">view</span><span class="o">).</span><span class="na">monitor</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+<span class="n">AppRate</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">setView</span><span class="o">(</span><span class="n">view</span><span class="o">).</span><span class="na">monitor</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
 </pre></div>
 
 <h3>
@@ -172,6 +170,7 @@
 <li>Russian</li>
 <li>Ukrainian</li>
 <li>Hebrew</li>
+<li>Portuguese</li>
 </ul><h2>
 <a name="contribute" class="anchor" href="#contribute"><span class="octicon octicon-link"></span></a>Contribute</h2>
 
@@ -194,6 +193,7 @@
 <li><a href="https://github.com/marta-rodriguez">marta-rodriguez</a></li>
 <li><a href="https://github.com/Bersh">Bersh</a></li>
 <li><a href="https://github.com/amitkot">amitkot</a></li>
+<li><a href="https://github.com/joelbrito">joelbrito</a></li>
 </ul><h2>
 <a name="used" class="anchor" href="#used"><span class="octicon octicon-link"></span></a>Used</h2>
 
