@@ -136,6 +136,7 @@ Android-Rate currently supports the following languages:
 - Russian
 - Ukrainian
 - Hebrew
+- Portuguese
 
 ## Contribute
 
@@ -156,6 +157,7 @@ Android-Rate currently supports the following languages:
 - [marta-rodriguez](https://github.com/marta-rodriguez)
 - [Bersh](https://github.com/Bersh)
 - [amitkot](https://github.com/amitkot)
+- [joelbrito](https://github.com/joelbrito)
 
 ## Used
 
