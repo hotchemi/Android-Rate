@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class AppRate {
 
-    private static final AppRate SINGLETON = new AppRate();
+    private static AppRate singleton;
 
     private int installDate = 10;
 
@@ -22,15 +22,25 @@ public class AppRate {
 
     private boolean isDebug = false;
 
+    private Context context;
+
     private View view;
 
     private OnClickButtonListener listener;
 
-    private AppRate() {
+    private AppRate(Context context) {
+        this.context = context.getApplicationContext();
     }
 
-    public static AppRate getInstance() {
-        return SINGLETON;
+    public static AppRate with(Context context) {
+        if (singleton == null) {
+            synchronized (AppRate.class) {
+                if (singleton == null) {
+                    singleton = new AppRate(context);
+                }
+            }
+        }
+        return singleton;
     }
 
     public AppRate setLaunchTimes(int launchTimes) {
@@ -58,7 +68,7 @@ public class AppRate {
         return this;
     }
 
-    public AppRate clearAgreeShowDialog(Context context) {
+    public AppRate clearAgreeShowDialog() {
         PreferenceHelper.setAgreeShowDialog(context, true);
         return this;
     }
@@ -78,7 +88,7 @@ public class AppRate {
         return this;
     }
 
-    public void monitor(Context context) {
+    public void monitor() {
         if (PreferenceHelper.isFirstLaunch(context)) {
             PreferenceHelper.setInstallDate(context);
         }
@@ -86,16 +96,16 @@ public class AppRate {
     }
 
     public static boolean showRateDialogIfMeetsConditions(Activity activity) {
-        if (SINGLETON.isDebug || SINGLETON.shouldShowRateDialog(activity)) {
-            SINGLETON.showRateDialog(activity);
+        if (singleton.isDebug || singleton.shouldShowRateDialog()) {
+            singleton.showRateDialog(activity);
             return true;
         }
         return false;
     }
 
     public static boolean passSignificantEvent(Activity activity) {
-        if (SINGLETON.isDebug || SINGLETON.isOverEventPass(activity.getApplicationContext())) {
-            SINGLETON.showRateDialog(activity);
+        if (singleton.isDebug || singleton.isOverEventPass()) {
+            singleton.showRateDialog(activity);
             return true;
         } else {
             Context context = activity.getApplicationContext();
@@ -109,26 +119,26 @@ public class AppRate {
         DialogManager.create(activity, isShowNeutralButton, listener, view).show();
     }
 
-    public boolean isOverEventPass(Context context) {
+    public boolean isOverEventPass() {
         return eventsTimes != -1 && PreferenceHelper.getEventTimes(context) > eventsTimes;
     }
 
-    public boolean shouldShowRateDialog(Context context) {
+    public boolean shouldShowRateDialog() {
         return PreferenceHelper.getIsAgreeShowDialog(context) &&
-                isOverLaunchTimes(context) &&
-                isOverInstallDate(context) &&
-                isOverRemindDate(context);
+                isOverLaunchTimes() &&
+                isOverInstallDate() &&
+                isOverRemindDate();
     }
 
-    private boolean isOverLaunchTimes(Context context) {
+    private boolean isOverLaunchTimes() {
         return PreferenceHelper.getLaunchTimes(context) >= launchTimes;
     }
 
-    private boolean isOverInstallDate(Context context) {
+    private boolean isOverInstallDate() {
         return isOverDate(PreferenceHelper.getInstallDate(context), installDate);
     }
 
-    private boolean isOverRemindDate(Context context) {
+    private boolean isOverRemindDate() {
         return isOverDate(PreferenceHelper.getRemindInterval(context), remindInterval);
     }
 
