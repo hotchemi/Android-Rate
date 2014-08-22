@@ -2,6 +2,7 @@ Android-Rate
 ============
 
 [![Build Status](https://travis-ci.org/hotchemi/Android-Rate.png?branch=master)](https://travis-ci.org/hotchemi/Android-Rate)
+[![Android Arsenal](http://img.shields.io/badge/Android%20Arsenal-Android%20Rate-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/846)
 
 Android-Rate is a library to help you promote your android app by prompting users to rate the app after using it for a few days.
 
