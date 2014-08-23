@@ -14,7 +14,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AppRate.getInstance()
+        AppRate.with(this)
                 .setInstallDays(0) // default 10, 0 means install day.
                 .setLaunchTimes(3) // default 10 times.
                 .setRemindInterval(2) // default 1 day.
@@ -26,7 +26,7 @@ public class MainActivity extends ActionBarActivity {
                         Log.d(MainActivity.class.getName(), Integer.toString(which));
                     }
                 })
-                .monitor(this);
+                .monitor();
 
         // Show a dialog if meets conditions.
         AppRate.showRateDialogIfMeetsConditions(this);
