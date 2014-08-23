@@ -96,23 +96,23 @@ public class AppRate {
     }
 
     public static boolean showRateDialogIfMeetsConditions(Activity activity) {
-        if (singleton.isDebug || singleton.shouldShowRateDialog()) {
+        boolean isMeetsConditions = singleton.isDebug || singleton.shouldShowRateDialog();
+        if (isMeetsConditions) {
             singleton.showRateDialog(activity);
-            return true;
         }
-        return false;
+        return isMeetsConditions;
     }
 
     public static boolean passSignificantEvent(Activity activity) {
-        if (singleton.isDebug || singleton.isOverEventPass()) {
+        boolean isMeetsConditions = singleton.isDebug || singleton.isOverEventPass();
+        if (isMeetsConditions) {
             singleton.showRateDialog(activity);
-            return true;
         } else {
             Context context = activity.getApplicationContext();
             int eventTimes = PreferenceHelper.getEventTimes(context);
             PreferenceHelper.setEventTimes(context, ++eventTimes);
-            return false;
         }
+        return isMeetsConditions;
     }
 
     public void showRateDialog(Activity activity) {
