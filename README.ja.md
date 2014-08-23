@@ -13,7 +13,7 @@ maven centralからダウンロードできます.
 
 ```groovy
 dependencies {
-  compile 'com.github.hotchemi:android-rate:0.4.0'
+  compile 'com.github.hotchemi:android-rate:0.4.1'
 }
 ```
 
@@ -33,7 +33,7 @@ protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
 
-  AppRate.getInstance().
+  AppRate.with(this)
       .setInstallDays(0) // default 10, 0 means install day.
       .setLaunchTimes(3) // default 10
       .setRemindInterval(2) // default 1
@@ -45,7 +45,7 @@ protected void onCreate(Bundle savedInstanceState) {
               Log.d(MainActivity.class.getName(), Integer.toString(which));
           }
       })
-      .monitor(this);
+      .monitor();
   
   // Show a dialog if meets conditions
   AppRate.showRateDialogIfMeetsConditions(this);
@@ -72,7 +72,7 @@ protected void onCreate(Bundle savedInstanceState) {
 protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
-  AppRate.getInstance().setEventTimes(2).monitor(this);// Event通過回数が3回以上でダイアログを出現させる
+  AppRate.with(this).setEventTimes(2).monitor();// Event通過回数が3回以上でダイアログを出現させる
 }
 
 @Override
@@ -83,18 +83,18 @@ public void onClick() {
 
 ### Clear show dialog flag
 
-アプリのアップデート時に再度ダイアログを出現させたい場合は､`AppRate#clearAgreeShowDialog(Context)`を利用してフラグをクリアしてください.
+アプリのアップデート時に再度ダイアログを出現させたい場合は､`AppRate#clearAgreeShowDialog()`を利用してフラグをクリアしてください.
 
 ```java
-AppRate.getInstance().clearAgreeShowDialog(this);
+AppRate.with(this).clearAgreeShowDialog();
 ```
 
 ### When the button presses on
 
-ボタンを押下した際にダイアログを出したい場合は`AppRate#showDialog(Context)`を直接呼び出してください.
+ボタンを押下した際にダイアログを出したい場合は`AppRate#showDialog(Activity)`を直接呼び出してください.
 
 ```java
-AppRate.getInstance().showDialog(this);
+AppRate.with(this).showDialog(this);
 ```
 
 ### Set custom view
@@ -104,7 +104,7 @@ AppRate.getInstance().showDialog(this);
 ```java
 LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
 View view = inflater.inflate(R.layout.custom_dialog, (ViewGroup)findViewById(R.id.layout_root));
-AppRate.getInstance().setView(view).monitor(this);
+AppRate.with(this).setView(view).monitor();
 ```
 
 ### Custom dialog

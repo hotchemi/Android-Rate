@@ -14,7 +14,7 @@ You can download from maven central.
 
 ```groovy
 dependencies {
-  compile 'com.github.hotchemi:android-rate:0.4.0'
+  compile 'com.github.hotchemi:android-rate:0.4.1'
 }
 ```
 
@@ -34,7 +34,7 @@ protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
 
-  AppRate.getInstance()
+  AppRate.with(this)
       .setInstallDays(0) // default 10, 0 means install day.
       .setLaunchTimes(3) // default 10
       .setRemindInterval(2) // default 1
@@ -46,7 +46,7 @@ protected void onCreate(Bundle savedInstanceState) {
               Log.d(MainActivity.class.getName(), Integer.toString(which));
           }
       })
-      .monitor(this);
+      .monitor();
 
   // Show a dialog if meets conditions
   AppRate.showRateDialogIfMeetsConditions(this);
@@ -72,7 +72,7 @@ When you want to track significant events, write code as below.
 protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
-  AppRate.getInstance().setEventTimes(2).monitor(this);
+  AppRate.with(this).setEventTimes(2).monitor();
 }
 
 @Override
@@ -83,18 +83,18 @@ public void onClick() {
 
 ### Clear show dialog flag
 
-When you want to show the dialog again, call `AppRate#clearAgreeShowDialog(Context)`.
+When you want to show the dialog again, call `AppRate#clearAgreeShowDialog()`.
 
 ```java
-AppRate.getInstance().clearAgreeShowDialog(this);
+AppRate.with(this).clearAgreeShowDialog();
 ```
 
 ### When the button presses on
 
-call `AppRate#showDialog(Context)`.
+call `AppRate#showDialog(Activity)`.
 
 ```java
-AppRate.getInstance().showDialog(this);
+AppRate.with(this).showDialog(this);
 ```
 
 ### Set custom view
@@ -104,7 +104,7 @@ call `AppRate#setView(View)`.
 ```java
 LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
 View view = inflater.inflate(R.layout.custom_dialog, (ViewGroup)findViewById(R.id.layout_root));
-AppRate.getInstance().setView(view).monitor(this);
+AppRate.with(this).setView(view).monitor();
 ```
 
 ### Custom dialog
