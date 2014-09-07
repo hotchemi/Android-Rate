@@ -9,12 +9,13 @@ Android-Rate is a library to help you promote your android app by prompting user
 ![screen shot](http://gifzo.net/BI5e2qMJVi0.gif)
 
 ## Getting Started
+![Maven Badges](https://maven-badges.herokuapp.com/maven-central/com.github.hotchemi/android-rate/badge.svg)
 
 You can download from maven central.
 
 ```groovy
 dependencies {
-  compile 'com.github.hotchemi:android-rate:0.4.1'
+  compile 'com.github.hotchemi:android-rate:{$latest.version}'
 }
 ```
 
@@ -59,7 +60,7 @@ The default conditions to show rate dialog is as below:
 2. App is launched more than 10 times. Change via `AppRate#setLaunchTimes(int)`.
 3. App is launched more than 2 days after neutral button clicked. Change via `AppRate#setRemindInterval(int)`.
 4. App shows neutral dialog(Remind me later) by default. Change via `setShowNeutralButton(boolean)`.
-5. To specify the callback when the button is pressed. The same value as the second argument of `DialogInterface.OnClickListener#onClick` will be passed in the argument of `onClickButton`. 
+5. To specify the callback when the button is pressed. The same value as the second argument of `DialogInterface.OnClickListener#onClick` will be passed in the argument of `onClickButton`.
 6. Setting `AppRate#setDebug(boolean)` will ensure that the rating request is shown each time the app is launched. **This feature is only development!**.
 
 ### Event Tracking

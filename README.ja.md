@@ -8,12 +8,13 @@ Android-Rateはアプリのレーティング促進ダイアログを出す事�
 ![screen shot](http://gifzo.net/BI5e2qMJVi0.gif)
 
 ## Getting Started
+![Maven Badges](https://maven-badges.herokuapp.com/maven-central/com.github.hotchemi/android-rate/badge.svg)
 
 maven centralからダウンロードできます.
 
 ```groovy
 dependencies {
-  compile 'com.github.hotchemi:android-rate:0.4.1'
+  compile 'com.github.hotchemi:android-rate:{$latest.version}'
 }
 ```
 
@@ -46,7 +47,7 @@ protected void onCreate(Bundle savedInstanceState) {
           }
       })
       .monitor();
-  
+
   // Show a dialog if meets conditions
   AppRate.showRateDialogIfMeetsConditions(this);
 }
