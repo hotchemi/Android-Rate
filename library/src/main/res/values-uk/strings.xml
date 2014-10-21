@@ -1,6 +1,6 @@
 <resources>
     <string name="rate_dialog_title">Оцініть цей додаток</string>
-    <string name="rate_dialog_message">Якщо вам подобається цей додаток - не задбудьте оцінити його у Google Play, це займе лише хвилину вашого часу. Дякуємо за вашу підтримку!</string>
+    <string name="rate_dialog_message">Якщо вам подобається цей додаток - не забудьте оцінити його у Google Play, це займе лише хвилину вашого часу. Дякуємо за вашу підтримку!</string>
     <string name="rate_dialog_ok">Оцінити зараз</string>
     <string name="rate_dialog_cancel">Нагадати пізніше</string>
     <string name="rate_dialog_no">Ні, дякую</string>
