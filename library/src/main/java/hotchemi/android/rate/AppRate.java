@@ -2,6 +2,7 @@ package hotchemi.android.rate;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 
 import java.util.Date;
@@ -146,4 +147,21 @@ public class AppRate {
         return new Date().getTime() - targetDate >= threshold * 24 * 60 * 60 * 1000;
     }
 
+
+    /**
+     * start - QuickStart with default values
+     *
+     */
+    public static void start(Activity activity) {
+        with(activity)
+                .setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
+                    @Override
+                    public void onClickButton(int which) {
+                        Log.d("QuickStart", Integer.toString(which));
+                    }
+                })
+                .monitor();
+
+        showRateDialogIfMeetsConditions(activity);
+    }
 }
