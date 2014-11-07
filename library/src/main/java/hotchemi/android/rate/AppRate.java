@@ -149,10 +149,10 @@ public class AppRate {
 
 
     /**
-     * start - QuickStart with default values
+     * QuickStart with default values
      *
      */
-    public static void start(Activity activity) {
+    public static void quickStart(Activity activity) {
         with(activity)
                 .setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
                     @Override
