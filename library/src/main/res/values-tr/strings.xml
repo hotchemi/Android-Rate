@@ -1,0 +1,7 @@
+<resources>
+    <string name="rate_dialog_title">Bu uygulamaya puan verin</string>
+    <string name="rate_dialog_message">Eğer bu uygulamayı beğendiyseniz birkaç dakikanızı ayırarak puan verir miydiniz? Bir dakikadan fazla sürmeyecek. Desteğiniz için teşekkür ederiz!</string>
+    <string name="rate_dialog_ok">Puan ver</string>
+    <string name="rate_dialog_cancel">Belki daha sonra</string>
+    <string name="rate_dialog_no">Hayır</string>
+</resources>
