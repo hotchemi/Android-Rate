@@ -3,6 +3,7 @@ package hotchemi.android.rate;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.os.Build;
 
 import java.util.Date;
 
@@ -40,7 +41,7 @@ final class PreferenceHelper {
         final SharedPreferences.Editor editor = getPreferencesEditor(context);
         editor.remove(PREF_KEY_INSTALL_DATE);
         editor.remove(PREF_KEY_LAUNCH_TIMES);
-        editor.commit();
+        commitOrApply(editor);
     }
 
     /**
@@ -53,7 +54,7 @@ final class PreferenceHelper {
     static void setAgreeShowDialog(Context context, boolean isAgree) {
         final SharedPreferences.Editor editor = getPreferencesEditor(context);
         editor.putBoolean(PREF_KEY_IS_AGREE_SHOW_DIALOG, isAgree);
-        editor.commit();
+        commitOrApply(editor);
     }
 
     static boolean getIsAgreeShowDialog(Context context) {
@@ -64,7 +65,7 @@ final class PreferenceHelper {
         SharedPreferences.Editor editor = getPreferencesEditor(context);
         editor.remove(PREF_KEY_REMIND_INTERVAL);
         editor.putLong(PREF_KEY_REMIND_INTERVAL, new Date().getTime());
-        editor.commit();
+        commitOrApply(editor);
     }
 
     static long getRemindInterval(Context context) {
@@ -74,7 +75,7 @@ final class PreferenceHelper {
     static void setInstallDate(Context context) {
         SharedPreferences.Editor editor = getPreferencesEditor(context);
         editor.putLong(PREF_KEY_INSTALL_DATE, new Date().getTime());
-        editor.commit();
+        commitOrApply(editor);
     }
 
     static long getInstallDate(Context context) {
@@ -84,7 +85,7 @@ final class PreferenceHelper {
     static void setLaunchTimes(Context context, int launchTimes) {
         SharedPreferences.Editor editor = getPreferencesEditor(context);
         editor.putInt(PREF_KEY_LAUNCH_TIMES, launchTimes);
-        editor.commit();
+        commitOrApply(editor);
     }
 
     static int getLaunchTimes(Context context) {
@@ -102,7 +103,15 @@ final class PreferenceHelper {
     static void setEventTimes(Context context, int eventTimes) {
         SharedPreferences.Editor editor = getPreferencesEditor(context);
         editor.putInt(PREF_KEY_EVENT_TIMES, eventTimes);
-        editor.commit();
+        commitOrApply(editor);
+    }
+
+    private static void commitOrApply(SharedPreferences.Editor editor) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            editor.apply();
+        } else {
+            editor.commit();
+        }
     }
 
 }
