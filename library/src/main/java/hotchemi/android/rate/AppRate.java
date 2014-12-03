@@ -116,7 +116,9 @@ public class AppRate {
     }
 
     public void showRateDialog(Activity activity) {
-        DialogManager.create(activity, isShowNeutralButton, listener, view).show();
+        if(!activity.isFinishing()) {
+            DialogManager.create(activity, isShowNeutralButton, listener, view).show();
+        }
     }
 
     public boolean isOverEventPass() {
