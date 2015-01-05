@@ -115,6 +115,18 @@ public class AppRate {
         return isMeetsConditions;
     }
 
+    public static boolean passSignificantEventAndConditions(Activity activity) {
+        boolean isMeetsConditions = singleton.isDebug || (singleton.isOverEventPass() && singleton.shouldShowRateDialog());
+        if (isMeetsConditions) {
+            singleton.showRateDialog(activity);
+        } else {
+            Context context = activity.getApplicationContext();
+            int eventTimes = PreferenceHelper.getEventTimes(context);
+            PreferenceHelper.setEventTimes(context, ++eventTimes);
+        }
+        return isMeetsConditions;
+    }
+
     public void showRateDialog(Activity activity) {
         if(!activity.isFinishing()) {
             DialogManager.create(activity, isShowNeutralButton, listener, view).show();
