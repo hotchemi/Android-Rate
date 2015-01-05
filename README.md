@@ -25,6 +25,8 @@ Please try to move the [sample module](https://github.com/hotchemi/Android-Rate/
 
 ## How to use
 
+Javadoc is [here](http://www.javadoc.io/doc/com.github.hotchemi/android-rate/).
+
 ### Configuration
 
 Android-Rate provides methods to configure its behavior.
