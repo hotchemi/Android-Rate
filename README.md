@@ -151,19 +151,6 @@ Android-Rate currently supports the following languages:
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
-## Contributor
-
-- [androhi](https://github.com/androhi)
-- [hoang8f](https://github.com/hoang8f)
-- [mrmike](https://github.com/mrmike)
-- [maarekj](https://github.com/maarekj)
-- [TomasValenta](https://github.com/TomasValenta)
-- [nein37](https://github.com/nein37)
-- [marta-rodriguez](https://github.com/marta-rodriguez)
-- [Bersh](https://github.com/Bersh)
-- [amitkot](https://github.com/amitkot)
-- [joelbrito](https://github.com/joelbrito)
-
 ## Used
 
 - [Zaim](https://play.google.com/store/apps/details?id=net.zaim.android)
