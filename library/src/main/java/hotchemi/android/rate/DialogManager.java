@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.view.View;
 
 final class DialogManager {
+    private static final String GOOGLE_PLAY_PACKAGE_NAME = "com.android.vending";
 
     private DialogManager() {
     }
@@ -23,6 +24,9 @@ final class DialogManager {
             public void onClick(DialogInterface dialog, int which) {
                 String packageName = context.getPackageName();
                 Intent intent = new Intent(Intent.ACTION_VIEW, UriHelper.getGooglePlay(packageName));
+                if (UriHelper.isPackageExists(context, GOOGLE_PLAY_PACKAGE_NAME)) {
+                    intent.setPackage(GOOGLE_PLAY_PACKAGE_NAME);
+                }
                 context.startActivity(intent);
                 PreferenceHelper.setAgreeShowDialog(context, false);
                 if (listener != null) listener.onClickButton(which);
