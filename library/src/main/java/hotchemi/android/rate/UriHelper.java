@@ -19,10 +19,8 @@ final class UriHelper {
     }
 
     static boolean isPackageExists(Context context, String targetPackage) {
-        List<ApplicationInfo> packages;
-        PackageManager pm;
-        pm = context.getPackageManager();
-        packages = pm.getInstalledApplications(0);
+        PackageManager pm = context.getPackageManager();
+        List<ApplicationInfo> packages = pm.getInstalledApplications(0);
         for (ApplicationInfo packageInfo : packages) {
             if (packageInfo.packageName.equals(targetPackage)) return true;
         }
