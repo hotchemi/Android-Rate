@@ -21,11 +21,11 @@ dependencies {
 
 ## Sample
 
-Please try to move the [sample module](https://github.com/hotchemi/Android-Rate/tree/master/sample).
+Please try to move the [sample](https://github.com/hotchemi/Android-Rate/tree/master/sample).
 
 ## How to use
 
-Javadoc is [here](http://www.javadoc.io/doc/com.github.hotchemi/android-rate/).
+[![javadoc.io](https://javadocio-badges.herokuapp.com/com.github.hotchemi/android-rate/badge.svg)](http://www.javadoc.io/doc/com.github.hotchemi/android-rate/)
 
 ### Configuration
 
