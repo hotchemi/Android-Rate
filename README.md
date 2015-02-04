@@ -21,11 +21,11 @@ dependencies {
 
 ## Sample
 
-Please try to move the [sample module](https://github.com/hotchemi/Android-Rate/tree/master/sample).
+Please try to move the [sample](https://github.com/hotchemi/Android-Rate/tree/master/sample).
 
 ## How to use
 
-Javadoc is [here](http://www.javadoc.io/doc/com.github.hotchemi/android-rate/).
+[![javadoc.io](https://javadocio-badges.herokuapp.com/com.github.hotchemi/android-rate/badge.svg)](http://www.javadoc.io/doc/com.github.hotchemi/android-rate/)
 
 ### Configuration
 
@@ -150,23 +150,3 @@ Android-Rate currently supports the following languages:
 3. Commit your changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
-
-## Contributor
-
-- [androhi](https://github.com/androhi)
-- [hoang8f](https://github.com/hoang8f)
-- [mrmike](https://github.com/mrmike)
-- [maarekj](https://github.com/maarekj)
-- [TomasValenta](https://github.com/TomasValenta)
-- [nein37](https://github.com/nein37)
-- [marta-rodriguez](https://github.com/marta-rodriguez)
-- [Bersh](https://github.com/Bersh)
-- [amitkot](https://github.com/amitkot)
-- [joelbrito](https://github.com/joelbrito)
-
-## Used
-
-- [Zaim](https://play.google.com/store/apps/details?id=net.zaim.android)
-- [就活マネージャー](https://play.google.com/store/apps/details?id=jp.co.recruit.shukatsumgr2016)
-- [candlecake](https://play.google.com/store/apps/details?id=com.eranamit.candlecake&referrer=utm_source%3DAndroid-Rate)
-- [Breaking Point](https://play.google.com/store/apps/details?id=yac.breakingpoint)

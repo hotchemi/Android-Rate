@@ -1,5 +1,8 @@
 # ChangeLog
 
+- 2015/01/19 0.4.3 release.
+    - [Add passSignificantEventAndConditions method.](https://github.com/hotchemi/Android-Rate/commit/9ca6375cbf25117a5f43afcc9651897d6bdf5888)
+    - Improvement of internal processing.
 - 2014/11/25 0.4.2 release.
 - 2014/08/23 0.4.1 release.
 - 2014/08/09 0.4.0 release.

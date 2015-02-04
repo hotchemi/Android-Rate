@@ -1,6 +1,11 @@
 package hotchemi.android.rate;
 
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+
+import java.util.List;
 
 final class UriHelper {
 
@@ -13,4 +18,12 @@ final class UriHelper {
         return packageName == null ? null : Uri.parse(GOOGLE_PLAY + packageName);
     }
 
+    static boolean isPackageExists(Context context, String targetPackage) {
+        PackageManager pm = context.getPackageManager();
+        List<ApplicationInfo> packages = pm.getInstalledApplications(0);
+        for (ApplicationInfo packageInfo : packages) {
+            if (packageInfo.packageName.equals(targetPackage)) return true;
+        }
+        return false;
+    }
 }
