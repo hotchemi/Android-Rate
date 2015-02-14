@@ -18,6 +18,8 @@ public class AppRate {
 
     private int eventsTimes = -1;
 
+    private boolean isShowTitle = true;
+
     private boolean isShowNeutralButton = true;
 
     private boolean isDebug = false;
@@ -65,6 +67,11 @@ public class AppRate {
 
     public AppRate setEventsTimes(int eventsTimes) {
         this.eventsTimes = eventsTimes;
+        return this;
+    }
+
+    public AppRate setShowTitle(boolean isShowTitle) {
+        this.isShowTitle = isShowTitle;
         return this;
     }
 
@@ -129,7 +136,7 @@ public class AppRate {
 
     public void showRateDialog(Activity activity) {
         if(!activity.isFinishing()) {
-            DialogManager.create(activity, isShowNeutralButton, listener, view).show();
+            DialogManager.create(activity, isShowNeutralButton, isShowTitle, listener, view).show();
         }
     }
 

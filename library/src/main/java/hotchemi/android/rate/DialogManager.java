@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
+import android.view.Window;
 
 final class DialogManager {
     private static final String GOOGLE_PLAY_PACKAGE_NAME = "com.android.vending";
@@ -14,9 +15,9 @@ final class DialogManager {
     }
 
     static Dialog create(final Context context, final boolean isShowNeutralButton,
-                         final OnClickButtonListener listener, final View view) {
+                         final boolean isShowTitle, final OnClickButtonListener listener,
+                         final View view) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(R.string.rate_dialog_title);
         builder.setMessage(R.string.rate_dialog_message);
         if (view != null) builder.setView(view);
         builder.setPositiveButton(R.string.rate_dialog_ok, new DialogInterface.OnClickListener() {
@@ -48,7 +49,13 @@ final class DialogManager {
                 if (listener != null) listener.onClickButton(which);
             }
         });
-        return builder.create();
+        final AlertDialog dialog = builder.create();
+        if (!isShowTitle) {
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        } else {
+            dialog.setTitle(R.string.rate_dialog_title);
+        }
+        return dialog;
     }
 
 }
