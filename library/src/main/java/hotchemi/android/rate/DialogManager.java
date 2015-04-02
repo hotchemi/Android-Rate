@@ -14,6 +14,18 @@ final class DialogManager {
     private DialogManager() {
     }
 
+    private boolean MyStartActivity(Intent intent) {
+        try
+        {
+            startActivity(intent);
+            return true;
+        }
+        catch (ActivityNotFoundException e)
+        {
+            return false;
+        }
+    }    
+
     static Dialog create(final Context context, final boolean isShowNeutralButton,
                          final boolean isShowTitle, final OnClickButtonListener listener,
                          final View view) {
@@ -24,11 +36,17 @@ final class DialogManager {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String packageName = context.getPackageName();
-                Intent intent = new Intent(Intent.ACTION_VIEW, UriHelper.getGooglePlay(packageName));
-                if (UriHelper.isPackageExists(context, GOOGLE_PLAY_PACKAGE_NAME)) {
-                    intent.setPackage(GOOGLE_PLAY_PACKAGE_NAME);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                //Try go to the Google Play Store
+                intent.setData(Uri.parse("market://details?id=" + packageName));
+                if (!MyStartActivity(intent)) {
+                 //Google Play Store app seems to be not installed, let's try to open a web browser
+                    intent.setData(Uri.parse("https://play.google.com/store/apps/details?" + packageName));
                 }
-                context.startActivity(intent);
+                if (!MyStartActivity(intent)) {
+                    Toast.makeText(this, "Please install Google Play Store first.", Toast.LENGTH_SHORT).show();
+                }
+                }
                 PreferenceHelper.setAgreeShowDialog(context, false);
                 if (listener != null) listener.onClickButton(which);
             }
