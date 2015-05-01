@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Toast;
+import android.content.ActivityNotFoundException;
 
 final class DialogManager {
     private static final String GOOGLE_PLAY_PACKAGE_NAME = "com.android.vending";
@@ -24,13 +26,19 @@ final class DialogManager {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String packageName = context.getPackageName();
-                Intent intent = new Intent(Intent.ACTION_VIEW, UriHelper.getGooglePlay(packageName));
-                if (UriHelper.isPackageExists(context, GOOGLE_PLAY_PACKAGE_NAME)) {
-                    intent.setPackage(GOOGLE_PLAY_PACKAGE_NAME);
+                try {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, UriHelper.getGooglePlay(packageName));
+                    if (UriHelper.isPackageExists(context, GOOGLE_PLAY_PACKAGE_NAME)) {
+                        intent.setPackage(GOOGLE_PLAY_PACKAGE_NAME);
+                    }
+                    context.startActivity(intent);
+                    PreferenceHelper.setAgreeShowDialog(context, false);
+                    if (listener != null) listener.onClickButton(which);
+                } 
+                catch (ActivityNotFoundException ex) {
+                    Toast.makeText(getActivity(), "Please install Google Play Store first.", Toast.LENGTH_SHORT).show();
                 }
-                context.startActivity(intent);
-                PreferenceHelper.setAgreeShowDialog(context, false);
-                if (listener != null) listener.onClickButton(which);
+           
             }
         });
         if (isShowNeutralButton) {
