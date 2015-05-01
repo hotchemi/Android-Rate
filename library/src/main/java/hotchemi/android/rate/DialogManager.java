@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
+import android.content.ActivityNotFoundException;
 
 final class DialogManager {
     private static final String GOOGLE_PLAY_PACKAGE_NAME = "com.android.vending";
@@ -35,7 +36,7 @@ final class DialogManager {
                     if (listener != null) listener.onClickButton(which);
                 } 
                 catch (ActivityNotFoundException ex) {
-                    Toast.makeText(getActivity().getBaseContext(), "Please install Google Play Store first.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please install Google Play Store first.", Toast.LENGTH_SHORT).show();
                 }
            
             }
