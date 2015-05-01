@@ -35,7 +35,7 @@ final class DialogManager {
                     if (listener != null) listener.onClickButton(which);
                 } 
                 catch (ActivityNotFoundException ex) {
-                    Toast.makeText(this, "Please install Google Play Store first.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getBaseContext(), "Please install Google Play Store first.", Toast.LENGTH_SHORT).show();
                 }
            
             }
