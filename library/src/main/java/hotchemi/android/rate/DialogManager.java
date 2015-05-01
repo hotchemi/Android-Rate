@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Toast;
 
 final class DialogManager {
     private static final String GOOGLE_PLAY_PACKAGE_NAME = "com.android.vending";
