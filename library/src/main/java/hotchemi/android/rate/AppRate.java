@@ -111,25 +111,20 @@ public class AppRate {
     }
 
     public static boolean passSignificantEvent(Activity activity) {
-        boolean isMeetsConditions = singleton.isDebug || singleton.isOverEventPass();
-        if (isMeetsConditions) {
-            singleton.showRateDialog(activity);
-        } else {
-            Context context = activity.getApplicationContext();
-            int eventTimes = PreferenceHelper.getEventTimes(context);
-            PreferenceHelper.setEventTimes(context, ++eventTimes);
-        }
-        return isMeetsConditions;
+        return passSignificantEvent(activity, true);
     }
 
     public static boolean passSignificantEventAndConditions(Activity activity) {
-        boolean isMeetsConditions = singleton.isDebug || (singleton.isOverEventPass() && singleton.shouldShowRateDialog());
+        return passSignificantEvent(activity, singleton.shouldShowRateDialog());
+    }
+
+    private static boolean passSignificantEvent(Activity activity, boolean shouldShow) {
+        Context context = activity.getApplicationContext();
+        int eventTimes = PreferenceHelper.getEventTimes(context);
+        PreferenceHelper.setEventTimes(context, ++eventTimes);
+        boolean isMeetsConditions = singleton.isDebug || (singleton.isOverEventPass() && shouldShow);
         if (isMeetsConditions) {
             singleton.showRateDialog(activity);
-        } else {
-            Context context = activity.getApplicationContext();
-            int eventTimes = PreferenceHelper.getEventTimes(context);
-            PreferenceHelper.setEventTimes(context, ++eventTimes);
         }
         return isMeetsConditions;
     }
