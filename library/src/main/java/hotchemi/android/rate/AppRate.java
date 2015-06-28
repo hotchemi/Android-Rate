@@ -6,6 +6,15 @@ import android.view.View;
 
 import java.util.Date;
 
+import static hotchemi.android.rate.DialogManager.create;
+import static hotchemi.android.rate.PreferenceHelper.getEventTimes;
+import static hotchemi.android.rate.PreferenceHelper.getInstallDate;
+import static hotchemi.android.rate.PreferenceHelper.getIsAgreeShowDialog;
+import static hotchemi.android.rate.PreferenceHelper.getLaunchTimes;
+import static hotchemi.android.rate.PreferenceHelper.getRemindInterval;
+import static hotchemi.android.rate.PreferenceHelper.isFirstLaunch;
+import static hotchemi.android.rate.PreferenceHelper.setInstallDate;
+
 public class AppRate {
 
     private static AppRate singleton;
@@ -96,10 +105,10 @@ public class AppRate {
     }
 
     public void monitor() {
-        if (PreferenceHelper.isFirstLaunch(context)) {
-            PreferenceHelper.setInstallDate(context);
+        if (isFirstLaunch(context)) {
+            setInstallDate(context);
         }
-        PreferenceHelper.setLaunchTimes(context, PreferenceHelper.getLaunchTimes(context) + 1);
+        PreferenceHelper.setLaunchTimes(context, getLaunchTimes(context) + 1);
     }
 
     public static boolean showRateDialogIfMeetsConditions(Activity activity) {
@@ -119,9 +128,8 @@ public class AppRate {
     }
 
     private static boolean passSignificantEvent(Activity activity, boolean shouldShow) {
-        Context context = activity.getApplicationContext();
-        int eventTimes = PreferenceHelper.getEventTimes(context);
-        PreferenceHelper.setEventTimes(context, ++eventTimes);
+        int eventTimes = getEventTimes(activity);
+        PreferenceHelper.setEventTimes(activity, ++eventTimes);
         boolean isMeetsConditions = singleton.isDebug || (singleton.isOverEventPass() && shouldShow);
         if (isMeetsConditions) {
             singleton.showRateDialog(activity);
@@ -130,38 +138,38 @@ public class AppRate {
     }
 
     public void showRateDialog(Activity activity) {
-        if(!activity.isFinishing()) {
-            DialogManager.create(activity, isShowNeutralButton, isShowTitle, listener, view).show();
+        if (!activity.isFinishing()) {
+            create(activity, isShowNeutralButton, isShowTitle, listener, view).show();
         }
     }
 
     public boolean isOverEventPass() {
-        return eventsTimes != -1 && PreferenceHelper.getEventTimes(context) > eventsTimes;
+        return eventsTimes != -1 && getEventTimes(context) > eventsTimes;
     }
 
     public boolean shouldShowRateDialog() {
-        return PreferenceHelper.getIsAgreeShowDialog(context) &&
+        return getIsAgreeShowDialog(context) &&
                 isOverLaunchTimes() &&
                 isOverInstallDate() &&
                 isOverRemindDate();
     }
 
     private boolean isOverLaunchTimes() {
-        return PreferenceHelper.getLaunchTimes(context) >= launchTimes;
+        return getLaunchTimes(context) >= launchTimes;
     }
 
     private boolean isOverInstallDate() {
-        return isOverDate(PreferenceHelper.getInstallDate(context), installDate);
+        return isOverDate(getInstallDate(context), installDate);
     }
 
     private boolean isOverRemindDate() {
-        return isOverDate(PreferenceHelper.getRemindInterval(context), remindInterval);
+        return isOverDate(getRemindInterval(context), remindInterval);
     }
 
-    private boolean isOverDate(long targetDate, int threshold) {
+    private static boolean isOverDate(long targetDate, int threshold) {
         return new Date().getTime() - targetDate >= threshold * 24 * 60 * 60 * 1000;
     }
-    
+
     private boolean isDebug() {
         return isDebug;
     }
