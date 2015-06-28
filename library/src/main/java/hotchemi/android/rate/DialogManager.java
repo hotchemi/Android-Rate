@@ -1,35 +1,35 @@
 package hotchemi.android.rate;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.os.Build;
 import android.view.View;
-import android.view.Window;
+
+import static hotchemi.android.rate.IntentHelper.createIntentForGooglePlay;
+import static hotchemi.android.rate.PreferenceHelper.setAgreeShowDialog;
+import static hotchemi.android.rate.PreferenceHelper.setRemindInterval;
+import static hotchemi.android.rate.Utils.getDialogBuilder;
 
 final class DialogManager {
-    private static final String GOOGLE_PLAY_PACKAGE_NAME = "com.android.vending";
 
     private DialogManager() {
     }
 
-    static Dialog create(final Context context, final boolean isShowNeutralButton,
-                         final boolean isShowTitle, final OnClickButtonListener listener,
-                         final View view) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    static Dialog create(final Context context, boolean isShowNeutralButton,
+                         boolean isShowTitle, final OnClickButtonListener listener, View view) {
+        AlertDialog.Builder builder = getDialogBuilder(context);
         builder.setMessage(R.string.rate_dialog_message);
+        if (isShowTitle) builder.setTitle(R.string.rate_dialog_title);
         if (view != null) builder.setView(view);
         builder.setPositiveButton(R.string.rate_dialog_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String packageName = context.getPackageName();
-                Intent intent = new Intent(Intent.ACTION_VIEW, UriHelper.getGooglePlay(packageName));
-                if (UriHelper.isPackageExists(context, GOOGLE_PLAY_PACKAGE_NAME)) {
-                    intent.setPackage(GOOGLE_PLAY_PACKAGE_NAME);
-                }
-                context.startActivity(intent);
-                PreferenceHelper.setAgreeShowDialog(context, false);
+                context.startActivity(createIntentForGooglePlay(context));
+                setAgreeShowDialog(context, false);
                 if (listener != null) listener.onClickButton(which);
             }
         });
@@ -37,7 +37,7 @@ final class DialogManager {
             builder.setNeutralButton(R.string.rate_dialog_cancel, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    PreferenceHelper.setRemindInterval(context);
+                    setRemindInterval(context);
                     if (listener != null) listener.onClickButton(which);
                 }
             });
@@ -45,17 +45,11 @@ final class DialogManager {
         builder.setNegativeButton(R.string.rate_dialog_no, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                PreferenceHelper.setAgreeShowDialog(context, false);
+                setAgreeShowDialog(context, false);
                 if (listener != null) listener.onClickButton(which);
             }
         });
-        final AlertDialog dialog = builder.create();
-        if (!isShowTitle) {
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        } else {
-            dialog.setTitle(R.string.rate_dialog_title);
-        }
-        return dialog;
+        return builder.create();
     }
 
 }

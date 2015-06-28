@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CustomLollipopDialogStyle" parent="android:Theme.Material.Light.Dialog.Alert">
+        <item name="android:buttonBarButtonStyle">@style/CustomButtonBarButtonStyle</item>
+        <item name="android:buttonBarStyle">@style/CustomButtonBarStyle</item>
+    </style>
+
+    <style name="CustomButtonBarStyle" parent="@android:style/Widget.Material.Light.ButtonBar.AlertDialog">
+        <!-- Making sure, the button bar uses parent width and is not restricted in height -->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:height">@null</item>
+        <item name="android:minHeight">@null</item>
+    </style>
+
+    <style name="CustomButtonBarButtonStyle" parent="@android:style/Widget.Material.Light.Button.Borderless.Colored">
+        <!-- Setting the weight as follows should result in equally wide buttons filling the alert dialog width,
+            but instead they span further out of the dialog, breaking in multiple lines though -->
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <!-- TODO: setting a fixed width as follows results in narrow buttons with line breaks, but of course this is not a solution -->
+        <item name="android:width">100dp</item>
+    </style>
+
+</resources>

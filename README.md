@@ -6,9 +6,10 @@ Android-Rate
 
 Android-Rate is a library to help you promote your android app by prompting users to rate the app after using it for a few days.
 
-![screen shot](http://gifzo.net/BI5e2qMJVi0.gif)
+![screen shot](http://i.gyazo.com/286342ba215a515f2f443a7ce996cc92.gif)
 
 ## Getting Started
+
 ![Maven Badges](https://maven-badges.herokuapp.com/maven-central/com.github.hotchemi/android-rate/badge.svg)
 
 You can download from maven central.
@@ -26,6 +27,10 @@ Please try to move the [sample](https://github.com/hotchemi/Android-Rate/tree/ma
 ## How to use
 
 [![javadoc.io](https://javadocio-badges.herokuapp.com/com.github.hotchemi/android-rate/badge.svg)](http://www.javadoc.io/doc/com.github.hotchemi/android-rate/)
+
+## Support
+
+Android-Rate supports over API level 9.
 
 ### Configuration
 
