@@ -1,5 +1,7 @@
 # ChangeLog
 
+- 2015/06/28 0.5.0 release.
+    - Fix the bug that text button overflows in material theme.
 - 2015/01/19 0.4.3 release.
     - [Add passSignificantEventAndConditions method.](https://github.com/hotchemi/Android-Rate/commit/9ca6375cbf25117a5f43afcc9651897d6bdf5888)
     - Improvement of internal processing.
