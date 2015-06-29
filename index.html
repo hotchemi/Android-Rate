@@ -6,7 +6,7 @@
     <title>Android-rate by hotchemi</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -36,7 +36,7 @@
 
 <p>Android-Rate is a library to help you promote your android app by prompting users to rate the app after using it for a few days.</p>
 
-<p><img src="http://gifzo.net/BI5e2qMJVi0.gif" alt="screen shot"></p>
+<p><img src="http://i.gyazo.com/286342ba215a515f2f443a7ce996cc92.gif" alt="screen shot"></p>
 
 <h2>
 <a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting Started</h2>
@@ -46,45 +46,50 @@
 <p>You can download from maven central.</p>
 
 <div class="highlight highlight-groovy"><pre>dependencies {
-  compile <span class="pl-s1"><span class="pl-pds">'</span>com.github.hotchemi:android-rate:{$latest.version}<span class="pl-pds">'</span></span>
+  compile <span class="pl-s"><span class="pl-pds">'</span>com.github.hotchemi:android-rate:{$latest.version}<span class="pl-pds">'</span></span>
 }</pre></div>
 
 <h2>
 <a id="sample" class="anchor" href="#sample" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sample</h2>
 
-<p>Please try to move the <a href="https://github.com/hotchemi/Android-Rate/tree/master/sample">sample module</a>.</p>
+<p>Please try to move the <a href="https://github.com/hotchemi/Android-Rate/tree/master/sample">sample</a>.</p>
 
 <h2>
 <a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to use</h2>
 
-<p>Javadoc is <a href="http://www.javadoc.io/doc/com.github.hotchemi/android-rate/">here</a>.</p>
+<p><a href="http://www.javadoc.io/doc/com.github.hotchemi/android-rate/"><img src="https://javadocio-badges.herokuapp.com/com.github.hotchemi/android-rate/badge.svg" alt="javadoc.io"></a></p>
+
+<h2>
+<a id="support" class="anchor" href="#support" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support</h2>
+
+<p>Android-Rate supports over API level 9.</p>
 
 <h3>
 <a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration</h3>
 
 <p>Android-Rate provides methods to configure its behavior.</p>
 
-<div class="highlight highlight-java"><pre>@<span class="pl-stj">Override</span>
-<span class="pl-s">protected</span> <span class="pl-st">void</span> onCreate(<span class="pl-stj">Bundle</span> savedInstanceState) {
+<div class="highlight highlight-java"><pre>@<span class="pl-smi">Override</span>
+<span class="pl-k">protected</span> <span class="pl-k">void</span> onCreate(<span class="pl-smi">Bundle</span> savedInstanceState) {
   <span class="pl-v">super</span><span class="pl-k">.</span>onCreate(savedInstanceState);
-  setContentView(<span class="pl-stj">R</span><span class="pl-k">.</span>layout<span class="pl-k">.</span>activity_main);
+  setContentView(<span class="pl-smi">R</span><span class="pl-k">.</span>layout<span class="pl-k">.</span>activity_main);
 
-  <span class="pl-stj">AppRate</span><span class="pl-k">.</span>with(<span class="pl-v">this</span>)
+  <span class="pl-smi">AppRate</span><span class="pl-k">.</span>with(<span class="pl-v">this</span>)
       .setInstallDays(<span class="pl-c1">0</span>) <span class="pl-c">// default 10, 0 means install day.</span>
       .setLaunchTimes(<span class="pl-c1">3</span>) <span class="pl-c">// default 10</span>
       .setRemindInterval(<span class="pl-c1">2</span>) <span class="pl-c">// default 1</span>
       .setShowNeutralButton(<span class="pl-c1">true</span>) <span class="pl-c">// default true</span>
       .setDebug(<span class="pl-c1">false</span>) <span class="pl-c">// default false</span>
-      .setOnClickButtonListener(<span class="pl-k">new</span> <span class="pl-stj">OnClickButtonListener</span>() { <span class="pl-c">// callback listener.</span>
-          <span class="pl-st">@Override</span>
-          <span class="pl-s">public</span> <span class="pl-st">void</span> <span class="pl-en">onClickButton</span>(<span class="pl-st">int</span> <span class="pl-v">which</span>) {
-              <span class="pl-stj">Log</span><span class="pl-k">.</span>d(<span class="pl-stj">MainActivity</span><span class="pl-k">.</span>class<span class="pl-k">.</span>getName(), <span class="pl-stj">Integer</span><span class="pl-k">.</span>toString(which));
+      .setOnClickButtonListener(<span class="pl-k">new</span> <span class="pl-smi">OnClickButtonListener</span>() { <span class="pl-c">// callback listener.</span>
+          <span class="pl-k">@Override</span>
+          <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">onClickButton</span>(<span class="pl-k">int</span> <span class="pl-v">which</span>) {
+              <span class="pl-smi">Log</span><span class="pl-k">.</span>d(<span class="pl-smi">MainActivity</span><span class="pl-k">.</span>class<span class="pl-k">.</span>getName(), <span class="pl-smi">Integer</span><span class="pl-k">.</span>toString(which));
           }
       })
       .monitor();
 
   <span class="pl-c">// Show a dialog if meets conditions</span>
-  <span class="pl-stj">AppRate</span><span class="pl-k">.</span>showRateDialogIfMeetsConditions(<span class="pl-v">this</span>);
+  <span class="pl-smi">AppRate</span><span class="pl-k">.</span>showRateDialogIfMeetsConditions(<span class="pl-v">this</span>);
 }</pre></div>
 
 <p>The default conditions to show rate dialog is as below:</p>
@@ -104,16 +109,16 @@
 <p>When you want to track significant events, write code as below.</p>
 
 <div class="highlight highlight-java"><pre>
-@<span class="pl-stj">Override</span>
-<span class="pl-s">protected</span> <span class="pl-st">void</span> onCreate(<span class="pl-stj">Bundle</span> savedInstanceState) {
+@<span class="pl-smi">Override</span>
+<span class="pl-k">protected</span> <span class="pl-k">void</span> onCreate(<span class="pl-smi">Bundle</span> savedInstanceState) {
   <span class="pl-v">super</span><span class="pl-k">.</span>onCreate(savedInstanceState);
-  setContentView(<span class="pl-stj">R</span><span class="pl-k">.</span>layout<span class="pl-k">.</span>activity_main);
-  <span class="pl-stj">AppRate</span><span class="pl-k">.</span>with(<span class="pl-v">this</span>)<span class="pl-k">.</span>setEventTimes(<span class="pl-c1">2</span>)<span class="pl-k">.</span>monitor();
+  setContentView(<span class="pl-smi">R</span><span class="pl-k">.</span>layout<span class="pl-k">.</span>activity_main);
+  <span class="pl-smi">AppRate</span><span class="pl-k">.</span>with(<span class="pl-v">this</span>)<span class="pl-k">.</span>setEventTimes(<span class="pl-c1">2</span>)<span class="pl-k">.</span>monitor();
 }
 
-@<span class="pl-stj">Override</span>
-<span class="pl-s">public</span> <span class="pl-st">void</span> onClick() {
-  <span class="pl-stj">AppRate</span><span class="pl-k">.</span>passSignificantEvent(<span class="pl-v">this</span>); <span class="pl-c">// when user pass this line for the third time, dialog appears.</span>
+@<span class="pl-smi">Override</span>
+<span class="pl-k">public</span> <span class="pl-k">void</span> onClick() {
+  <span class="pl-smi">AppRate</span><span class="pl-k">.</span>passSignificantEvent(<span class="pl-v">this</span>); <span class="pl-c">// when user pass this line for the third time, dialog appears.</span>
 }</pre></div>
 
 <h3>
@@ -121,23 +126,23 @@
 
 <p>When you want to show the dialog again, call <code>AppRate#clearAgreeShowDialog()</code>.</p>
 
-<div class="highlight highlight-java"><pre><span class="pl-stj">AppRate</span><span class="pl-k">.</span>with(<span class="pl-v">this</span>)<span class="pl-k">.</span>clearAgreeShowDialog();</pre></div>
+<div class="highlight highlight-java"><pre><span class="pl-smi">AppRate</span><span class="pl-k">.</span>with(<span class="pl-v">this</span>)<span class="pl-k">.</span>clearAgreeShowDialog();</pre></div>
 
 <h3>
 <a id="when-the-button-presses-on" class="anchor" href="#when-the-button-presses-on" aria-hidden="true"><span class="octicon octicon-link"></span></a>When the button presses on</h3>
 
 <p>call <code>AppRate#showDialog(Activity)</code>.</p>
 
-<div class="highlight highlight-java"><pre><span class="pl-stj">AppRate</span><span class="pl-k">.</span>with(<span class="pl-v">this</span>)<span class="pl-k">.</span>showDialog(<span class="pl-v">this</span>);</pre></div>
+<div class="highlight highlight-java"><pre><span class="pl-smi">AppRate</span><span class="pl-k">.</span>with(<span class="pl-v">this</span>)<span class="pl-k">.</span>showDialog(<span class="pl-v">this</span>);</pre></div>
 
 <h3>
 <a id="set-custom-view" class="anchor" href="#set-custom-view" aria-hidden="true"><span class="octicon octicon-link"></span></a>Set custom view</h3>
 
 <p>call <code>AppRate#setView(View)</code>.</p>
 
-<div class="highlight highlight-java"><pre><span class="pl-stj">LayoutInflater</span> inflater <span class="pl-k">=</span> (<span class="pl-stj">LayoutInflater</span>)<span class="pl-v">this</span><span class="pl-k">.</span>getSystemService(<span class="pl-c1">LAYOUT_INFLATER_SERVICE</span>);
-<span class="pl-stj">View</span> view <span class="pl-k">=</span> inflater<span class="pl-k">.</span>inflate(<span class="pl-stj">R</span><span class="pl-k">.</span>layout<span class="pl-k">.</span>custom_dialog, (<span class="pl-stj">ViewGroup</span>)findViewById(<span class="pl-stj">R</span><span class="pl-k">.</span>id<span class="pl-k">.</span>layout_root));
-<span class="pl-stj">AppRate</span><span class="pl-k">.</span>with(<span class="pl-v">this</span>)<span class="pl-k">.</span>setView(view)<span class="pl-k">.</span>monitor();</pre></div>
+<div class="highlight highlight-java"><pre><span class="pl-smi">LayoutInflater</span> inflater <span class="pl-k">=</span> (<span class="pl-smi">LayoutInflater</span>)<span class="pl-v">this</span><span class="pl-k">.</span>getSystemService(<span class="pl-c1">LAYOUT_INFLATER_SERVICE</span>);
+<span class="pl-smi">View</span> view <span class="pl-k">=</span> inflater<span class="pl-k">.</span>inflate(<span class="pl-smi">R</span><span class="pl-k">.</span>layout<span class="pl-k">.</span>custom_dialog, (<span class="pl-smi">ViewGroup</span>)findViewById(<span class="pl-smi">R</span><span class="pl-k">.</span>id<span class="pl-k">.</span>layout_root));
+<span class="pl-smi">AppRate</span><span class="pl-k">.</span>with(<span class="pl-v">this</span>)<span class="pl-k">.</span>setView(view)<span class="pl-k">.</span>monitor();</pre></div>
 
 <h3>
 <a id="custom-dialog" class="anchor" href="#custom-dialog" aria-hidden="true"><span class="octicon octicon-link"></span></a>Custom dialog</h3>
@@ -145,11 +150,11 @@
 <p>If you want to use your own dialog labels, override string xml resources on your application.</p>
 
 <div class="highlight highlight-xml"><pre>&lt;<span class="pl-ent">resources</span>&gt;
-    &lt;<span class="pl-ent">string</span> <span class="pl-e">name</span>=<span class="pl-s1"><span class="pl-pds">"</span>rate_dialog_title<span class="pl-pds">"</span></span>&gt;Rate this app&lt;/<span class="pl-ent">string</span>&gt;
-    &lt;<span class="pl-ent">string</span> <span class="pl-e">name</span>=<span class="pl-s1"><span class="pl-pds">"</span>rate_dialog_message<span class="pl-pds">"</span></span>&gt;If you enjoy playing this app, would you mind taking a moment to rate it? It won\'t take more than a minute. Thanks for your support!&lt;/<span class="pl-ent">string</span>&gt;
-    &lt;<span class="pl-ent">string</span> <span class="pl-e">name</span>=<span class="pl-s1"><span class="pl-pds">"</span>rate_dialog_ok<span class="pl-pds">"</span></span>&gt;Rate It Now&lt;/<span class="pl-ent">string</span>&gt;
-    &lt;<span class="pl-ent">string</span> <span class="pl-e">name</span>=<span class="pl-s1"><span class="pl-pds">"</span>rate_dialog_cancel<span class="pl-pds">"</span></span>&gt;Remind Me Later&lt;/<span class="pl-ent">string</span>&gt;
-    &lt;<span class="pl-ent">string</span> <span class="pl-e">name</span>=<span class="pl-s1"><span class="pl-pds">"</span>rate_dialog_no<span class="pl-pds">"</span></span>&gt;No, Thanks&lt;/<span class="pl-ent">string</span>&gt;
+    &lt;<span class="pl-ent">string</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>rate_dialog_title<span class="pl-pds">"</span></span>&gt;Rate this app&lt;/<span class="pl-ent">string</span>&gt;
+    &lt;<span class="pl-ent">string</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>rate_dialog_message<span class="pl-pds">"</span></span>&gt;If you enjoy playing this app, would you mind taking a moment to rate it? It won\'t take more than a minute. Thanks for your support!&lt;/<span class="pl-ent">string</span>&gt;
+    &lt;<span class="pl-ent">string</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>rate_dialog_ok<span class="pl-pds">"</span></span>&gt;Rate It Now&lt;/<span class="pl-ent">string</span>&gt;
+    &lt;<span class="pl-ent">string</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>rate_dialog_cancel<span class="pl-pds">"</span></span>&gt;Remind Me Later&lt;/<span class="pl-ent">string</span>&gt;
+    &lt;<span class="pl-ent">string</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>rate_dialog_no<span class="pl-pds">"</span></span>&gt;No, Thanks&lt;/<span class="pl-ent">string</span>&gt;
 &lt;/<span class="pl-ent">resources</span>&gt;</pre></div>
 
 <h2>
