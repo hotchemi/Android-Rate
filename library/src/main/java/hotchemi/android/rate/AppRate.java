@@ -27,17 +27,12 @@ public class AppRate {
 
     private int eventsTimes = -1;
 
-    private boolean isShowTitle = true;
-
-    private boolean isShowNeutralButton = true;
+    private Context context;
 
     private boolean isDebug = false;
 
-    private Context context;
+    private DialogOptions options = new DialogOptions();
 
-    private View view;
-
-    private OnClickButtonListener listener;
 
     private AppRate(Context context) {
         this.context = context.getApplicationContext();
@@ -69,8 +64,8 @@ public class AppRate {
         return this;
     }
 
-    public AppRate setShowNeutralButton(boolean isShowNeutralButton) {
-        this.isShowNeutralButton = isShowNeutralButton;
+    public AppRate setShowLaterButton(boolean isShowNeutralButton) {
+        options.setShowNeutralButton( isShowNeutralButton );
         return this;
     }
 
@@ -80,7 +75,7 @@ public class AppRate {
     }
 
     public AppRate setShowTitle(boolean isShowTitle) {
-        this.isShowTitle = isShowTitle;
+        options.setShowTitle( isShowTitle );
         return this;
     }
 
@@ -95,12 +90,37 @@ public class AppRate {
     }
 
     public AppRate setView(View view) {
-        this.view = view;
+        options.setView( view );
         return this;
     }
 
     public AppRate setOnClickButtonListener(OnClickButtonListener listener) {
-        this.listener = listener;
+        options.setListener(listener);
+        return this;
+    }
+
+    public AppRate setTitle(int resourceId) {
+        options.setTitleResId(resourceId);
+        return this;
+    }
+
+    public AppRate setMessage(int resourceId) {
+        options.setMessageResId(resourceId);
+        return this;
+    }
+
+    public AppRate setTextRateNow(int resourceId) {
+        options.setTextPositiveResId(resourceId);
+        return this;
+    }
+
+    public AppRate setTextLater(int resourceId) {
+        options.setTextNeutralResId(resourceId);
+        return this;
+    }
+
+    public AppRate setTextNever(int resourceId) {
+        options.setTextNegativeResId(resourceId);
         return this;
     }
 
@@ -139,7 +159,7 @@ public class AppRate {
 
     public void showRateDialog(Activity activity) {
         if (!activity.isFinishing()) {
-            create(activity, isShowNeutralButton, isShowTitle, listener, view).show();
+            create(activity, options).show();
         }
     }
 

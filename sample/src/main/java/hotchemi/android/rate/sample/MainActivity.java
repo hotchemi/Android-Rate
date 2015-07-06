@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
                 .setInstallDays(3) // default 10, 0 means install day.
                 .setLaunchTimes(10) // default 10 times.
                 .setRemindInterval(2) // default 1 day.
-                .setShowNeutralButton(true) // default true.
+                .setShowLaterButton(true) // default true.
                 .setDebug(true) // default false.
                 .setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
                     @Override
@@ -26,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(MainActivity.class.getName(), Integer.toString(which));
                     }
                 })
+                .setTitle(R.string.new_rate_dialog_title)
+                .setTextLater(R.string.new_rate_dialog_later)
+                .setTextNever(R.string.new_rate_dialog_never)
+                .setTextRateNow( R.string.new_rate_dialog_ok )
                 .monitor();
 
         AppRate.showRateDialogIfMeetsConditions(this);
