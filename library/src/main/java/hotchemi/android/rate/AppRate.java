@@ -170,7 +170,7 @@ public class AppRate {
         return new Date().getTime() - targetDate >= threshold * 24 * 60 * 60 * 1000;
     }
 
-    private boolean isDebug() {
+    public boolean isDebug() {
         return isDebug;
     }
 
