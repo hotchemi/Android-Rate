@@ -1,11 +1,9 @@
 package hotchemi.android.rate;
 
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Build;
 import android.view.View;
 
 import static hotchemi.android.rate.IntentHelper.createIntentForGooglePlay;
@@ -18,16 +16,14 @@ final class DialogManager {
     private DialogManager() {
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     static Dialog create(final Context context, DialogOptions options) {
         AlertDialog.Builder builder = getDialogBuilder(context);
+        builder.setMessage(options.getMessageResId());
 
-        builder.setMessage( options.getMessageResId() );
-
-        if ( options.shouldShowTitle() ) builder.setTitle( options.getTitleResId() );
+        if (options.shouldShowTitle()) builder.setTitle(options.getTitleResId());
 
         View view = options.getView();
-        if (view != null) builder.setView( view );
+        if (view != null) builder.setView(view);
 
         final OnClickButtonListener listener = options.getListener();
 

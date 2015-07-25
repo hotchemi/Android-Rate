@@ -19,6 +19,10 @@ public class AppRate {
 
     private static AppRate singleton;
 
+    private final Context context;
+
+    private final DialogOptions options = new DialogOptions();
+
     private int installDate = 10;
 
     private int launchTimes = 10;
@@ -27,12 +31,7 @@ public class AppRate {
 
     private int eventsTimes = -1;
 
-    private Context context;
-
     private boolean isDebug = false;
-
-    private DialogOptions options = new DialogOptions();
-
 
     private AppRate(Context context) {
         this.context = context.getApplicationContext();
@@ -75,7 +74,7 @@ public class AppRate {
     }
 
     public AppRate setShowTitle(boolean isShowTitle) {
-        options.setShowTitle( isShowTitle );
+        options.setShowTitle(isShowTitle);
         return this;
     }
 
@@ -90,7 +89,7 @@ public class AppRate {
     }
 
     public AppRate setView(View view) {
-        options.setView( view );
+        options.setView(view);
         return this;
     }
 
