@@ -65,7 +65,7 @@ public class AppRate {
     }
 
     public AppRate setShowLaterButton(boolean isShowNeutralButton) {
-        options.setShowNeutralButton( isShowNeutralButton );
+        options.setShowNeutralButton(isShowNeutralButton);
         return this;
     }
 

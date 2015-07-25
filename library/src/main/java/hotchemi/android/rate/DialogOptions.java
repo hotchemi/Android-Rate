@@ -2,10 +2,7 @@ package hotchemi.android.rate;
 
 import android.view.View;
 
-/**
- * Created by Leonardo on 06/07/2015.
- */
-class DialogOptions {
+final class DialogOptions {
 
     private boolean showNeutralButton = true;
     private boolean showTitle = true;
