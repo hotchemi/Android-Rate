@@ -2,7 +2,7 @@ language: android
 jdk: oraclejdk7
 env:
   matrix:
-    - ANDROID_TARGET=android-22  ANDROID_ABI=armeabi-v7a
+    - ANDROID_TARGET=android-30  ANDROID_ABI=armeabi-v7a
 
 before_install:
   - echo yes | android update sdk --all --filter build-tools-22.0.1 --no-ui --force
