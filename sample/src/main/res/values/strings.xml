@@ -4,4 +4,9 @@
     <string name="app_name">Android-Rate Sample</string>
     <string name="hello_world">Hello world!</string>
 
+    <string name="new_rate_dialog_title">Rate Me!</string>
+    <string name="new_rate_dialog_never">Never</string>
+    <string name="new_rate_dialog_later">Later</string>
+    <string name="new_rate_dialog_ok">Rate</string>
+
 </resources>

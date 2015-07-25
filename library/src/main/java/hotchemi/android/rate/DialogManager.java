@@ -19,13 +19,19 @@ final class DialogManager {
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    static Dialog create(final Context context, boolean isShowNeutralButton,
-                         boolean isShowTitle, final OnClickButtonListener listener, View view) {
+    static Dialog create(final Context context, DialogOptions options) {
         AlertDialog.Builder builder = getDialogBuilder(context);
-        builder.setMessage(R.string.rate_dialog_message);
-        if (isShowTitle) builder.setTitle(R.string.rate_dialog_title);
-        if (view != null) builder.setView(view);
-        builder.setPositiveButton(R.string.rate_dialog_ok, new DialogInterface.OnClickListener() {
+
+        builder.setMessage( options.getMessageResId() );
+
+        if ( options.shouldShowTitle() ) builder.setTitle( options.getTitleResId() );
+
+        View view = options.getView();
+        if (view != null) builder.setView( view );
+
+        final OnClickButtonListener listener = options.getListener();
+
+        builder.setPositiveButton(options.getTextPositiveResId(), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 context.startActivity(createIntentForGooglePlay(context));
@@ -33,8 +39,9 @@ final class DialogManager {
                 if (listener != null) listener.onClickButton(which);
             }
         });
-        if (isShowNeutralButton) {
-            builder.setNeutralButton(R.string.rate_dialog_cancel, new DialogInterface.OnClickListener() {
+
+        if (options.shouldShowNeutralButton()) {
+            builder.setNeutralButton(options.getTextNeutralResId(), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     setRemindInterval(context);
@@ -42,13 +49,15 @@ final class DialogManager {
                 }
             });
         }
-        builder.setNegativeButton(R.string.rate_dialog_no, new DialogInterface.OnClickListener() {
+
+        builder.setNegativeButton(options.getTextNegativeResId(), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 setAgreeShowDialog(context, false);
                 if (listener != null) listener.onClickButton(which);
             }
         });
+
         return builder.create();
     }
 
