@@ -1,17 +1,14 @@
 language: android
 jdk: oraclejdk7
-env:
-  android:
-    components:
-      - build-tools-19.1.0
-      - android-19
-      - sysimg-19
-      - extra-android-support
-    licenses:
-      - android-sdk-license-5be876d5
-      - '.*intel.+'
-    before_install:
-      - android list sdk --no-ui --all --extended
+
+before_install:
+    - export TERM=dumb # to get clean gradle output
+    - export ANDROID_TARGET=android-19
+    # setup and run the Android emulator
+    - android list targets # for debugging
+    - echo no | android create avd --force -n test -t $ANDROID_TARGET -b armeabi-v7a
+    - emulator -avd test -no-skin -no-audio -no-window &
+    - curl -L https://raw.githubusercontent.com/embarkmobile/android-sdk-installer/master/wait_for_emulator | bash
 
 script:
   - chmod +x gradlew
