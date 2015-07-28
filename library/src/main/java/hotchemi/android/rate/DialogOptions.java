@@ -81,6 +81,9 @@ final class DialogOptions {
     }
 
     public View getView() {
+        if (view == null) {
+            return null;
+        }
         return view.get();
     }
 
@@ -89,6 +92,9 @@ final class DialogOptions {
     }
 
     public OnClickButtonListener getListener() {
+        if (listener == null) {
+            return null;
+        }
         return listener.get();
     }
 
