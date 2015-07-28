@@ -1,5 +1,7 @@
 # ChangeLog
 
+- 2015/07/28 0.5.2 release.
+    - Fix tiny bug.
 - 2015/07/26 0.5.1 release.
     - [Custom resource ids #61](https://github.com/hotchemi/Android-Rate/pull/61)
 - 2015/06/28 0.5.0 release.
