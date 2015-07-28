@@ -2,8 +2,6 @@ package hotchemi.android.rate;
 
 import android.view.View;
 
-import java.lang.ref.WeakReference;
-
 final class DialogOptions {
 
     private boolean showNeutralButton = true;
@@ -20,9 +18,9 @@ final class DialogOptions {
 
     private int textNegativeResId = R.string.rate_dialog_no;
 
-    private WeakReference<View> view;
+    private View view;
 
-    private WeakReference<OnClickButtonListener> listener;
+    private OnClickButtonListener listener;
 
     public boolean shouldShowNeutralButton() {
         return showNeutralButton;
@@ -81,25 +79,19 @@ final class DialogOptions {
     }
 
     public View getView() {
-        if (view == null) {
-            return null;
-        }
-        return view.get();
+        return view;
     }
 
     public void setView(View view) {
-        this.view = new WeakReference<>(view);
+        this.view = view;
     }
 
     public OnClickButtonListener getListener() {
-        if (listener == null) {
-            return null;
-        }
-        return listener.get();
+        return listener;
     }
 
     public void setListener(OnClickButtonListener listener) {
-        this.listener = new WeakReference<>(listener);
+        this.listener = listener;
     }
 
 }
