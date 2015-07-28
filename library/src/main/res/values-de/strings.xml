@@ -1,0 +1,7 @@
+<resources>
+    <string name="rate_dialog_title">Bewerte diese App</string>
+    <string name="rate_dialog_message">Falls dir diese App gefällt, könntest du dir bitte einen Moment Zeit nehmen, sie zu bewerten? Es dauert nicht länger als eine Minute. Vielen Dank für deine Unterstützung!</string>
+    <string name="rate_dialog_ok">Jetzt bewerten</string>
+    <string name="rate_dialog_cancel">Später erinnern</string>
+    <string name="rate_dialog_no">Nein, danke</string>
+</resources>
