@@ -22,6 +22,8 @@ final class DialogManager {
 
         if (options.shouldShowTitle()) builder.setTitle(options.getTitleResId());
 
+        builder.setCancelable(options.getCancelable());
+
         View view = options.getView();
         if (view != null) builder.setView(view);
 

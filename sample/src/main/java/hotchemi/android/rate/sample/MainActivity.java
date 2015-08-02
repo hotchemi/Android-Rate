@@ -20,6 +20,7 @@ public class MainActivity extends Activity {
                 .setRemindInterval(2) // default 1 day.
                 .setShowLaterButton(true) // default true.
                 .setDebug(true) // default false.
+                .setCancelable(false) // default false.
                 .setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
                     @Override
                     public void onClickButton(int which) {

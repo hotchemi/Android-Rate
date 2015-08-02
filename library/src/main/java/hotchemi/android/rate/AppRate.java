@@ -123,6 +123,11 @@ public class AppRate {
         return this;
     }
 
+    public AppRate setCancelable(boolean cancelable) {
+        options.setCancelable(cancelable);
+        return this;
+    }
+
     public void monitor() {
         if (isFirstLaunch(context)) {
             setInstallDate(context);
