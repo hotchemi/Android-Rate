@@ -8,6 +8,8 @@ final class DialogOptions {
 
     private boolean showTitle = true;
 
+    private boolean cancelable = false;
+
     private int titleResId = R.string.rate_dialog_title;
 
     private int messageResId = R.string.rate_dialog_message;
@@ -36,6 +38,14 @@ final class DialogOptions {
 
     public void setShowTitle(boolean showTitle) {
         this.showTitle = showTitle;
+    }
+
+    public boolean getCancelable() {
+        return cancelable;
+    }
+
+    public void setCancelable(boolean cancelable) {
+        this.cancelable = cancelable;
     }
 
     public int getTitleResId() {
