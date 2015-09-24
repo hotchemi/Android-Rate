@@ -16,7 +16,7 @@ You can download from maven central.
 
 ```groovy
 dependencies {
-  compile 'com.github.hotchemi:android-rate:{$latest.version}'
+  compile 'com.github.hotchemi:android-rate:0.5.3'
 }
 ```
 
@@ -46,7 +46,7 @@ protected void onCreate(Bundle savedInstanceState) {
       .setInstallDays(0) // default 10, 0 means install day.
       .setLaunchTimes(3) // default 10
       .setRemindInterval(2) // default 1
-      .setShowNeutralButton(true) // default true
+      .setShowLaterButton(true) // default true
       .setDebug(false) // default false
       .setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
           @Override
