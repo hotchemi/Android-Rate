@@ -83,6 +83,11 @@ public class AppRate {
         return this;
     }
 
+    public AppRate setAgreeShowDialog(boolean clear) {
+        PreferenceHelper.setAgreeShowDialog(context, clear);
+        return this;
+    }
+
     public AppRate setDebug(boolean isDebug) {
         this.isDebug = isDebug;
         return this;
