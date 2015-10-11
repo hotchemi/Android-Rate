@@ -1,5 +1,7 @@
 # ChangeLog
 
+- 2015/10/12 0.5.4 release.
+    - Add `AppRate.setAgreeShowDialog`.
 - 2015/08/11 0.5.3 release.
     - Add `AppRate.setCancelable`.
 - 2015/07/28 0.5.2 release.
