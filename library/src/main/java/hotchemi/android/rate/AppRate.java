@@ -83,6 +83,12 @@ public class AppRate {
         return this;
     }
 
+    public AppRate clearSettingsParam() {
+        PreferenceHelper.setAgreeShowDialog(context, true);
+        PreferenceHelper.clearSharedPreferences(context);
+        return this;
+    }
+
     public AppRate setAgreeShowDialog(boolean clear) {
         PreferenceHelper.setAgreeShowDialog(context, clear);
         return this;
