@@ -16,7 +16,7 @@ You can download from maven central.
 
 ```groovy
 dependencies {
-  compile 'com.github.hotchemi:android-rate:0.5.3'
+  compile 'com.github.hotchemi:android-rate:0.5.5'
 }
 ```
 
