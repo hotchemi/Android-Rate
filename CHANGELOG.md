@@ -1,5 +1,8 @@
 # ChangeLog
 
+- 2015/10/27 0.5.5 release.
+    - Fix #72.
+    - Fix #73.
 - 2015/10/12 0.5.4 release.
     - Add `AppRate.setAgreeShowDialog`.
 - 2015/08/11 0.5.3 release.
