@@ -4,8 +4,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.View;
 
+import static hotchemi.android.rate.IntentHelper.createIntentForAmazonAppstore;
 import static hotchemi.android.rate.IntentHelper.createIntentForGooglePlay;
 import static hotchemi.android.rate.PreferenceHelper.setAgreeShowDialog;
 import static hotchemi.android.rate.PreferenceHelper.setRemindInterval;
@@ -16,7 +18,7 @@ final class DialogManager {
     private DialogManager() {
     }
 
-    static Dialog create(final Context context, DialogOptions options) {
+    static Dialog create(final Context context, final DialogOptions options) {
         AlertDialog.Builder builder = getDialogBuilder(context);
         builder.setMessage(options.getMessageResId());
 
@@ -32,7 +34,9 @@ final class DialogManager {
         builder.setPositiveButton(options.getTextPositiveResId(), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                context.startActivity(createIntentForGooglePlay(context));
+                final Intent intentToAppstore = options.getAppstore() == AppRate.EAppstore.GOOGLEPLAY ?
+                createIntentForGooglePlay(context) : createIntentForAmazonAppstore(context);
+                context.startActivity(intentToAppstore);
                 setAgreeShowDialog(context, false);
                 if (listener != null) listener.onClickButton(which);
             }
