@@ -114,8 +114,18 @@ public class AppRate {
         return this;
     }
 
+    public AppRate setTitle(String title){
+        options.setTitleText(title);
+        return  this;
+    }
+
     public AppRate setMessage(int resourceId) {
         options.setMessageResId(resourceId);
+        return this;
+    }
+
+    public AppRate setMessage(String message) {
+        options.setMessageText(message);
         return this;
     }
 
@@ -124,13 +134,28 @@ public class AppRate {
         return this;
     }
 
+    public AppRate setTextRateNow(String rateNow) {
+        options.setPositiveText(rateNow);
+        return this;
+    }
+
     public AppRate setTextLater(int resourceId) {
         options.setTextNeutralResId(resourceId);
         return this;
     }
 
+    public AppRate setTextLater(String textLater) {
+        options.setNeutralText(textLater);
+        return this;
+    }
+
     public AppRate setTextNever(int resourceId) {
         options.setTextNegativeResId(resourceId);
+        return this;
+    }
+
+    public AppRate setTextNever(String textNever) {
+        options.setNegativeText(textNever);
         return this;
     }
 

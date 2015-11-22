@@ -20,6 +20,16 @@ final class DialogOptions {
 
     private int textNegativeResId = R.string.rate_dialog_no;
 
+    private String titleText = null;
+
+    private String messageText = null;
+
+    private String positiveText = null;
+
+    private String neutralText = null;
+
+    private String negativeText = null;
+
     private View view;
 
     private OnClickButtonListener listener;
@@ -104,4 +114,43 @@ final class DialogOptions {
         this.listener = listener;
     }
 
+    public String getTitleText() {
+        return titleText;
+    }
+
+    public void setTitleText(String titleText) {
+        this.titleText = titleText;
+    }
+
+    public String getMessageText() {
+        return messageText;
+    }
+
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
+    }
+
+    public String getPositiveText() {
+        return positiveText;
+    }
+
+    public void setPositiveText(String positiveText) {
+        this.positiveText = positiveText;
+    }
+
+    public String getNeutralText() {
+        return neutralText;
+    }
+
+    public void setNeutralText(String neutralText) {
+        this.neutralText = neutralText;
+    }
+
+    public String getNegativeText() {
+        return negativeText;
+    }
+
+    public void setNegativeText(String negativeText) {
+        this.negativeText = negativeText;
+    }
 }
