@@ -18,20 +18,9 @@ final class DialogManager {
 
     static Dialog create(final Context context, DialogOptions options) {
         AlertDialog.Builder builder = getDialogBuilder(context);
-        if(options.getMessageText() == null) {
-            builder.setMessage(options.getMessageResId());
-        }
-        else{
-            builder.setMessage(options.getMessageText());
-        }
+        builder.setMessage(options.getMessageText(context));
 
-        if (options.shouldShowTitle()){
-            if(options.getTitleText() == null) {
-                builder.setTitle(options.getTitleResId());
-            } else{
-                builder.setTitle(options.getTitleText());
-            }
-        }
+        if (options.shouldShowTitle()) builder.setTitle(options.getTitleText(context));
 
         builder.setCancelable(options.getCancelable());
 
@@ -40,53 +29,32 @@ final class DialogManager {
 
         final OnClickButtonListener listener = options.getListener();
 
-        DialogInterface.OnClickListener positiveClickListener = new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(options.getPositiveText(context), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 context.startActivity(createIntentForGooglePlay(context));
                 setAgreeShowDialog(context, false);
                 if (listener != null) listener.onClickButton(which);
             }
-        };
+        });
 
-        DialogInterface.OnClickListener neutralClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                setRemindInterval(context);
-                if (listener != null) listener.onClickButton(which);
-            }
-        };
+        if (options.shouldShowNeutralButton()) {
+            builder.setNeutralButton(options.getNeutralText(context), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    setRemindInterval(context);
+                    if (listener != null) listener.onClickButton(which);
+                }
+            });
+        }
 
-        DialogInterface.OnClickListener negativeClickListener = new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(options.getNegativeText(context), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 setAgreeShowDialog(context, false);
                 if (listener != null) listener.onClickButton(which);
             }
-        };
-
-        if(options.getPositiveText() == null){
-            builder.setPositiveButton(options.getTextPositiveResId(), positiveClickListener);
-        }
-        else{
-            builder.setPositiveButton(options.getPositiveText(), positiveClickListener);
-        }
-
-        if (options.shouldShowNeutralButton()) {
-            if(options.getNeutralText() == null){
-                builder.setNeutralButton(options.getTextNeutralResId(), neutralClickListener);
-            }
-            else{
-                builder.setNeutralButton(options.getNeutralText(), neutralClickListener);
-            }
-        }
-
-        if(options.getNegativeText() == null){
-            builder.setNegativeButton(options.getTextNegativeResId(), negativeClickListener);
-        }
-        else{
-            builder.setNegativeButton(options.getNegativeText(), negativeClickListener);
-        }
+        });
 
         return builder.create();
     }

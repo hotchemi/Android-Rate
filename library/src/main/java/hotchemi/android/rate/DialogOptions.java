@@ -1,5 +1,6 @@
 package hotchemi.android.rate;
 
+import android.content.Context;
 import android.view.View;
 
 final class DialogOptions {
@@ -114,7 +115,10 @@ final class DialogOptions {
         this.listener = listener;
     }
 
-    public String getTitleText() {
+    public String getTitleText(Context context) {
+        if (titleText == null) {
+            return context.getString(titleResId);
+        }
         return titleText;
     }
 
@@ -122,7 +126,10 @@ final class DialogOptions {
         this.titleText = titleText;
     }
 
-    public String getMessageText() {
+    public String getMessageText(Context context) {
+        if (messageText == null) {
+            return context.getString(messageResId);
+        }
         return messageText;
     }
 
@@ -130,7 +137,10 @@ final class DialogOptions {
         this.messageText = messageText;
     }
 
-    public String getPositiveText() {
+    public String getPositiveText(Context context) {
+        if (positiveText == null) {
+            return context.getString(textPositiveResId);
+        }
         return positiveText;
     }
 
@@ -138,7 +148,10 @@ final class DialogOptions {
         this.positiveText = positiveText;
     }
 
-    public String getNeutralText() {
+    public String getNeutralText(Context context) {
+        if (neutralText == null) {
+            return context.getString(textNeutralResId);
+        }
         return neutralText;
     }
 
@@ -146,7 +159,10 @@ final class DialogOptions {
         this.neutralText = neutralText;
     }
 
-    public String getNegativeText() {
+    public String getNegativeText(Context context) {
+        if (negativeText == null) {
+            return context.getString(textNegativeResId);
+        }
         return negativeText;
     }
 

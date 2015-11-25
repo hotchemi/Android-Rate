@@ -48,6 +48,36 @@ public class AppRate {
         return singleton;
     }
 
+    public static boolean showRateDialogIfMeetsConditions(Activity activity) {
+        boolean isMeetsConditions = singleton.isDebug || singleton.shouldShowRateDialog();
+        if (isMeetsConditions) {
+            singleton.showRateDialog(activity);
+        }
+        return isMeetsConditions;
+    }
+
+    public static boolean passSignificantEvent(Activity activity) {
+        return passSignificantEvent(activity, true);
+    }
+
+    public static boolean passSignificantEventAndConditions(Activity activity) {
+        return passSignificantEvent(activity, singleton.shouldShowRateDialog());
+    }
+
+    private static boolean passSignificantEvent(Activity activity, boolean shouldShow) {
+        int eventTimes = getEventTimes(activity);
+        PreferenceHelper.setEventTimes(activity, ++eventTimes);
+        boolean isMeetsConditions = singleton.isDebug || (singleton.isOverEventPass() && shouldShow);
+        if (isMeetsConditions) {
+            singleton.showRateDialog(activity);
+        }
+        return isMeetsConditions;
+    }
+
+    private static boolean isOverDate(long targetDate, int threshold) {
+        return new Date().getTime() - targetDate >= threshold * 24 * 60 * 60 * 1000;
+    }
+
     public AppRate setLaunchTimes(int launchTimes) {
         this.launchTimes = launchTimes;
         return this;
@@ -94,11 +124,6 @@ public class AppRate {
         return this;
     }
 
-    public AppRate setDebug(boolean isDebug) {
-        this.isDebug = isDebug;
-        return this;
-    }
-
     public AppRate setView(View view) {
         options.setView(view);
         return this;
@@ -114,9 +139,9 @@ public class AppRate {
         return this;
     }
 
-    public AppRate setTitle(String title){
+    public AppRate setTitle(String title) {
         options.setTitleText(title);
-        return  this;
+        return this;
     }
 
     public AppRate setMessage(int resourceId) {
@@ -134,8 +159,8 @@ public class AppRate {
         return this;
     }
 
-    public AppRate setTextRateNow(String rateNow) {
-        options.setPositiveText(rateNow);
+    public AppRate setTextRateNow(String positiveText) {
+        options.setPositiveText(positiveText);
         return this;
     }
 
@@ -144,8 +169,8 @@ public class AppRate {
         return this;
     }
 
-    public AppRate setTextLater(String textLater) {
-        options.setNeutralText(textLater);
+    public AppRate setTextLater(String neutralText) {
+        options.setNeutralText(neutralText);
         return this;
     }
 
@@ -154,8 +179,8 @@ public class AppRate {
         return this;
     }
 
-    public AppRate setTextNever(String textNever) {
-        options.setNegativeText(textNever);
+    public AppRate setTextNever(String negativeText) {
+        options.setNegativeText(negativeText);
         return this;
     }
 
@@ -169,32 +194,6 @@ public class AppRate {
             setInstallDate(context);
         }
         PreferenceHelper.setLaunchTimes(context, getLaunchTimes(context) + 1);
-    }
-
-    public static boolean showRateDialogIfMeetsConditions(Activity activity) {
-        boolean isMeetsConditions = singleton.isDebug || singleton.shouldShowRateDialog();
-        if (isMeetsConditions) {
-            singleton.showRateDialog(activity);
-        }
-        return isMeetsConditions;
-    }
-
-    public static boolean passSignificantEvent(Activity activity) {
-        return passSignificantEvent(activity, true);
-    }
-
-    public static boolean passSignificantEventAndConditions(Activity activity) {
-        return passSignificantEvent(activity, singleton.shouldShowRateDialog());
-    }
-
-    private static boolean passSignificantEvent(Activity activity, boolean shouldShow) {
-        int eventTimes = getEventTimes(activity);
-        PreferenceHelper.setEventTimes(activity, ++eventTimes);
-        boolean isMeetsConditions = singleton.isDebug || (singleton.isOverEventPass() && shouldShow);
-        if (isMeetsConditions) {
-            singleton.showRateDialog(activity);
-        }
-        return isMeetsConditions;
     }
 
     public void showRateDialog(Activity activity) {
@@ -226,12 +225,13 @@ public class AppRate {
         return isOverDate(getRemindInterval(context), remindInterval);
     }
 
-    private static boolean isOverDate(long targetDate, int threshold) {
-        return new Date().getTime() - targetDate >= threshold * 24 * 60 * 60 * 1000;
-    }
-
     public boolean isDebug() {
         return isDebug;
+    }
+
+    public AppRate setDebug(boolean isDebug) {
+        this.isDebug = isDebug;
+        return this;
     }
 
 }

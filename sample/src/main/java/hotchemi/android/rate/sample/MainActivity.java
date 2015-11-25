@@ -30,20 +30,8 @@ public class MainActivity extends Activity {
                 .setTitle(R.string.new_rate_dialog_title)
                 .setTextLater(R.string.new_rate_dialog_later)
                 .setTextNever(R.string.new_rate_dialog_never)
-                .setTextRateNow( R.string.new_rate_dialog_ok )
+                .setTextRateNow(R.string.new_rate_dialog_ok)
                 .monitor();
-
-        /*
-
-        Methods for setting text are overloaded, so if you need to set custom text at runtime
-        (for example if you retrieve your translations from server) set String
-        parameters instead of resource ids:
-
-        .setTitle("CustomTitle")
-        .setTextLater("Later")
-        and so on
-
-         */
 
         AppRate.showRateDialogIfMeetsConditions(this);
     }
