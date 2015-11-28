@@ -18,9 +18,9 @@ final class DialogManager {
 
     static Dialog create(final Context context, DialogOptions options) {
         AlertDialog.Builder builder = getDialogBuilder(context);
-        builder.setMessage(options.getMessageResId());
+        builder.setMessage(options.getMessageText(context));
 
-        if (options.shouldShowTitle()) builder.setTitle(options.getTitleResId());
+        if (options.shouldShowTitle()) builder.setTitle(options.getTitleText(context));
 
         builder.setCancelable(options.getCancelable());
 
@@ -29,7 +29,7 @@ final class DialogManager {
 
         final OnClickButtonListener listener = options.getListener();
 
-        builder.setPositiveButton(options.getTextPositiveResId(), new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(options.getPositiveText(context), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 context.startActivity(createIntentForGooglePlay(context));
@@ -39,7 +39,7 @@ final class DialogManager {
         });
 
         if (options.shouldShowNeutralButton()) {
-            builder.setNeutralButton(options.getTextNeutralResId(), new DialogInterface.OnClickListener() {
+            builder.setNeutralButton(options.getNeutralText(context), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     setRemindInterval(context);
@@ -48,7 +48,7 @@ final class DialogManager {
             });
         }
 
-        builder.setNegativeButton(options.getTextNegativeResId(), new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(options.getNegativeText(context), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 setAgreeShowDialog(context, false);

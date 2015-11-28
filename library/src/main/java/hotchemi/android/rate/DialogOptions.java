@@ -1,5 +1,6 @@
 package hotchemi.android.rate;
 
+import android.content.Context;
 import android.view.View;
 
 final class DialogOptions {
@@ -19,6 +20,16 @@ final class DialogOptions {
     private int textNeutralResId = R.string.rate_dialog_cancel;
 
     private int textNegativeResId = R.string.rate_dialog_no;
+
+    private String titleText = null;
+
+    private String messageText = null;
+
+    private String positiveText = null;
+
+    private String neutralText = null;
+
+    private String negativeText = null;
 
     private View view;
 
@@ -104,4 +115,58 @@ final class DialogOptions {
         this.listener = listener;
     }
 
+    public String getTitleText(Context context) {
+        if (titleText == null) {
+            return context.getString(titleResId);
+        }
+        return titleText;
+    }
+
+    public void setTitleText(String titleText) {
+        this.titleText = titleText;
+    }
+
+    public String getMessageText(Context context) {
+        if (messageText == null) {
+            return context.getString(messageResId);
+        }
+        return messageText;
+    }
+
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
+    }
+
+    public String getPositiveText(Context context) {
+        if (positiveText == null) {
+            return context.getString(textPositiveResId);
+        }
+        return positiveText;
+    }
+
+    public void setPositiveText(String positiveText) {
+        this.positiveText = positiveText;
+    }
+
+    public String getNeutralText(Context context) {
+        if (neutralText == null) {
+            return context.getString(textNeutralResId);
+        }
+        return neutralText;
+    }
+
+    public void setNeutralText(String neutralText) {
+        this.neutralText = neutralText;
+    }
+
+    public String getNegativeText(Context context) {
+        if (negativeText == null) {
+            return context.getString(textNegativeResId);
+        }
+        return negativeText;
+    }
+
+    public void setNegativeText(String negativeText) {
+        this.negativeText = negativeText;
+    }
 }
