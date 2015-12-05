@@ -1,5 +1,7 @@
 # ChangeLog
 
+- 2015/12/05 0.5.6 release.
+    - Add #78.
 - 2015/10/27 0.5.5 release.
     - Fix #72.
     - Fix #73.
