@@ -28,8 +28,7 @@ final class DialogOptions {
 
     private OnClickButtonListener listener;
 
-    public boolean shouldShowNeutralButton()
-    {
+    public boolean shouldShowNeutralButton() {
         return showNeutralButton;
     }
 
