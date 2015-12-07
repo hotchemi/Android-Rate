@@ -33,7 +33,7 @@ public class AppRate {
 
     private boolean isDebug = false;
 
-    public enum EAppstore {
+    public enum StoreType {
         GOOGLEPLAY,
         AMAZON
     }
@@ -144,8 +144,8 @@ public class AppRate {
         return this;
     }
 
-    public AppRate setAppstore(EAppstore appstore) {
-        options.setAppstore(appstore);
+    public AppRate setStoreType(StoreType appstore) {
+        options.setStoreType(appstore);
         return this;
     }
 
