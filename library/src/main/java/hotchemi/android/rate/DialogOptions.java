@@ -33,7 +33,7 @@ final class DialogOptions {
         return showNeutralButton;
     }
 
-    public void setShowNeutralButton( boolean showNeutralButton) {
+    public void setShowNeutralButton(boolean showNeutralButton) {
         this.showNeutralButton = showNeutralButton;
     }
 
