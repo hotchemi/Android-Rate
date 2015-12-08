@@ -21,6 +21,8 @@ final class DialogOptions {
 
     private int textNegativeResId = R.string.rate_dialog_no;
 
+    private int dialogStyleResId = 0;
+
     private String titleText = null;
 
     private String messageText = null;
@@ -168,5 +170,13 @@ final class DialogOptions {
 
     public void setNegativeText(String negativeText) {
         this.negativeText = negativeText;
+    }
+
+    public void setDialogStyle(int dialogStyleResId){
+        this.dialogStyleResId = dialogStyleResId;
+    }
+
+    public int getDialogStyleResId(){
+        return this.dialogStyleResId;
     }
 }
