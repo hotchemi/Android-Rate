@@ -3,6 +3,8 @@ package hotchemi.android.rate;
 import android.content.Context;
 import android.view.View;
 
+import hotchemi.android.rate.AppRate.StoreType;
+
 final class DialogOptions {
 
     private boolean showNeutralButton = true;
@@ -10,6 +12,8 @@ final class DialogOptions {
     private boolean showTitle = true;
 
     private boolean cancelable = false;
+
+    private StoreType storeType = StoreType.GOOGLEPLAY;
 
     private int titleResId = R.string.rate_dialog_title;
 
@@ -57,6 +61,14 @@ final class DialogOptions {
 
     public void setCancelable(boolean cancelable) {
         this.cancelable = cancelable;
+    }
+
+    public StoreType getStoreType() {
+        return storeType;
+    }
+
+    public void setStoreType( StoreType appstore ) {
+        storeType = appstore;
     }
 
     public int getTitleResId() {

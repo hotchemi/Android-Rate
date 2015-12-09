@@ -33,6 +33,11 @@ public class AppRate {
 
     private boolean isDebug = false;
 
+    public enum StoreType {
+        GOOGLEPLAY,
+        AMAZON
+    }
+
     private AppRate(Context context) {
         this.context = context.getApplicationContext();
     }
@@ -186,6 +191,11 @@ public class AppRate {
 
     public AppRate setCancelable(boolean cancelable) {
         options.setCancelable(cancelable);
+        return this;
+    }
+
+    public AppRate setStoreType(StoreType appstore) {
+        options.setStoreType(appstore);
         return this;
     }
 
