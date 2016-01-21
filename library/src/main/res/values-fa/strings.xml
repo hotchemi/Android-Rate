@@ -1,0 +1,7 @@
+<resources>
+    <string name="rate_dialog_title">به اپ امتياز دهيد</string>
+    <string name="rate_dialog_message">اگر از استفاده اين اپ لذت مي بريد درصورت امكان به ما امتياز دهيد . بيشتر از چند دقيقه زمان نمي برد. ممنون از حمات شما.</string>
+    <string name="rate_dialog_ok">الان امتياز مي دهم</string>
+    <string name="rate_dialog_cancel">بعدا ياد آوري كن</string>
+    <string name="rate_dialog_no">نه ممنون</string>
+</resources>
