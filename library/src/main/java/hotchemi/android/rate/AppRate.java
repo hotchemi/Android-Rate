@@ -204,6 +204,11 @@ public class AppRate {
         return this;
     }
 
+    public AppRate setDialogStyle(int resourceId) {
+        options.setDialogStyle(resourceId);
+        return this;
+    }
+
     public void monitor() {
         if (isFirstLaunch(context)) {
             setInstallDate(context);
