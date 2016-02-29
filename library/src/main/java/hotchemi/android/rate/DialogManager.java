@@ -52,13 +52,15 @@ final class DialogManager {
             });
         }
 
-        builder.setNegativeButton(options.getNegativeText(context), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                setAgreeShowDialog(context, false);
-                if (listener != null) listener.onClickButton(which);
-            }
-        });
+        if (options.shouldShowNegativeButton()) {
+            builder.setNegativeButton(options.getNegativeText(context), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    setAgreeShowDialog(context, false);
+                    if (listener != null) listener.onClickButton(which);
+                }
+            });
+        }
 
         return builder.create();
     }
