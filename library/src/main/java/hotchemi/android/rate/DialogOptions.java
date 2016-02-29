@@ -9,6 +9,8 @@ final class DialogOptions {
 
     private boolean showNeutralButton = true;
 
+    private boolean showNegativeButton = true;
+
     private boolean showTitle = true;
 
     private boolean cancelable = false;
@@ -45,6 +47,14 @@ final class DialogOptions {
 
     public void setShowNeutralButton(boolean showNeutralButton) {
         this.showNeutralButton = showNeutralButton;
+    }
+
+    public boolean shouldShowNegativeButton() {
+        return showNegativeButton;
+    }
+
+    public void setShowNegativeButton(boolean showNegativeButton) {
+        this.showNegativeButton = showNegativeButton;
     }
 
     public boolean shouldShowTitle() {

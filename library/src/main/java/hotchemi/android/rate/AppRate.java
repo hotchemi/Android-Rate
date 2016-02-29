@@ -103,6 +103,11 @@ public class AppRate {
         return this;
     }
 
+    public AppRate setShowNeverButton(boolean isShowNeverButton) {
+        options.setShowNegativeButton(isShowNeverButton);
+        return this;
+    }
+
     public AppRate setEventsTimes(int eventsTimes) {
         this.eventsTimes = eventsTimes;
         return this;
