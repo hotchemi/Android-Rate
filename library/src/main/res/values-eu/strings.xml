@@ -1,0 +1,7 @@
+<resources>
+    <string name="rate_dialog_title">Puntuatu app hau</string>
+    <string name="rate_dialog_message">App hau gustoko baduzu, tartetxo batean puntuatu nahiko zenuke? Minutu batean baino azkarrago egiten da. Eskerrik asko zure laguntzagatik!</string>
+    <string name="rate_dialog_ok">Puntuatu orain</string>
+    <string name="rate_dialog_cancel">Galdetu geroago</string>
+    <string name="rate_dialog_no">Ez, eskerrik asko</string>
+</resources>
