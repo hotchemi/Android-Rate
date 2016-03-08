@@ -5,10 +5,12 @@
 
     <application
         android:allowBackup="false"
+        android:name=".ExampleApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name">
         <activity
             android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
