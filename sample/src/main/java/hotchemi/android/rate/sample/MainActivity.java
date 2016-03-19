@@ -37,4 +37,9 @@ public class MainActivity extends Activity {
         AppRate.showRateDialogIfMeetsConditions(this);
     }
 
+    @Override
+    protected void onDestroy() {
+        AppRate.destroy();
+        super.onDestroy();
+    }
 }
