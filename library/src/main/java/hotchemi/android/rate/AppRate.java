@@ -53,10 +53,6 @@ public class AppRate {
         return singleton;
     }
 
-    public static void destroy() {
-        singleton = null;
-    }
-
     public static boolean showRateDialogIfMeetsConditions(Activity activity) {
         boolean isMeetsConditions = singleton.isDebug || singleton.shouldShowRateDialog();
         if (isMeetsConditions) {
