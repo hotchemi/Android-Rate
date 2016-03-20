@@ -7,7 +7,6 @@ import android.view.View;
 import java.util.Date;
 
 import static hotchemi.android.rate.DialogManager.create;
-import static hotchemi.android.rate.PreferenceHelper.getEventTimes;
 import static hotchemi.android.rate.PreferenceHelper.getInstallDate;
 import static hotchemi.android.rate.PreferenceHelper.getIsAgreeShowDialog;
 import static hotchemi.android.rate.PreferenceHelper.getLaunchTimes;
@@ -29,8 +28,6 @@ public final class AppRate {
 
     private int remindInterval = 1;
 
-    private int eventsTimes = -1;
-
     private boolean isDebug = false;
 
     private AppRate(Context context) {
@@ -50,24 +47,6 @@ public final class AppRate {
 
     public static boolean showRateDialogIfMeetsConditions(Activity activity) {
         boolean isMeetsConditions = singleton.isDebug || singleton.shouldShowRateDialog();
-        if (isMeetsConditions) {
-            singleton.showRateDialog(activity);
-        }
-        return isMeetsConditions;
-    }
-
-    public static boolean passSignificantEvent(Activity activity) {
-        return passSignificantEvent(activity, true);
-    }
-
-    public static boolean passSignificantEventAndConditions(Activity activity) {
-        return passSignificantEvent(activity, singleton.shouldShowRateDialog());
-    }
-
-    private static boolean passSignificantEvent(Activity activity, boolean shouldShow) {
-        int eventTimes = getEventTimes(activity);
-        PreferenceHelper.setEventTimes(activity, ++eventTimes);
-        boolean isMeetsConditions = singleton.isDebug || (singleton.isOverEventPass() && shouldShow);
         if (isMeetsConditions) {
             singleton.showRateDialog(activity);
         }
@@ -100,11 +79,6 @@ public final class AppRate {
 
     public AppRate setShowNeverButton(boolean isShowNeverButton) {
         options.setShowNegativeButton(isShowNeverButton);
-        return this;
-    }
-
-    public AppRate setEventsTimes(int eventsTimes) {
-        this.eventsTimes = eventsTimes;
         return this;
     }
 
@@ -215,10 +189,6 @@ public final class AppRate {
         if (!activity.isFinishing()) {
             create(activity, options).show();
         }
-    }
-
-    public boolean isOverEventPass() {
-        return eventsTimes != -1 && getEventTimes(context) > eventsTimes;
     }
 
     public boolean shouldShowRateDialog() {

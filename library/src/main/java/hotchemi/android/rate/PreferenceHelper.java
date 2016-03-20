@@ -18,8 +18,6 @@ final class PreferenceHelper {
 
     private static final String PREF_KEY_REMIND_INTERVAL = "android_rate_remind_interval";
 
-    private static final String PREF_KEY_EVENT_TIMES = "android_rate_event_times";
-
     private PreferenceHelper() {
     }
 
@@ -93,16 +91,6 @@ final class PreferenceHelper {
 
     static boolean isFirstLaunch(Context context) {
         return getPreferences(context).getLong(PREF_KEY_INSTALL_DATE, 0) == 0L;
-    }
-
-    static int getEventTimes(Context context) {
-        return getPreferences(context).getInt(PREF_KEY_EVENT_TIMES, 0);
-    }
-
-    static void setEventTimes(Context context, int eventTimes) {
-        SharedPreferences.Editor editor = getPreferencesEditor(context);
-        editor.putInt(PREF_KEY_EVENT_TIMES, eventTimes);
-        editor.apply();
     }
 
 }
