@@ -19,17 +19,7 @@ dependencies {
 }
 ```
 
-## Sample
-
-Please try to move the [sample](https://github.com/hotchemi/Android-Rate/tree/master/sample).
-
-## How to use
-
-- [javadoc](http://www.javadoc.io/doc/com.github.hotchemi/android-rate/)
-
-## Support
-
-Android-Rate supports over API level 9.
+## Usage
 
 ### Configuration
 
@@ -68,25 +58,6 @@ The default conditions to show rate dialog is as below:
 4. App shows neutral dialog(Remind me later) by default. Change via `setShowLaterButton(boolean)`.
 5. To specify the callback when the button is pressed. The same value as the second argument of `DialogInterface.OnClickListener#onClick` will be passed in the argument of `onClickButton`.
 6. Setting `AppRate#setDebug(boolean)` will ensure that the rating request is shown each time the app is launched. **This feature is only development!**.
-
-### Event Tracking
-
-When you want to track significant events, write code as below.
-
-```java
-
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-  super.onCreate(savedInstanceState);
-  setContentView(R.layout.activity_main);
-  AppRate.with(this).setEventTimes(2).monitor();
-}
-
-@Override
-public void onClick() {
-  AppRate.passSignificantEvent(this); // when user pass this line for the third time, dialog appears.
-}
-```
 
 ### Clear show dialog flag
 
@@ -146,6 +117,14 @@ Android-Rate currently supports the following languages:
 - Hebrew
 - Portuguese
 - Turkish
+
+## Support
+
+Android-Rate supports API level 9 and up.
+
+## Sample
+
+Please try to move the [sample](https://github.com/hotchemi/Android-Rate/tree/master/sample).
 
 ## Contribute
 
