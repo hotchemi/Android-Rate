@@ -9,13 +9,13 @@ Android-Rate is a library to help you promote your android app by prompting user
 
 ## Install
 
-![Maven Badges](https://maven-badges.herokuapp.com/maven-central/com.github.hotchemi/android-rate/badge.svg)
-
 You can download from maven central.
+
+${latest.version} is ![Maven Badges](https://maven-badges.herokuapp.com/maven-central/com.github.hotchemi/android-rate/badge.svg)
 
 ```groovy
 dependencies {
-  compile 'com.github.hotchemi:android-rate:0.5.6'
+  compile 'com.github.hotchemi:android-rate:{latest.version}'
 }
 ```
 
