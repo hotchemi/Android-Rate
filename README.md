@@ -99,24 +99,28 @@ If you want to use your own dialog labels, override string xml resources on your
 </resources>
 ```
 
-## Localization
+## Language
 
 Android-Rate currently supports the following languages:
 
 - English
-- Spanish
-- French
-- Chinese
-- Korean
-- Japanese
-- Vietnamese
-- Polish
 - Czech
-- Russian
-- Ukrainian
+- German
+- Spanish
+- Basque
+- Persian
+- French
+- Italy
 - Hebrew
+- Japanese
+- Korean
+- Polish
 - Portuguese
+- Russian
 - Turkish
+- Ukrainian
+- Vietnamese
+- Chinese
 
 ## Support
 
