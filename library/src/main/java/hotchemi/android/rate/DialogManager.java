@@ -34,7 +34,7 @@ final class DialogManager {
         builder.setPositiveButton(options.getPositiveText(context), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                final Intent intentToAppstore = options.getStoreType() == AppRate.StoreType.GOOGLEPLAY ?
+                final Intent intentToAppstore = options.getStoreType() == StoreType.GOOGLEPLAY ?
                 createIntentForGooglePlay(context) : createIntentForAmazonAppstore(context);
                 context.startActivity(intentToAppstore);
                 setAgreeShowDialog(context, false);

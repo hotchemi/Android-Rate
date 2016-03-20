@@ -3,7 +3,8 @@ package hotchemi.android.rate;
 import android.content.Context;
 import android.view.View;
 
-import hotchemi.android.rate.AppRate.StoreType;
+import java.lang.ref.Reference;
+import java.lang.ref.WeakReference;
 
 final class DialogOptions {
 
@@ -41,7 +42,7 @@ final class DialogOptions {
 
     private View view;
 
-    private OnClickButtonListener listener;
+    private Reference<OnClickButtonListener> listener;
 
     public boolean shouldShowNeutralButton() {
         return showNeutralButton;
@@ -132,11 +133,11 @@ final class DialogOptions {
     }
 
     public OnClickButtonListener getListener() {
-        return listener;
+        return listener.get();
     }
 
     public void setListener(OnClickButtonListener listener) {
-        this.listener = listener;
+        this.listener = new WeakReference<>(listener);
     }
 
     public String getTitleText(Context context) {

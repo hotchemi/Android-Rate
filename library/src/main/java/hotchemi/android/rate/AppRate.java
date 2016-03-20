@@ -15,7 +15,7 @@ import static hotchemi.android.rate.PreferenceHelper.getRemindInterval;
 import static hotchemi.android.rate.PreferenceHelper.isFirstLaunch;
 import static hotchemi.android.rate.PreferenceHelper.setInstallDate;
 
-public class AppRate {
+public final class AppRate {
 
     private static AppRate singleton;
 
@@ -32,11 +32,6 @@ public class AppRate {
     private int eventsTimes = -1;
 
     private boolean isDebug = false;
-
-    public enum StoreType {
-        GOOGLEPLAY,
-        AMAZON
-    }
 
     private AppRate(Context context) {
         this.context = context.getApplicationContext();
