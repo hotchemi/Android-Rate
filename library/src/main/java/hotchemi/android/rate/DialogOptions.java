@@ -133,7 +133,7 @@ final class DialogOptions {
     }
 
     public OnClickButtonListener getListener() {
-        return listener.get();
+        return listener != null ? listener.get() : null;
     }
 
     public void setListener(OnClickButtonListener listener) {
