@@ -69,10 +69,10 @@ AppRate.with(this).clearAgreeShowDialog();
 
 ### When the button presses on
 
-call `AppRate#showDialog(Activity)`.
+call `AppRate#showRateDialog(Activity)`.
 
 ```java
-AppRate.with(this).showDialog(this);
+AppRate.with(this).showRateDialog(this);
 ```
 
 ### Set custom view
