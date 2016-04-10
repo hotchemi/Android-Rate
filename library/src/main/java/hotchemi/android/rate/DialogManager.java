@@ -1,10 +1,10 @@
 package hotchemi.android.rate;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import static hotchemi.android.rate.IntentHelper.createIntentForAmazonAppstore;
@@ -19,7 +19,7 @@ final class DialogManager {
     }
 
     static Dialog create(final Context context, final DialogOptions options) {
-        AlertDialog.Builder builder = getDialogBuilder(context, options.getDialogStyleResId());
+        AlertDialog.Builder builder = getDialogBuilder(context);
         builder.setMessage(options.getMessageText(context));
 
         if (options.shouldShowTitle()) builder.setTitle(options.getTitleText(context));
