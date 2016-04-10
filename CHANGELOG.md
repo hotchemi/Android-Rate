@@ -1,5 +1,8 @@
 # ChangeLog
 
+- 2015/12/05 1.0.1
+    - Fix https://github.com/hotchemi/Android-Rate/pull/101.
+    - Fix https://github.com/hotchemi/Android-Rate/pull/103.
 - 2016/03/20 1.0.0
     - Delete event tracking.
     - Add [#80](https://github.com/hotchemi/Android-Rate/pull/80).
