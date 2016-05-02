@@ -5,6 +5,8 @@ import android.content.Context;
 import android.view.View;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import static hotchemi.android.rate.DialogManager.create;
 import static hotchemi.android.rate.PreferenceHelper.getInstallDate;
@@ -13,6 +15,7 @@ import static hotchemi.android.rate.PreferenceHelper.getLaunchTimes;
 import static hotchemi.android.rate.PreferenceHelper.getRemindInterval;
 import static hotchemi.android.rate.PreferenceHelper.isFirstLaunch;
 import static hotchemi.android.rate.PreferenceHelper.setInstallDate;
+import static hotchemi.android.rate.PreferenceHelper.getCustomEventCount;
 
 public final class AppRate {
 
@@ -27,6 +30,8 @@ public final class AppRate {
     private int launchTimes = 10;
 
     private int remindInterval = 1;
+
+    private final HashMap<String, Long> customEventCounts = new HashMap<>();
 
     private boolean isDebug = false;
 
@@ -69,6 +74,11 @@ public final class AppRate {
 
     public AppRate setRemindInterval(int remindInterval) {
         this.remindInterval = remindInterval;
+        return this;
+    }
+
+    public AppRate setMinimumEventCount(String eventName, long count) {
+        this.customEventCounts.put(eventName, count);
         return this;
     }
 
@@ -173,6 +183,15 @@ public final class AppRate {
         return this;
     }
 
+    public AppRate incrementEventCount(String eventName) {
+        return setEventCount(eventName, getCustomEventCount(context,eventName) + 1);
+    }
+
+    public AppRate setEventCount(String eventName, long count) {
+        PreferenceHelper.setCustomEventCount(context, eventName, count);
+        return this;
+    }
+
     public void monitor() {
         if (isFirstLaunch(context)) {
             setInstallDate(context);
@@ -190,7 +209,8 @@ public final class AppRate {
         return getIsAgreeShowDialog(context) &&
                 isOverLaunchTimes() &&
                 isOverInstallDate() &&
-                isOverRemindDate();
+                isOverRemindDate() &&
+                isOverCustomEventRequirements();
     }
 
     private boolean isOverLaunchTimes() {
@@ -203,6 +223,16 @@ public final class AppRate {
 
     private boolean isOverRemindDate() {
         return isOverDate(getRemindInterval(context), remindInterval);
+    }
+
+    private boolean isOverCustomEventRequirements() {
+        for(Map.Entry<String, Long> eventRequirement: customEventCounts.entrySet()) {
+            Long currentCount = getCustomEventCount(context, eventRequirement.getKey());
+            if(currentCount < eventRequirement.getValue()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean isDebug() {
