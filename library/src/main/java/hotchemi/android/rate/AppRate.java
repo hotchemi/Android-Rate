@@ -16,6 +16,7 @@ import static hotchemi.android.rate.PreferenceHelper.getRemindInterval;
 import static hotchemi.android.rate.PreferenceHelper.isFirstLaunch;
 import static hotchemi.android.rate.PreferenceHelper.setInstallDate;
 import static hotchemi.android.rate.PreferenceHelper.getCustomEventCount;
+import static hotchemi.android.rate.PreferenceHelper.setCustomEventCount;
 
 public final class AppRate {
 
@@ -77,8 +78,8 @@ public final class AppRate {
         return this;
     }
 
-    public AppRate setMinimumEventCount(String eventName, long count) {
-        this.customEventCounts.put(eventName, count);
+    public AppRate setMinimumEventCount(String eventName, long minimumCount) {
+        this.customEventCounts.put(eventName, minimumCount);
         return this;
     }
 
@@ -184,11 +185,11 @@ public final class AppRate {
     }
 
     public AppRate incrementEventCount(String eventName) {
-        return setEventCount(eventName, getCustomEventCount(context,eventName) + 1);
+        return setEventCountValue(eventName, getCustomEventCount(context,eventName) + 1);
     }
 
-    public AppRate setEventCount(String eventName, long count) {
-        PreferenceHelper.setCustomEventCount(context, eventName, count);
+    public AppRate setEventCountValue(String eventName, long countValue) {
+        setCustomEventCount(context, eventName, countValue);
         return this;
     }
 
