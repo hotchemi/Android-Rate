@@ -227,7 +227,7 @@ public final class AppRate {
     }
 
     private boolean isOverCustomEventRequirements() {
-        for(Map.Entry<String, Long> eventRequirement: customEventCounts.entrySet()) {
+        for(Map.Entry<String, Long> eventRequirement : customEventCounts.entrySet()) {
             Long currentCount = getCustomEventCount(context, eventRequirement.getKey());
             if(currentCount < eventRequirement.getValue()) {
                 return false;
