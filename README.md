@@ -1,3 +1,5 @@
+[![Android Gems](http://www.android-gems.com/badge/hotchemi/Android-Rate.svg?branch=master)](http://www.android-gems.com/lib/hotchemi/Android-Rate)
+
 Android-Rate
 ============
 
