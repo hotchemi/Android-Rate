@@ -14,12 +14,12 @@ final class Utils {
         return Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB;
     }
 
-    static boolean isLollipop() {
-        return Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP || Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1;
+    static boolean greaterThanKitKat() {
+        return Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT;
     }
 
     static int getDialogTheme() {
-        return isLollipop() ? R.style.CustomLollipopDialogStyle : 0;
+        return greaterThanKitKat() ? R.style.CustomLollipopDialogStyle : 0;
     }
 
     @SuppressLint("NewApi")
