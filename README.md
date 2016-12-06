@@ -107,6 +107,7 @@ Android-Rate currently supports the following languages:
 - Czech
 - German
 - Spanish
+- Catalan
 - Basque
 - Persian
 - French
