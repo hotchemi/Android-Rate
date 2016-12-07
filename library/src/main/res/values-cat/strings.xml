@@ -1,7 +1,7 @@
 <resources>
-    <string name="rate_dialog_title">Valorar l'aplicació</string>
-    <string name="rate_dialog_message">Si t'ha agradat l'aplicació, t'importaria valorar-la? No et portarà més d'un minut. Gràcies pel teu suport!</string>
+    <string name="rate_dialog_title">Valorar l\'aplicació</string>
+    <string name="rate_dialog_message">Si t\'ha agradat l\'aplicació, t\'importaria valorar-la? No et portarà més d\'un minut. Gràcies pel teu suport!</string>
     <string name="rate_dialog_ok">Valorar ara</string>
-    <string name="rate_dialog_cancel">Recorda-m'ho més tard</string>
+    <string name="rate_dialog_cancel">Recorda-m\'ho més tard</string>
     <string name="rate_dialog_no">No, gracies!</string>
 </resources>
