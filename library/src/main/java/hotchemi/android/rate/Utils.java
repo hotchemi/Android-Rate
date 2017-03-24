@@ -23,11 +23,11 @@ final class Utils {
     }
 
     @SuppressLint("NewApi")
-    static AlertDialog.Builder getDialogBuilder(Context context) {
+    static AlertDialog.Builder getDialogBuilder(Context context, Integer pThemeResId) {
         if (underHoneyComb()) {
             return new AlertDialog.Builder(context);
         } else {
-            return new AlertDialog.Builder(context, getDialogTheme());
+            return new AlertDialog.Builder(context, pThemeResId != null ? pThemeResId : getDialogTheme());
         }
     }
 

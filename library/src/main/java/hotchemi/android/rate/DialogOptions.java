@@ -28,6 +28,8 @@ final class DialogOptions {
 
     private int textNegativeResId = R.string.rate_dialog_no;
 
+    private Integer themeResId;
+
     private String titleText = null;
 
     private String messageText = null;
@@ -191,5 +193,13 @@ final class DialogOptions {
 
     public void setNegativeText(String negativeText) {
         this.negativeText = negativeText;
+    }
+
+    public Integer getThemeResId() {
+        return themeResId;
+    }
+
+    public void setThemeResId(Integer themeResId) {
+        this.themeResId = themeResId;
     }
 }
