@@ -121,6 +121,7 @@ Android-Rate currently supports the following languages:
 - Ukrainian
 - Vietnamese
 - Chinese
+- Arabic
 
 ## Support
 
