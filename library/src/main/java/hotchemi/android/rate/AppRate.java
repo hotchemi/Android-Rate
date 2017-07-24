@@ -6,13 +6,7 @@ import android.view.View;
 
 import java.util.Date;
 
-import static hotchemi.android.rate.DialogManager.create;
-import static hotchemi.android.rate.PreferenceHelper.getInstallDate;
-import static hotchemi.android.rate.PreferenceHelper.getIsAgreeShowDialog;
-import static hotchemi.android.rate.PreferenceHelper.getLaunchTimes;
-import static hotchemi.android.rate.PreferenceHelper.getRemindInterval;
-import static hotchemi.android.rate.PreferenceHelper.isFirstLaunch;
-import static hotchemi.android.rate.PreferenceHelper.setInstallDate;
+import static hotchemi.android.rate.PreferenceHelper.*;
 
 public final class AppRate {
 
@@ -29,6 +23,8 @@ public final class AppRate {
     private int remindInterval = 1;
 
     private boolean isDebug = false;
+
+    private DialogManager.Factory dialogManagerFactory = new DefaultDialogManager.Factory();
 
     private AppRate(Context context) {
         this.context = context.getApplicationContext();
@@ -173,6 +169,11 @@ public final class AppRate {
         return this;
     }
 
+    public AppRate setDialogManagerFactory(DialogManager.Factory dialogManagerFactory) {
+        this.dialogManagerFactory = dialogManagerFactory;
+        return this;
+    }
+
     public void monitor() {
         if (isFirstLaunch(context)) {
             setInstallDate(context);
@@ -182,7 +183,7 @@ public final class AppRate {
 
     public void showRateDialog(Activity activity) {
         if (!activity.isFinishing()) {
-            create(activity, options).show();
+            dialogManagerFactory.createDialogManager(activity, options).createDialog().show();
         }
     }
 
