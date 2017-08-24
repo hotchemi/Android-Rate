@@ -1,0 +1,7 @@
+<resources>
+	<string name="rate_dialog_title">تقييم التطبيق</string>
+	<string name="rate_dialog_message">إن أعجبك التطبيق، فضلاً شاركه مع من تحب، او قم بتقييم التطبيق، وشكراً لدعمكم.</string>
+	<string name="rate_dialog_ok">تقييم الآن</string>
+	<string name="rate_dialog_cancel">لاحقاً</string>
+	<string name="rate_dialog_no">لا، شكراً</string>
+</resources>
