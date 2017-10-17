@@ -28,6 +28,8 @@ public final class AppRate {
 
     private int remindInterval = 1;
 
+    private int remindLaunchTimes = 0;
+
     private boolean isDebug = false;
 
     private AppRate(Context context) {
@@ -69,6 +71,11 @@ public final class AppRate {
 
     public AppRate setRemindInterval(int remindInterval) {
         this.remindInterval = remindInterval;
+        return this;
+    }
+
+    public AppRate setRemindLaunchTimes(int remindLaunchTimes) {
+        this.remindLaunchTimes = remindLaunchTimes;
         return this;
     }
 
@@ -189,6 +196,7 @@ public final class AppRate {
     public boolean shouldShowRateDialog() {
         return getIsAgreeShowDialog(context) &&
                 isOverLaunchTimes() &&
+                isOverRemindLaunchTimes() &&
                 isOverInstallDate() &&
                 isOverRemindDate();
     }
@@ -196,6 +204,8 @@ public final class AppRate {
     private boolean isOverLaunchTimes() {
         return getLaunchTimes(context) >= launchTimes;
     }
+
+    private boolean isOverRemindLaunchTimes() { return remindLaunchTimes != 0 && getLaunchTimes(context) % remindLaunchTimes == 0; }
 
     private boolean isOverInstallDate() {
         return isOverDate(getInstallDate(context), installDate);
