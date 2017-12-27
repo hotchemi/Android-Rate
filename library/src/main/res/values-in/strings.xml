@@ -1,0 +1,7 @@
+<resources>
+    <string name="rate_dialog_title">Nilai aplikasi ini</string>
+    <string name="rate_dialog_message">Jika kamu senang menggunakan aplikasi ini, maukah kamu meluangkan sedikit waktu untuk memberikan nilai? Memberikan nilai tidak akan lebih dari 1 menit. Terima kasih atas dukungannya!</string>
+    <string name="rate_dialog_ok">Berikan Nilai</string>
+    <string name="rate_dialog_cancel">Nanti Saja</string>
+    <string name="rate_dialog_no">Tidak</string>
+</resources>
