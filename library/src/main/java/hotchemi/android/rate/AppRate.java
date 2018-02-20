@@ -53,8 +53,8 @@ public final class AppRate {
         return isMeetsConditions;
     }
 
-    private static boolean isOverDate(long targetDate, int threshold) {
-        return new Date().getTime() - targetDate >= (long)threshold * 24 * 60 * 60 * 1000;
+    private static boolean isOverDate(long targetDate, long threshold) {
+        return new Date().getTime() - targetDate >= threshold * 24 * 60 * 60 * 1000;
     }
 
     public AppRate setLaunchTimes(int launchTimes) {
