@@ -18,6 +18,12 @@ final class PreferenceHelper {
 
     private static final String PREF_KEY_REMIND_INTERVAL = "android_rate_remind_interval";
 
+    private static final String PREF_KEY_MAX_NUM_SHOWINGS = "android_rate_max_num_showings";
+
+    private static final String PREF_KEY_CURRENT_SHOWING_COUNT = "android_rate_current_showing_count";
+
+    private static final String PREF_KEY_INITIAL_DATE_MAX_SHOWINGS = "android_rate_init_date_max_showings";
+
     private PreferenceHelper() {
     }
 
@@ -93,4 +99,42 @@ final class PreferenceHelper {
         return getPreferences(context).getLong(PREF_KEY_INSTALL_DATE, 0) == 0L;
     }
 
+    static void setMaxDialogShowings(Context context, int numberOfShowingsAllowed){
+        SharedPreferences.Editor editor = getPreferencesEditor(context);
+        editor.putInt(PREF_KEY_MAX_NUM_SHOWINGS, numberOfShowingsAllowed);
+        editor.apply();
+    }
+
+    static int getMaxDialogShowings(Context context){
+        return getPreferences(context).getInt(PREF_KEY_MAX_NUM_SHOWINGS, 0);
+    }
+
+    static void incrementNumberOfShowings(Context context){
+        int currentNumberOfShowings = getPreferences(context).getInt(PREF_KEY_CURRENT_SHOWING_COUNT, 0);
+
+        SharedPreferences.Editor editor = getPreferencesEditor(context);
+        editor.putInt(PREF_KEY_CURRENT_SHOWING_COUNT, currentNumberOfShowings + 1);
+        editor.apply();
+    }
+
+    static void resetNumberOfShowingsCount(Context context){
+        SharedPreferences.Editor editor = getPreferencesEditor(context);
+        editor.putInt(PREF_KEY_CURRENT_SHOWING_COUNT, 0);
+        editor.apply();
+    }
+
+    static int getCurrentShowingsCount(Context context){
+        return getPreferences(context).getInt(PREF_KEY_CURRENT_SHOWING_COUNT, 0);
+    }
+
+    static void setMaxShowingsInitialDate(Context context){
+        Date now = new Date();
+        SharedPreferences.Editor editor = getPreferencesEditor(context);
+        editor.putLong(PREF_KEY_INITIAL_DATE_MAX_SHOWINGS, now.getTime());
+        editor.apply();
+    }
+
+    static long getMaxShowingsInitialDate(Context context){
+        return getPreferences(context).getLong(PREF_KEY_INITIAL_DATE_MAX_SHOWINGS, 0);
+    }
 }

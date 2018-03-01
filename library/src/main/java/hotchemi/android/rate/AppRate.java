@@ -2,6 +2,7 @@ package hotchemi.android.rate;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.format.DateUtils;
 import android.view.View;
 
 import java.util.Date;
@@ -10,6 +11,7 @@ import static hotchemi.android.rate.DialogManager.create;
 import static hotchemi.android.rate.PreferenceHelper.getInstallDate;
 import static hotchemi.android.rate.PreferenceHelper.getIsAgreeShowDialog;
 import static hotchemi.android.rate.PreferenceHelper.getLaunchTimes;
+import static hotchemi.android.rate.PreferenceHelper.getMaxShowingsInitialDate;
 import static hotchemi.android.rate.PreferenceHelper.getRemindInterval;
 import static hotchemi.android.rate.PreferenceHelper.isFirstLaunch;
 import static hotchemi.android.rate.PreferenceHelper.setInstallDate;
@@ -32,6 +34,18 @@ public final class AppRate {
 
     private AppRate(Context context) {
         this.context = context.getApplicationContext();
+
+        if(getMaxShowingsInitialDate(context) == 0) {
+            PreferenceHelper.setMaxShowingsInitialDate(context);
+        }
+
+        long nowMilli = (new Date()).getTime();
+        long initTimeMilli = getMaxShowingsInitialDate(context);
+        long diffTimeMilli = nowMilli - initTimeMilli;
+        if(diffTimeMilli >= DateUtils.YEAR_IN_MILLIS){
+            PreferenceHelper.resetNumberOfShowingsCount(context);
+            PreferenceHelper.setMaxShowingsInitialDate(context);
+        }
     }
 
     public static AppRate with(Context context) {
@@ -182,12 +196,14 @@ public final class AppRate {
 
     public void showRateDialog(Activity activity) {
         if (!activity.isFinishing()) {
+            PreferenceHelper.incrementNumberOfShowings(context);
             create(activity, options).show();
         }
     }
 
     public boolean shouldShowRateDialog() {
         return getIsAgreeShowDialog(context) &&
+                isLessThanMaxNumberShowings() &&
                 isOverLaunchTimes() &&
                 isOverInstallDate() &&
                 isOverRemindDate();
@@ -205,6 +221,18 @@ public final class AppRate {
         return isOverDate(getRemindInterval(context), remindInterval);
     }
 
+    private boolean isLessThanMaxNumberShowings() {
+        int maxShowings = PreferenceHelper.getMaxDialogShowings(context);
+        //always true for 0
+        if(maxShowings == 0){
+            return true;
+        }
+
+        int currentShowingsCount = PreferenceHelper.getCurrentShowingsCount(context);
+
+        return currentShowingsCount < maxShowings;
+    }
+
     public boolean isDebug() {
         return isDebug;
     }
@@ -214,4 +242,9 @@ public final class AppRate {
         return this;
     }
 
+    //set 0 for unlimited
+    public AppRate setMaxNumberOfShowingsPerYear(int maxNumberOfShowings){
+        PreferenceHelper.setMaxDialogShowings(context, maxNumberOfShowings);
+        return this;
+    }
 }
