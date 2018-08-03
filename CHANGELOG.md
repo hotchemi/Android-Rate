@@ -1,6 +1,6 @@
 # ChangeLog
 
-- 2015/12/05 1.0.1
+- 2016/04/11 1.0.1
     - [#101](https://github.com/hotchemi/Android-Rate/pull/101) Fix null pointer exception if onClickListener not set.
     - [#103](https://github.com/hotchemi/Android-Rate/pull/103) Revert "Updated gradle and switch to support AlertDialog"(#86).
 - 2016/03/20 1.0.0
