@@ -1,21 +1,21 @@
 # ChangeLog
 
-- 2015/12/05 1.0.1
-    - Fix https://github.com/hotchemi/Android-Rate/pull/101.
-    - Fix https://github.com/hotchemi/Android-Rate/pull/103.
+- 2016/04/11 1.0.1
+    - [#101](https://github.com/hotchemi/Android-Rate/pull/101) Fix null pointer exception if onClickListener not set.
+    - [#103](https://github.com/hotchemi/Android-Rate/pull/103) Revert "Updated gradle and switch to support AlertDialog"(#86).
 - 2016/03/20 1.0.0
     - Delete event tracking.
-    - Add [#80](https://github.com/hotchemi/Android-Rate/pull/80).
-    - Add [#84](https://github.com/hotchemi/Android-Rate/pull/84).
-    - Add [#89](https://github.com/hotchemi/Android-Rate/pull/89).
-    - Fix [#86](https://github.com/hotchemi/Android-Rate/pull/86).
-    - Add [#91](https://github.com/hotchemi/Android-Rate/pull/91).
-    - Fix [#79](https://github.com/hotchemi/Android-Rate/issues/79).
+    - [#80](https://github.com/hotchemi/Android-Rate/pull/80) Support for Amazon Appstore, with updated sample.
+    - [#84](https://github.com/hotchemi/Android-Rate/pull/84) Add Persian/Farsi Language
+    - [#89](https://github.com/hotchemi/Android-Rate/pull/89) Add option to show 'never' button or not
+    - [#86](https://github.com/hotchemi/Android-Rate/pull/86) Fix error with the Travis CI validation (Updated gradle and switch to support AlertDialog)
+    - [#91](https://github.com/hotchemi/Android-Rate/pull/91) Add basque translation
+    - [#79](https://github.com/hotchemi/Android-Rate/issues/79) Fix leaking memory issue
 - 2015/12/05 0.5.6
-    - Add #78.
+    - [#78](https://github.com/hotchemi/Android-Rate/pull/78) Add support for custom String content
 - 2015/10/27 0.5.5 
-    - Fix #72.
-    - Fix #73.
+    - [#72](https://github.com/hotchemi/Android-Rate/issues/72) Fix buttons being shown in the vertical orientation on Marshmallow.
+    - [#73](https://github.com/hotchemi/Android-Rate/pull/73) Add `AppRate.clearSettingsParam`
 - 2015/10/12 0.5.4 
     - Add `AppRate.setAgreeShowDialog`.
 - 2015/08/11 0.5.3 
