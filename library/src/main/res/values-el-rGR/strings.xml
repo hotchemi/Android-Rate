@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rate_dialog_title">Βαθμολόγησε την Εφαρμογή</string>
+    <string name="rate_dialog_message">Σου άρεσε η εφαρμογή; Βαθμολόγησε την, δεν θα διαρκέσει παραπάνω από ένα λεπτό. Ευχαριστούμε για την υποστήριξη!</string>
+    <string name="rate_dialog_ok">Βαθμολόγησε τώρα</string>
+    <string name="rate_dialog_cancel">Αργότερα</string>
+    <string name="rate_dialog_no">Όχι, ευχαριστώ</string>
+</resources>
